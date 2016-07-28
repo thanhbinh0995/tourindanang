@@ -1,2 +1,5 @@
 main-local.php
 params-local.php
+db.php
+mail.php
+url.php

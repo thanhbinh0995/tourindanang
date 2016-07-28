@@ -1,20 +1,30 @@
 <?php
 return [
-    'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2-food',
-            'username' => 'root',
-            'password' => 'root',
-            'charset' => 'utf8',
+    'components' => array_merge([
+        'db' => require(__DIR__ . '/db.php'),        
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                        'class' => 'yii\i18n\PhpMessageSource',
+                        'basePath' => '@approot/messages',
+                    ]
+                ]
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+        'mailer' => require(__DIR__ . '/mail.php'),
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],        
         ],
-    ],
+        'backup' => [
+            'class' => 'demi\backup\Component',
+            // The directory for storing backups files
+            'backupsFolder' => dirname(dirname(__DIR__)) . '/backups', // <project-root>/backups
+            // Directories that will be added to backup
+            'directories' => [
+                'uploads' => '@api/web/uploads',
+            ],
+        ],
+    ], require(__DIR__ . '/url.php')),
 ];
