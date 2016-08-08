@@ -37,7 +37,21 @@ return [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
-        ]
+        ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null) {
+                    $response->data = [
+                        'success' => $response->isSuccessful,
+                        'data' => $response->data,
+                    ];
+                }
+            },
+                    'format' => yii\web\Response::FORMAT_JSON,
+                    'charset' => 'UTF-8',
+        ],
     ],
     'params' => $params,
 ];
