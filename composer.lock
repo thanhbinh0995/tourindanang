@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c95825d4d221042bea75920ecebf54f",
-    "content-hash": "05ae6ea1ff132439b95d3200d2ba5e2a",
+    "hash": "992b9757061e3a3121e27211426262d6",
+    "content-hash": "a224cd217b95bd3386d37543e8027fcf",
     "packages": [
         {
             "name": "bower-asset/admin-lte",
@@ -475,6 +475,48 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2015-07-22 18:31:08"
+        },
+        {
+            "name": "gbksoft/yii2-swagger",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gbksoft/yii2-swagger.git",
+                "reference": "90864f2876ff833000f63b80a9966b8f704067a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gbksoft/yii2-swagger/zipball/90864f2876ff833000f63b80a9966b8f704067a4",
+                "reference": "90864f2876ff833000f63b80a9966b8f704067a4",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "gbksoft\\modules\\swagger\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hryhorii Furletov",
+                    "email": "littlefuntik@gmail.com"
+                }
+            ],
+            "description": "Yii 2 wrapper for Swagger",
+            "keywords": [
+                "extension",
+                "module",
+                "swagger",
+                "yii2"
+            ],
+            "time": "2016-04-06 09:27:26"
         },
         {
             "name": "swiftmailer/swiftmailer",

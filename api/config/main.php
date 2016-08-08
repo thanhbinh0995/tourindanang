@@ -13,17 +13,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
-        'request' => [
-            'csrfParam' => '_csrf-api',
-        ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the api
-            'name' => 'advanced-api',
+            'enableAutoLogin' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -34,17 +26,18 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ]
     ],
     'params' => $params,
 ];
