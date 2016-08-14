@@ -10,7 +10,8 @@ class m160812_061006_create_admin extends Migration
         $model = new User();
         $model->setAttributes(array(
             'username' => 'admin',
-            'email' => 'admin@gmail.com'
+            'email' => 'admin@gmail.com',
+            'auth_key' => ''
         ));
         $model->setPassword("abc123");
         $model->save();
