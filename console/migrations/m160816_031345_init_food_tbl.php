@@ -21,7 +21,7 @@ class m160816_031345_init_food_tbl extends Migration
             'content' => $this->text()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->boolean()->defaultValue(false),
         ], $tableOptions);
     }
 

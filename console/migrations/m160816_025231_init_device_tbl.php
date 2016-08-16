@@ -19,7 +19,7 @@ class m160816_025231_init_device_tbl extends Migration
             'device_token' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->boolean()->defaultValue(false),
         ], $tableOptions);
     }
 

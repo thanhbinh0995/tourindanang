@@ -18,7 +18,7 @@ class m160816_030316_init_category_tbl extends Migration
             'image' => $this->string(50)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->boolean()->defaultValue(false),
         ], $tableOptions);
     }
 
