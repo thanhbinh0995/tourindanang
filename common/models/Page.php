@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 /**
  * This is the model class for table "page".
  *
@@ -24,13 +25,25 @@ class Page extends \yii\db\ActiveRecord
         return 'page';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'deleted_at' => time()
+                ],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'content', 'created_at', 'updated_at'], 'required'],
+            [['name', 'content'], 'required'],
             [['content'], 'string'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
