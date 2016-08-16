@@ -21,7 +21,12 @@
         "damirka/yii2-jwt": "v0.1.0",
         "demi/backup": "~1.0",
         "gbksoft/yii2-swagger": "^1.0",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "lajax/yii2-language-picker": "1.*",
+        "bryglen/yii2-apns-gcm": "1.0.4",
+        "cornernote/yii2-softdelete": "*",
+        "yiidoc/yii2-redactor": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
