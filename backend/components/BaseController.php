@@ -15,7 +15,7 @@ class BaseController extends Controller
     {
         return [
             'verbs' => [
-                'class' => aVerbFilter::className(),
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
