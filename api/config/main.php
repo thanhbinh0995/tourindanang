@@ -11,7 +11,18 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'swagger' => [
+            'class' => 'gbksoft\modules\swagger\Module',
+            'swaggerUrl' => '/api/web/swagger/swagger.json',
+            'swaggerPath' => __DIR__ . '/../../api/web/swagger/swagger.json',
+            'on beforeJson' => function($event) {
+                // Replace response content (swagger.json)
+                $event->responseText = mb_ereg_replace('{{http_host}}', \Yii::$app->request->hostInfo, $event->responseText);
+                $event->responseText = mb_ereg_replace('{{apiversion}}', \Yii::$app->params['apiversion'], $event->responseText);
+            },
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,7 +39,6 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
             ],
@@ -49,8 +59,8 @@ return [
                     ];
                 }
             },
-                    'format' => yii\web\Response::FORMAT_JSON,
-                    'charset' => 'UTF-8',
+            'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
         ],
     ],
     'params' => $params,

@@ -2,9 +2,9 @@
 namespace api\controllers;
 
 
-use yii\rest\ActiveController;
+use yii\rest\Controller;
 
-class SiteController extends ActiveController
+class SiteController extends Controller
 {
     /**
      * Displays homepage.
@@ -16,8 +16,6 @@ class SiteController extends ActiveController
         $data = array(
             '343'
         );
-        echo "thanh";
-        exit();
         return $data;
     }
 }
