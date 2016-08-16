@@ -3,24 +3,24 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Device;
-use common\models\DeviceSearch;
+use common\models\Page;
+use common\models\PageSearch;
 use yii\web\NotFoundHttpException;
 use backend\components\BaseController;
 
 /**
- * DeviceController implements the CRUD actions for Device model.
+ * PageController implements the CRUD actions for Page model.
  */
-class DeviceController extends BaseController
+class PageController extends BaseController
 {
 
     /**
-     * Lists all Device models.
+     * Lists all Page models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DeviceSearch();
+        $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -30,7 +30,7 @@ class DeviceController extends BaseController
     }
 
     /**
-     * Displays a single Device model.
+     * Displays a single Page model.
      * @param integer $id
      * @return mixed
      */
@@ -42,13 +42,13 @@ class DeviceController extends BaseController
     }
 
     /**
-     * Creates a new Device model.
+     * Creates a new Page model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Device();
+        $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -60,7 +60,7 @@ class DeviceController extends BaseController
     }
 
     /**
-     * Updates an existing Device model.
+     * Updates an existing Page model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -79,7 +79,7 @@ class DeviceController extends BaseController
     }
 
     /**
-     * Deletes an existing Device model.
+     * Deletes an existing Page model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -92,15 +92,15 @@ class DeviceController extends BaseController
     }
 
     /**
-     * Finds the Device model based on its primary key value.
+     * Finds the Page model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Device the loaded model
+     * @return Page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Device::findOne($id)) !== null) {
+        if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

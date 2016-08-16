@@ -2,31 +2,19 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\redactor\widgets\Redactor;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Food */
+/* @var $model common\models\Page */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="food-form">
+<div class="page-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'content')->widget(Redactor::className(), [
-        'clientOptions' => [
-//            'minHeight'=> 200, // pixels
-//            'minHeight'=> 200 // pixels
-        ]
-    ]) ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 
