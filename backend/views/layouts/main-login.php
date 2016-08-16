@@ -1,11 +1,12 @@
 <?php
 use backend\assets\AppAsset;
 use yii\helpers\Html;
+use backend\assets\AdminFoodAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-dmstr\web\AdminLteAsset::register($this);
+AdminFoodAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
