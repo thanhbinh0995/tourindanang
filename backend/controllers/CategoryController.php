@@ -51,7 +51,7 @@ class CategoryController extends BaseController
     {
         $model = new Category();
         if($model->load(Yii::$app->request->post())){
-            $model->file_image = UploadedFile::getInstance($model, 'file_image');
+            $model->file_image = UploadedFile::getInstance($model, 'file_image');            
             if ($model->file_image) {
                 $model->image = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
             }
@@ -98,13 +98,13 @@ class CategoryController extends BaseController
                 return $this->redirect(['index']);
             } else {
                 return $this->render('create', [
-                            'model' => $model,
+                    'model' => $model,
                 ]);
             }
         }
         else{
             return $this->render('create', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }

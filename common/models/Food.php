@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "food".
@@ -22,6 +24,24 @@ use Yii;
  */
 class Food extends \yii\db\ActiveRecord
 {
+    
+    public $file_image;
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'deleted_at' => time()
+                ],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -36,13 +56,14 @@ class Food extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'user_id', 'name', 'image', 'content', 'created_at', 'updated_at'], 'required'],
+            [['category_id', 'user_id', 'name', 'image', 'content'], 'required'],
             [['category_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['content'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
         ];
     }
 
@@ -53,8 +74,8 @@ class Food extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'Category ID'),
-            'user_id' => Yii::t('app', 'User ID'),
+            'category_id' => Yii::t('app', 'Category'),
+            'user_id' => Yii::t('app', 'User'),
             'name' => Yii::t('app', 'Name'),
             'image' => Yii::t('app', 'Image'),
             'content' => Yii::t('app', 'Content'),

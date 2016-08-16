@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "category".
@@ -91,5 +92,9 @@ class Category extends \yii\db\ActiveRecord
     public function getFoods()
     {
         return $this->hasMany(Food::className(), ['category_id' => 'id']);
+    }
+    
+    public static function listCategory(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }
