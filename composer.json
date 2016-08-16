@@ -27,7 +27,8 @@
         "bryglen/yii2-apns-gcm": "1.0.4",        
         "yiidoc/yii2-redactor": "*",
         "yii2tech/ar-softdelete": "^1.0",
-        "tebazil/yii2-db-seeder": "^0.0.0"
+        "tebazil/yii2-db-seeder": "^0.0.0",
+        "yiisoft/yii2-jui": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

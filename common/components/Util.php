@@ -34,6 +34,7 @@ class Util {
         return false;
     }
     public static function deleteFile($fileName) {
+        $uploadPath = \Yii::getAlias('@uploadPath');  
         @unlink(Yii::getAlias($uploadPath . '/' . $fileName));
     }
     

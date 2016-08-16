@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "category".
@@ -18,12 +20,40 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    public $file_image;
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            'softDeleteBehavior' => [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'deleted_at' => time()
+                ],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'category';
+    }
+    
+    public function beforeSoftDelete()
+    {
+        $this->deleted_at = time(); // log the deletion date
+        return true;
+    }
+
+    public function beforeRestore()
+    {
+        return $this->deleted_at > (time() - 3600); // allow restoration only for the records, being deleted during last hour
     }
 
     /**
@@ -32,10 +62,11 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'image', 'created_at', 'updated_at'], 'required'],
+            [['name', 'image'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 50],
+            [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
         ];
     }
 
