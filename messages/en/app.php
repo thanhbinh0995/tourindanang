@@ -1,4 +1,5 @@
 <?php
 
-array(  
+return array(  
+    "Create" => "Create*",    
 );
