@@ -18,7 +18,7 @@
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "damirka/yii2-jwt": "v0.1.0",
+        "damirka/yii2-jwt": "v0.2.1",
         "demi/backup": "~1.0",
         "gbksoft/yii2-swagger": "^1.0",
         "dmstr/yii2-adminlte-asset": "2.*",
@@ -28,7 +28,8 @@
         "yiidoc/yii2-redactor": "*",
         "yii2tech/ar-softdelete": "^1.0",
         "tebazil/yii2-db-seeder": "^0.0.0",
-        "yiisoft/yii2-jui": "^2.0"
+        "yiisoft/yii2-jui": "^2.0",
+        "sizeg/yii2-jwt": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
