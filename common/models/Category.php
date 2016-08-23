@@ -102,9 +102,11 @@ class Category extends \yii\db\ActiveRecord
     public function fields()
     {
         $fields = parent::fields();
-        $fields['foods'] = function () {
-            return $this->foods;
-        };
         return $fields;
     }
+    public function extraFields() 
+    {
+        return ['foods'];
+    }
+
 }

@@ -59,17 +59,6 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
     
-    public function beforeSoftDelete()
-    {
-        $this->deleted_at = time(); // log the deletion date
-        return true;
-    }
-
-    public function beforeRestore()
-    {
-        return $this->deleted_at > (time() - 3600); // allow restoration only for the records, being deleted during last hour
-    }
-
     /**
      * @inheritdoc
      */
@@ -125,7 +114,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
+    }    
 
     /**
      * Finds user by username
@@ -259,4 +248,18 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Food::className(), ['user_id' => 'id']);
     }
     
+    public function fields() {
+        $fields = parent::fields();
+
+        // remove fields that contain sensitive information
+        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+
+        return $fields;
+    }
+    
+    public function extraFields()
+    {
+        return ['foods'];
+    }
+
 }
