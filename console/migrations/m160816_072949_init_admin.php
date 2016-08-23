@@ -12,8 +12,10 @@ class m160816_072949_init_admin extends Migration
            'username' => 'admin',
             'email' =>'admin@gmail.com',
             'role' => User::ROLE_ADMIN,
+            'avatar' => 'no-image.jpg'
         ));
         $model->setPassword("abc123");
+        $model->generateAuthKey();
         $model->save(false);
 
     }
