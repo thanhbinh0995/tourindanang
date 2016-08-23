@@ -5,7 +5,7 @@ namespace api\controllers;
 use yii\rest\Controller;
 use sizeg\jwt\JwtHttpBearerAuth;
 use Yii;
-
+use common\models\Category;
 class SiteController extends Controller
 {
 //    public function behaviors() {
@@ -23,10 +23,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $model = Category::findOne(3) ;
+            
         $data = array(
             '343'
         );
-        return $data;
+        return $model;
     }
     
     public function actionTest() {

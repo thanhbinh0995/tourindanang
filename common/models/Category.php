@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
 class Category extends \yii\db\ActiveRecord
 {
     public $file_image;
+    use \mootensai\relation\RelationTrait;
     
     /**
      * @inheritdoc
@@ -96,5 +97,14 @@ class Category extends \yii\db\ActiveRecord
     
     public static function listCategory(){
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
+    }
+    
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['foods'] = function () {
+            return $this->foods;
+        };
+        return $fields;
     }
 }
