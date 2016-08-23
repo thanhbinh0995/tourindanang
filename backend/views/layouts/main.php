@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use backend\assets\AdminFoodAsset;
+use backend\assets\AppAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -17,7 +17,7 @@ if (Yii::$app->controller->action->id === 'login') {
     );
 } else {
 
-    AdminFoodAsset::register($this);
+    AppAsset::register($this);
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     ?>
