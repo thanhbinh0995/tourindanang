@@ -113,8 +113,16 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }    
+//        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+    }   
+    public function updateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+        $this->last_login_time = date('Y-m-d H:i:s', strtotime('now'));
+        $this->last_login_ip = Yii::$app->request->userIP;
+        $this->save();
+    }
 
     /**
      * Finds user by username
