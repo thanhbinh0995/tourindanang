@@ -3,18 +3,26 @@ namespace api\controllers;
 
 
 use yii\rest\Controller;
-use sizeg\jwt\JwtHttpBearerAuth;
 use Yii;
 use common\models\Category;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
+
 class SiteController extends Controller
 {
-//    public function behaviors() {
-//        $behaviors = parent::behaviors();
-//        $behaviors['authenticator'] = [
-//            'class' => JwtHttpBearerAuth::className(),
-//        ];
-//        return $behaviors;
-//    }
+    public function behaviors() {
+    $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::className(),
+            'authMethods' => [
+                HttpBasicAuth::className(),
+                HttpBearerAuth::className(),
+                QueryParamAuth::className(),
+            ],
+        ];
+        return $behaviors;
+    }
 
     /**
      * Displays homepage.
