@@ -119,8 +119,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function updateAccessToken()
     {
         $this->access_token = Yii::$app->security->generateRandomString();
-        $this->last_login_time = date('Y-m-d H:i:s', strtotime('now'));
-        $this->last_login_ip = Yii::$app->request->userIP;
+//        $this->last_login_time = date('Y-m-d H:i:s', strtotime('now'));
+//        $this->last_login_ip = Yii::$app->request->userIP;
         $this->save();
     }
 

@@ -19,6 +19,7 @@ class ApiController extends Controller
                 HttpBearerAuth::className(),
                 QueryParamAuth::className(),
             ],
+            'tokenParam' => 'access_token',
         ];
         return $behaviors;
     }
