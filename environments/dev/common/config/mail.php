@@ -8,7 +8,7 @@ return [
                 'host' => 'smtp.gmail.com',
                 'username' => 'noreplythanhle@gmail.com',
                 'password' => '!@#noreply!@#',
-                'port' => '465',
+                'port' => '587',
                 'encryption' => 'tls',
             ],
             'useFileTransport' => false,
