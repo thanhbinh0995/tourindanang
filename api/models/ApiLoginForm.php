@@ -3,16 +3,18 @@ namespace api\models;
 
 use Yii;
 use yii\base\Model;
+use common\models\User;
 
 /**
  * Login form
  */
-class LoginForm extends Model
+class ApiLoginForm extends Model
 {
     public $username;
     public $password;
 
     private $_user;
+    private $accessToken;
 
 
     /**
@@ -53,7 +55,9 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            $this->getUser()->updateAccessToken();
+            $this->accessToken = $this->getUser()->getAccessToken();
+            return true;
         } else {
             return false;
         }
@@ -71,5 +75,9 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+    
+    public function getAccessToken(){
+        return $this->accessToken;
     }
 }

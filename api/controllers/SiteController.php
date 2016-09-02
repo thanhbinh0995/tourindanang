@@ -7,7 +7,7 @@ use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use api\components\ApiController;
-use common\models\LoginForm;
+use api\models\ApiLoginForm;
 use yii\filters\auth\CompositeAuth;
 
 class SiteController extends ApiController
@@ -27,16 +27,44 @@ class SiteController extends ApiController
     }
 
     /**
-     * Login action.
+     * @SWG\Post(path="/site/login",
+     *     tags={"Auth"},
+     *     summary="创建用户接口",
+     *     description="Login",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *        in = "formData",
+     *        name = "username",
+     *        description = "Username",
+     *        required = true,
+     *        type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *        in = "formData",
+     *        name = "password",
+     *        description = "Password",
+     *        required = true,
+     *        type = "string"
+     *     ),
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = " success"
+     *     ),
+     *     @SWG\Response(
+     *         response = 401,
+     *         description = "需要重新登陆",
+     *         @SWG\Schema(ref="#/definitions/Error")
+     *     )
+     * )
      *
-     * @return string
      */
     public function actionLogin() {
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return "ok";
+        $model = new ApiLoginForm();
+        
+        if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login() != "") {
+            return $model->getAccessToken();
         } else {
-            return "ok";
+            return $model->errors;
         }
     }
 

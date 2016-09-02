@@ -8,14 +8,14 @@ class UserController extends ApiController
 {
     
     /**
-     * @SWG\Get(path="/users",
+     * @SWG\Get(path="/user/index",
      *     tags={"user"},
      *     summary="获取用户列表",
      *     description="测试直接返回一个array",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *        in = "query",
-     *        name = "access_token",
+     *        in = "header",
+     *        name = "access-token",
      *        description = "access token",
      *        required = true,
      *        type = "string"
@@ -23,7 +23,7 @@ class UserController extends ApiController
      *
      *     @SWG\Response(
      *         response = 200,
-     *         description = " success"
+     *         description = "success"
      *     )
      * )
      *
@@ -40,9 +40,25 @@ class UserController extends ApiController
     }
 
     /**
-     * Displays a single User model.
-     * @param integer $id
-     * @return mixed
+     * @SWG\Get(path="/user/view",
+     *     tags={"user"},
+     *     summary="获取用户列表",
+     *     description="测试直接返回一个array",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *        in = "query",
+     *        name = "id",
+     *        description = "user id",
+     *        required = true,
+     *        type = "integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response = 200,
+     *         description = "success"
+     *     )
+     * )
+     *
      */
     public function actionView($id)
     {

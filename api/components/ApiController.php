@@ -14,12 +14,13 @@ class ApiController extends Controller
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
 //            'except' => ['create', 'login', 'resetpassword'],
+//            'only' => ['dashboard'],
             'authMethods' => [
                 HttpBasicAuth::className(),
                 HttpBearerAuth::className(),
                 QueryParamAuth::className(),
             ],
-            'tokenParam' => 'access_token',
+//            'tokenParam' => 'access_token',
         ];
         return $behaviors;
     }

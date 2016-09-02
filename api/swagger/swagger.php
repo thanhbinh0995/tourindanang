@@ -1,10 +1,10 @@
 <?php
-namespace api\modules\v1\swagger;
+namespace api\swagger\swagger;
 /**
  * @SWG\Swagger(
  *     schemes={"http"},
- *     host="localhost:8080",
- *     basePath="/v1",
+ *     host="yii2-food.local/",
+ *     basePath="api",
  *     @SWG\Info(
  *         version="1.0.0",
  *         title="Thanh Le",
