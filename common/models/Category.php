@@ -4,8 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use yii\helpers\ArrayHelper;
+use cornernote\softdelete\SoftDeleteBehavior;
 
 /**
  * This is the model class for table "category".
@@ -31,11 +31,10 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            'softDeleteBehavior' => [
+            'SoftDeleteBehavior' => [
                 'class' => SoftDeleteBehavior::className(),
-                'softDeleteAttributeValues' => [
-                    'deleted_at' => time()
-                ],
+                'attribute' => 'deleted_at',
+                'value' => time(), // for sqlite use - new \yii\db\Expression("date('now')")
             ],
         ];
     }
