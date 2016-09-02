@@ -11,18 +11,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'swagger' => [
-            'class' => 'gbksoft\modules\swagger\Module',
-            'swaggerUrl' => '/api/web/swagger/swagger.json',
-            'swaggerPath' => __DIR__ . '/../../api/web/swagger/swagger.json',
-            'on beforeJson' => function($event) {
-                // Replace response content (swagger.json)
-                $event->responseText = mb_ereg_replace('{{http_host}}', \Yii::$app->request->hostInfo, $event->responseText);
-                $event->responseText = mb_ereg_replace('{{apiversion}}', \Yii::$app->params['apiversion'], $event->responseText);
-            },
-        ],
-    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

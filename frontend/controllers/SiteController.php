@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\helpers\Url;
 
 /**
  * Site controller
@@ -61,6 +62,19 @@ class SiteController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+            'doc' => [
+                'class' => 'light\swagger\SwaggerAction',
+                'restUrl' => URL::to(['/site/api'], true),
+            ],
+            'api' => [
+                'class' => 'light\swagger\SwaggerApiAction',
+                'scanDir' => [
+                    Yii::getAlias('@api/swagger'),
+                    Yii::getAlias('@api/controllers'),
+                    Yii::getAlias('@api/models'),
+                ],
+                // 'api_key' => 'test'
             ],
         ];
     }

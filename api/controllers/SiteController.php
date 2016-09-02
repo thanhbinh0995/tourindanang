@@ -11,7 +11,7 @@ use common\models\LoginForm;
 use yii\filters\auth\CompositeAuth;
 
 class SiteController extends ApiController
-{   
+{
     public function behaviors() {
     $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
@@ -31,11 +31,10 @@ class SiteController extends ApiController
      *
      * @return string
      */
-    public function actionLogin()
-    {
+    public function actionLogin() {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-           return "ok";
+            return "ok";
         } else {
             return "ok";
         }
