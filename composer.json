@@ -20,7 +20,6 @@
         "yiisoft/yii2-swiftmailer": "*",
         "damirka/yii2-jwt": "v0.2.1",
         "demi/backup": "~1.0",
-        "gbksoft/yii2-swagger": "^1.0",
         "dmstr/yii2-adminlte-asset": "2.*",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "lajax/yii2-language-picker": "1.*",
@@ -36,7 +35,8 @@
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*"
+        "yiisoft/yii2-faker": "*",
+        "light/yii2-swagger": "~1.0.0"
     },
     "config": {
         "process-timeout": 1800
