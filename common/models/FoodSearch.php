@@ -12,14 +12,16 @@ use common\models\Food;
  */
 class FoodSearch extends Food
 {
+    
+    public $category;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'image', 'content'], 'safe'],
+            [['id', 'user_id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['name', 'image', 'content', 'category_id'], 'safe'],
         ];
     }
 
@@ -43,12 +45,18 @@ class FoodSearch extends Food
     {
         $query = Food::find();
 
+        $query->joinWith(['category']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
+        $dataProvider->sort->attributes['category_id'] = [
+            'asc' => ['category.name' => SORT_ASC],
+            'desc' => ['category.name' => SORT_DESC],
+        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -67,7 +75,7 @@ class FoodSearch extends Food
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'food.name', $this->name])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'content', $this->content]);
 
