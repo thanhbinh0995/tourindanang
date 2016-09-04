@@ -257,9 +257,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     protected static function getSecretKey() {
-        return "abc123";
+        return Yii::$app->params['jwtSecret'];
     }
     protected static function getHeaderToken() {
-        return ['access-token'];
+        return ['exp' => time() + Yii::$app->params['jwtExpire']];
     }
 }

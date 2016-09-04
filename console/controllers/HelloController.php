@@ -9,6 +9,7 @@ namespace console\controllers;
 
 use yii\console\Controller;
 use Yii;
+use Firebase\JWT\JWT;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -40,6 +41,11 @@ class HelloController extends Controller
     
     public function actionAlias(){
         echo Yii::getAlias('@approot');
+    }
+    
+    
+    public function actionDecode($jwt){
+        var_dump(JWT::decode($jwt, Yii::$app->params['jwtSecret'], ['HS256']));
     }
     
 
