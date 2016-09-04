@@ -6,7 +6,19 @@ use common\models\User;
 
 class UserController extends ApiController
 {
-    
+        public function behaviors() {
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = [
+            [
+//                'actions' => [''],
+                'allow' => true,
+                'roles' => [User::ROLE_USER],
+            ],
+        ];
+
+        return $behaviors;
+    }
+
     /**
      * @SWG\Get(path="/user/index",
      *     tags={"user"},
@@ -15,8 +27,8 @@ class UserController extends ApiController
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *        in = "header",
-     *        name = "access_token",
-     *        description = "access token",
+     *        name = "Authorization",
+     *        description = "Authorization",
      *        required = true,
      *        type = "string"
      *     ),

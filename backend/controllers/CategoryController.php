@@ -9,12 +9,28 @@ use yii\web\NotFoundHttpException;
 use backend\components\BaseController;
 use common\components\Util;
 use yii\web\UploadedFile;
+use common\models\User;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
 class CategoryController extends BaseController
 {
+    public function behaviors() {
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = [
+            [
+                'actions' => ['view'],
+                'allow' => true,
+                'roles' => [User::ROLE_ADMIN, User::ROLE_USER],
+            ],
+            [
+                'allow' => true,
+                'roles' => [User::ROLE_ADMIN],
+            ],
+        ];
+        return $behaviors;
+    }
     /**
      * Lists all Category models.
      * @return mixed

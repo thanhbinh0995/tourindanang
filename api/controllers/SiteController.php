@@ -3,26 +3,23 @@ namespace api\controllers;
 
 
 use Yii;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\HttpBearerAuth;
-use yii\filters\auth\QueryParamAuth;
 use api\components\ApiController;
 use api\models\ApiLoginForm;
-use yii\filters\auth\CompositeAuth;
+use common\models\User;
 
 class SiteController extends ApiController
 {
     public function behaviors() {
-    $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class' => CompositeAuth::className(),
-            'except' => ['create', 'login', 'resetpassword'],
-            'authMethods' => [
-                HttpBasicAuth::className(),
-                HttpBearerAuth::className(),
-                QueryParamAuth::className(),
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator']['except'] = ['login'];
+        $behaviors['access']['rules'] = [
+            [
+                'actions' => ['login'],
+                'allow' => true,
+                'roles' => ['?'],
             ],
         ];
+
         return $behaviors;
     }
 

@@ -3,15 +3,15 @@
 use yii\db\Migration;
 use common\models\User;
 
-class m160816_072949_init_admin extends Migration
+class m160904_025732_init_user extends Migration
 {
     public function up()
     {
         $model = new User();
         $model->setAttributes(array(
-            'username' => 'admin',
-            'email' =>'admin@gmail.com',
-            'role' => User::ROLE_ADMIN,
+            'username' => 'user',
+            'email' =>'user@gmail.com',
+            'role' => User::ROLE_USER,
             'avatar' => 'no-image.jpg'
         ));
         $model->setPassword("abc123");
@@ -22,7 +22,7 @@ class m160816_072949_init_admin extends Migration
 
     public function down()
     {
-        User::deleteAll(array('email' => 'admin@gmail.com'));
+        User::deleteAll(array('email' => 'user@gmail.com'));
     }
 
     /*
