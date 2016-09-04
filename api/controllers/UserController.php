@@ -15,7 +15,7 @@ class UserController extends ApiController
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *        in = "header",
-     *        name = "access-token",
+     *        name = "access_token",
      *        description = "access token",
      *        required = true,
      *        type = "string"

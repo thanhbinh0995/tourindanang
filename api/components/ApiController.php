@@ -16,7 +16,6 @@ class ApiController extends Controller
 //            'except' => ['create', 'login', 'resetpassword'],
 //            'only' => ['dashboard'],
             'authMethods' => [
-                HttpBasicAuth::className(),
                 HttpBearerAuth::className(),
                 QueryParamAuth::className(),
             ],

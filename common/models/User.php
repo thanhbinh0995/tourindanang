@@ -30,6 +30,7 @@ use cornernote\softdelete\SoftDeleteBehavior;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    use \damirka\JWT\UserTrait;
     const STATUS_DELETED = 0;
     const STATUS_NOT_ACTIVE = 1;
     const STATUS_ACTIVE = 2;
@@ -108,25 +109,6 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-//        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
-    }   
-    public function updateAccessToken()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-//        $this->last_login_time = date('Y-m-d H:i:s', strtotime('now'));
-//        $this->last_login_ip = Yii::$app->request->userIP;
-        $this->save();
-    }
-    public function getAccessToken()
-    {
-        return $this->getAuthKey();
-    }
 
     /**
      * Finds user by username
@@ -274,4 +256,10 @@ class User extends ActiveRecord implements IdentityInterface
         return ['foods'];
     }
 
+    protected static function getSecretKey() {
+        return "abc123";
+    }
+    protected static function getHeaderToken() {
+        return ['access-token'];
+    }
 }

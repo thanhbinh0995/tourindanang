@@ -14,7 +14,7 @@ class ApiLoginForm extends Model
     public $password;
 
     private $_user;
-    private $accessToken;
+    private $jwt;
 
 
     /**
@@ -55,8 +55,8 @@ class ApiLoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            $this->getUser()->updateAccessToken();
-            $this->accessToken = $this->getUser()->getAccessToken();
+//            $this->getUser()->updateAccessToken();
+            $this->jwt = $this->getUser()->jwt;
             return true;
         } else {
             return false;
@@ -77,7 +77,7 @@ class ApiLoginForm extends Model
         return $this->_user;
     }
     
-    public function getAccessToken(){
-        return $this->accessToken;
+    public function getJwt(){
+        return $this->jwt;
     }
 }

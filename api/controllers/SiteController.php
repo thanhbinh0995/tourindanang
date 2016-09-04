@@ -62,7 +62,7 @@ class SiteController extends ApiController
         $model = new ApiLoginForm();
         
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login() != "") {
-            return $model->getAccessToken();
+            return $model->jwt;
         } else {
             return $model->errors;
         }
