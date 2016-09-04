@@ -52,10 +52,6 @@ return [
             'format' => yii\web\Response::FORMAT_JSON,
             'charset' => 'UTF-8',
         ],
-        'jwt' => [
-                'class' => 'sizeg\jwt\Jwt',
-                'key' => 'abc123',
-        ],
     ],
     'params' => $params,
 ];
