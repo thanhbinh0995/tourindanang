@@ -3,6 +3,8 @@ namespace api\controllers;
 
 use api\components\ApiController;
 use common\models\User;
+use common\models\UserSearch;
+use Yii;
 
 class UserController extends ApiController
 {
@@ -45,10 +47,11 @@ class UserController extends ApiController
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+//        return [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ];
+        return Yii::$app->user->identity;
     }
 
     /**
@@ -57,6 +60,13 @@ class UserController extends ApiController
      *     summary="获取用户列表",
      *     description="测试直接返回一个array",
      *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *        in = "header",
+     *        name = "Authorization",
+     *        description = "Authorization",
+     *        required = true,
+     *        type = "string"
+     *     ),
      *     @SWG\Parameter(
      *        in = "query",
      *        name = "id",
@@ -74,9 +84,7 @@ class UserController extends ApiController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->findModel($id);
     }
 
     /**
@@ -134,13 +142,20 @@ class UserController extends ApiController
     }
 
     /**
-     * @SWG\Put(path="/users/{id}",
+     * @SWG\Post(path="/user/update",
      *     tags={"user"},
      *     summary="更新用户接口",
      *     description="*path*类型的参数会放入请求地址地址中",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *        in = "path",
+     *        in = "header",
+     *        name = "Authorization",
+     *        description = "Authorization",
+     *        required = true,
+     *        type = "string"
+     *     ),
+     *     @SWG\Parameter(
+     *        in = "query",
      *        name = "id",
      *        description = "用户ID",
      *        required = true,
@@ -153,30 +168,6 @@ class UserController extends ApiController
      *        required = true,
      *        type = "string"
      *     ),
-     *     @SWG\Parameter(
-     *        in = "formData",
-     *        name = "phone",
-     *        description = "手机号",
-     *        required = true,
-     *        type = "string"
-     *     ),
-     *     @SWG\Parameter(
-     *        in = "formData",
-     *        name = "sex",
-     *        description = "性别 1. 男 2.女 此项为非必填项.这里指定了一个默认项，那么会默认选中",
-     *        required = false,
-     *        type = "integer",
-     *        default = 1,
-     *        enum = {1, 2}
-     *     ),
-     *     @SWG\Parameter(
-     *        in = "formData",
-     *        name = "job",
-     *        description = "这里可以设置默认值",
-     *        required = false,
-     *        type = "string",
-     *      default = "程序猿"
-     *    ),
      *     @SWG\Parameter(
      *        in = "formData",
      *        name = "avatar",
@@ -203,12 +194,10 @@ class UserController extends ApiController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
+            return $model;
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return $model->errors;
         }
     }
 
