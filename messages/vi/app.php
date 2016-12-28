@@ -1,5 +1,9 @@
 <?php
 
 return array(  
-    "Create" => "Create*",    
+    "Create" => "Tạo",    
+    "Create User" => "Tạo người dùng",
+    "List User" => "Danh sách người dùng",
+    "Users" => "Người dùng",
+    "User" => "Người dùng",    
 );

@@ -7,39 +7,36 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use cornernote\softdelete\SoftDeleteBehavior;
-
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "user".
  *
  * @property integer $id
  * @property string $username
- * @property string $auth_key
+ * @property string $password
+ * @property string $repassword
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $auth_key
  * @property string $email
  * @property string $avatar
- * @property integer $role
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- * @property integer $deleted_at
-  * @property string $password write-only password
- * @property Device[] $devices
- * @property Food[] $foods
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    use \damirka\JWT\UserTrait;
-    const STATUS_DELETED = 0;
+    /**
+     * @inheritdoc
+     */
     const STATUS_NOT_ACTIVE = 1;
     const STATUS_ACTIVE = 2;
 
     const ROLE_ADMIN = 1;
     const ROLE_USER = 2;
-    /**
-     * @inheritdoc
-     */
+    public $file;
+    public $password;
+    public $password_repeat;
     public static function tableName()
     {
         return 'user';
@@ -52,11 +49,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
-            'SoftDeleteBehavior' => [
-                'class' => SoftDeleteBehavior::className(),
-                'attribute' => 'deleted_at',
-                'value' => time(), // for sqlite use - new \yii\db\Expression("date('now')")
-            ],
         ];
     }
     
@@ -67,16 +59,18 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'email', 'avatar'], 'required'],
-            [['role', 'status', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
+            [['role','status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['avatar'], 'string', 'max' => 50],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_NOT_ACTIVE]],
+            [['username', 'email'], 'unique'],
             [['email'], 'email'],
+            [['file'],'file','extensions' => 'png, jpg','maxSize' => 1024 * 1024*2],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_NOT_ACTIVE]],
+            [['password','password_repeat'], 'required','on'=>'create'],
+            [['password', 'password_repeat'], 'string', 'min' => 6,'on'=>'create'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
         ];
     }
 
@@ -86,24 +80,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Username'),
-            'auth_key' => Yii::t('app', 'Auth Key'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
-            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
-            'email' => Yii::t('app', 'Email'),
-            'avatar' => Yii::t('app', 'Avatar'),
-            'role' => Yii::t('app', 'Role'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'deleted_at' => Yii::t('app', 'Deleted At'),
+            'id' => 'ID',
+            'username' => Yii::t('app','Username'),
+            'password' => Yii::t('app','Password'),
+            'password_repeat' => Yii::t('app','Password Repeat'),
+            'email' => Yii::t('app','Email'),
+            'status' => Yii::t('app','Status'),
+            'created_at' => Yii::t('app','Created At'),
+            'updated_at' => Yii::t('app','Updated At'),
+            'file' => Yii::t('app','Avatar'),
+            'role' => Yii::t('app','IsAdmin'),
         ];
     }
-    
-    /**
-     * @inheritdoc
-     */
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
@@ -225,41 +213,14 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDevices()
-    {
-        return $this->hasMany(Device::className(), ['user_id' => 'id']);
+    public static function findIdentityByAccessToken($token, $type = null): IdentityInterface {
+        
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFoods()
-    {
-        return $this->hasMany(Food::className(), ['user_id' => 'id']);
-    }
-    
-    public function fields() {
-        $fields = parent::fields();
-
-        // remove fields that contain sensitive information
-        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
-
-        return $fields;
-    }
-    
-    public function extraFields()
-    {
-        return ['foods'];
-    }
-
-    protected static function getSecretKey() {
-        return Yii::$app->params['jwtSecret'];
-    }
-    protected static function getHeaderToken() {
-        return ['exp' => time() + Yii::$app->params['jwtExpire']];
+    public static function listRole(){
+        $array = [
+            1 => 'admin',
+            2 => 'user',
+        ];
+        return $array;
     }
 }
