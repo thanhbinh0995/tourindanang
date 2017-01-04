@@ -26,6 +26,6 @@ return [
                 'uploads' => '@api/web/uploads',
             ],
         ],
-        'timeZone' => 'Europe/London',
     ], require(__DIR__ . '/url.php')),
+    'timeZone' => 'Europe/London',
 ];

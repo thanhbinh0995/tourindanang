@@ -45,30 +45,39 @@ use common\components\Util;
                         ],
                     ],
                     [
-                        'label' => Yii::t('app', 'Category'),
+                        'label' => Yii::t('app', 'Tour'),
                         'icon' => 'fa fa-map',
                         'url' => '#',
                         'items' => [
-                            ['label' => Yii::t('app', 'List Category'), 'icon' => 'fa fa-circle-o', 'url' => ['/category'],],
-                            ['label' => Yii::t('app', 'Create Category'), 'icon' => 'fa fa-circle-o', 'url' => ['/category/create'],],
+                            ['label' => Yii::t('app', 'List Tour'), 'icon' => 'fa fa-circle-o', 'url' => ['/tour'],],
+                            ['label' => Yii::t('app', 'Create Tour'), 'icon' => 'fa fa-circle-o', 'url' => ['/tour/create'],],
                         ],
                     ],
                     [
-                        'label' => Yii::t('app', 'Food'),
+                        'label' => Yii::t('app', 'Hotel'),
                         'icon' => 'fa fa-asterisk',
                         'url' => '#',
                         'items' => [
-                            ['label' => Yii::t('app', 'List Food'), 'icon' => 'fa fa-circle-o', 'url' => ['/food'],],
-                            ['label' => Yii::t('app', 'Create Food'), 'icon' => 'fa fa-circle-o', 'url' => ['/food/create'],],
+                            ['label' => Yii::t('app', 'List Hotel'), 'icon' => 'fa fa-circle-o', 'url' => ['/hotel'],],
+                            ['label' => Yii::t('app', 'Create Hotel'), 'icon' => 'fa fa-circle-o', 'url' => ['/hotel/create'],],
                         ],
                     ],
                     [
-                        'label' => Yii::t('app', 'Page'),
+                        'label' => Yii::t('app', 'Price'),
                         'icon' => 'fa fa-file-excel-o',
                         'url' => '#',
                         'items' => [
-                            ['label' => Yii::t('app', 'List Page'), 'icon' => 'fa fa-circle-o', 'url' => ['/page'],],
-                            ['label' => Yii::t('app', 'Create Page'), 'icon' => 'fa fa-circle-o', 'url' => ['/page/create'],],
+                            ['label' => Yii::t('app', 'List Price'), 'icon' => 'fa fa-circle-o', 'url' => ['/price'],],
+                            ['label' => Yii::t('app', 'Create Price'), 'icon' => 'fa fa-circle-o', 'url' => ['/price/create'],],
+                        ],
+                    ],
+                    [
+                        'label' => Yii::t('app', 'Motel'),
+                        'icon' => 'fa fa-asterisk',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => Yii::t('app', 'List Motel'), 'icon' => 'fa fa-circle-o', 'url' => ['/motel'],],
+                            ['label' => Yii::t('app', 'Create Motel'), 'icon' => 'fa fa-circle-o', 'url' => ['/motel/create'],],
                         ],
                     ],
                     ['label' => 'Login', 'icon' => 'fa  fa-sign-out', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

@@ -19,16 +19,17 @@ use common\components\Util;
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-
-                <!-- User Account: style can be found in dropdown.less -->
                 <li>
-                    <?=
-                    \lajax\languagepicker\widgets\LanguagePicker::widget([
-                        'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_DROPDOWN,
-                        'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_LARGE
-                    ]);
-                    ?>
+                    
+                <?=
+                \lajax\languagepicker\widgets\LanguagePicker::widget([
+                    'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_DROPDOWN,
+                    'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_LARGE
+                ]);
+                ?>
                 </li>
+                <!-- User Account: style can be found in dropdown.less -->
+             
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= Util::getUrlImage(Yii::$app->user->identity->avatar) ?>" class="user-image" alt="User Image"/>
