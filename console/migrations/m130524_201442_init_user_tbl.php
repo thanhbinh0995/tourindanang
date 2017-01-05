@@ -24,7 +24,7 @@ class m130524_201442_init_user_tbl extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(2),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull()->defaultValue(0),
             
         ], $tableOptions);
     }

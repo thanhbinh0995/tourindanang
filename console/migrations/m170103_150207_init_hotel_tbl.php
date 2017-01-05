@@ -21,7 +21,7 @@ class m170103_150207_init_hotel_tbl extends Migration
             'hotelNumberPax' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
 

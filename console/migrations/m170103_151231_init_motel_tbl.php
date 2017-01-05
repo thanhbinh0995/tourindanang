@@ -19,7 +19,7 @@ class m170103_151231_init_motel_tbl extends Migration
             'price' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
 

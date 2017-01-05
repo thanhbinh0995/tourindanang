@@ -17,7 +17,7 @@ class m170105_030630_init_tourType_tbl extends Migration
             'typeId' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
 

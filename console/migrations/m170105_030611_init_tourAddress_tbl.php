@@ -17,7 +17,7 @@ class m170105_030611_init_tourAddress_tbl extends Migration
             'addressId' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
 

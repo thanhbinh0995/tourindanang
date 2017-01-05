@@ -21,7 +21,7 @@ class m170103_150157_init_tour_tbl extends Migration
             'avatar' => $this->string(50)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->boolean()->defaultValue(false),
+            'deleted_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
 
