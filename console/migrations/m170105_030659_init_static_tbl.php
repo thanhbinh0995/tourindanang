@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170103_150157_init_tour_tbl extends Migration
+class m170105_030659_init_static_tbl extends Migration
 {
     public function up()
     {
@@ -12,13 +12,10 @@ class m170103_150157_init_tour_tbl extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tour}}', [
+        $this->createTable('{{%static}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
-            'dayTour' => $this->integer()->notNull(),
-            'info' => $this->string()->notNull(),
-            'itinerary' => $this->string()->notNull(),
-            'avatar' => $this->string(50)->notNull(),
+            'type' => $this->string()->notNull(),
+            'context' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'deleted_at' => $this->boolean()->defaultValue(false),
@@ -27,7 +24,7 @@ class m170103_150157_init_tour_tbl extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%tour}}');
+        $this->dropTable('{{%static}}');
     }
 
     /*
