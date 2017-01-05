@@ -18,7 +18,7 @@ class m170105_030659_init_static_tbl extends Migration
             'context' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

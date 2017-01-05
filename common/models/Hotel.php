@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "hotel".
  *
@@ -28,14 +29,19 @@ class Hotel extends \yii\db\ActiveRecord
     {
         return 'hotel';
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'address', 'level', 'hotelPrice', 'hotelNumberPax', 'created_at', 'updated_at'], 'required'],
+            [['name', 'address', 'level', 'hotelPrice', 'hotelNumberPax',], 'required'],
             [['hotelPrice', 'hotelNumberPax', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name', 'address', 'level'], 'string', 'max' => 255],
         ];

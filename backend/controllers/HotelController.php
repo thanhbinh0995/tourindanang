@@ -30,7 +30,7 @@ class HotelController extends BaseController
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    
     /**
      * Displays a single Hotel model.
      * @param integer $id

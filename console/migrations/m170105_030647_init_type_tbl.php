@@ -17,7 +17,7 @@ class m170105_030647_init_type_tbl extends Migration
             'name' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 

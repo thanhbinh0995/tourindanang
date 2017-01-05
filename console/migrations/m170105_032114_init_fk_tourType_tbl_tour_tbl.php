@@ -6,12 +6,12 @@ class m170105_032114_init_fk_tourType_tbl_tour_tbl extends Migration
 {
     public function up()
     {
-        $this->addForeignKey("fk_tourType_tbl_tour_tbl", 'tourType', 'tourId', 'tour', 'id', "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_tourType_tbl_tour_tbl", 'tourtype', 'tourId', 'tour', 'id', "CASCADE", "RESTRICT");
     }
 
     public function down()
     {
-        $this->dropForeignKey("fk_tourType_tbl_tour_tbl", "tourType");
+        $this->dropForeignKey("fk_tourType_tbl_tour_tbl", "tourtype");
     }
 
     /*

@@ -12,19 +12,19 @@ class m170105_030611_init_tourAddress_tbl extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tourAddress}}', [
+        $this->createTable('{{%touraddress}}', [
             'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
             'addressId' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 
     public function down()
     {
-        $this->dropTable('{{%tourAddress}}');
+        $this->dropTable('{{%touraddress}}');
     }
 
     /*

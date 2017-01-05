@@ -6,12 +6,12 @@ class m170105_032031_init_fk_tourAddress_tbl_address_tbl extends Migration
 {
     public function up()
     {
-        $this->addForeignKey("fk_tourAddress_tbl_address_tbl", 'tourAddress', 'addressId', 'address', 'id', "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_tourAddress_tbl_address_tbl", 'touraddress', 'addressId', 'address', 'id', "CASCADE", "RESTRICT");
     }
 
     public function down()
     {
-        $this->dropForeignKey("fk_tourAddress_tbl_address_tbl", "tourAddress");
+        $this->dropForeignKey("fk_tourAddress_tbl_address_tbl", "touraddress");
     }
 
     /*

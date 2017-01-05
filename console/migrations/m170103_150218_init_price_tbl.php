@@ -19,7 +19,7 @@ class m170103_150218_init_price_tbl extends Migration
             'info' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'deleted_at' => $this->integer()->notNull(),
+            'deleted_at' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
     }
 
