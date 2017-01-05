@@ -13,6 +13,7 @@ class m170105_030630_init_tourType_tbl extends Migration
         }
 
         $this->createTable('{{%tourType}}', [
+            'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
             'typeId' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
