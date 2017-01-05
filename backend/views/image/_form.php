@@ -4,23 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Tour */
+/* @var $model common\models\Image */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="tour-form">
+<div class="image-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'tourId')->textInput() ?>
+
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'dayTour')->textInput() ?>
-
-    <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'itinerary')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'avatar')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 

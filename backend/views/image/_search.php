@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\TourSearch */
+/* @var $model common\models\ImageSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="tour-search">
+<div class="image-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
+    <?= $form->field($model, 'tourId') ?>
+
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'dayTour') ?>
+    <?= $form->field($model, 'created_at') ?>
 
-    <?= $form->field($model, 'info') ?>
-
-    <?= $form->field($model, 'itinerary') ?>
-
-    <?php // echo $form->field($model, 'avatar') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
     <?php // echo $form->field($model, 'deleted_at') ?>
 
