@@ -1,5 +1,5 @@
 <?php
-
+ 
 use yii\db\Migration;
 
 class m170105_030538_init_address_tbl extends Migration

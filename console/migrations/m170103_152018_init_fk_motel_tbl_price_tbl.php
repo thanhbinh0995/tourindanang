@@ -1,5 +1,5 @@
 <?php
-
+ 
 use yii\db\Migration;
 
 class m170103_152018_init_fk_motel_tbl_price_tbl extends Migration

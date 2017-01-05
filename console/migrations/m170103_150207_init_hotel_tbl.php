@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-
+ 
 class m170103_150207_init_hotel_tbl extends Migration
 {
     public function up()
