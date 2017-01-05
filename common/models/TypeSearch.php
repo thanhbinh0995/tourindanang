@@ -5,23 +5,21 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Food;
+use common\models\Type;
 
 /**
- * FoodSearch represents the model behind the search form about `common\models\Food`.
+ * TypeSearch represents the model behind the search form about `common\models\Type`.
  */
-class FoodSearch extends Food
+class TypeSearch extends Type
 {
-    
-    public $category;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'user_id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'image', 'content', 'category_id'], 'safe'],
+            [['id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -43,9 +41,7 @@ class FoodSearch extends Food
      */
     public function search($params)
     {
-        $query = Food::find();
-
-        $query->joinWith(['category']);
+        $query = Type::find();
 
         // add conditions that should always apply here
 
@@ -53,10 +49,6 @@ class FoodSearch extends Food
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['category_id'] = [
-            'asc' => ['category.name' => SORT_ASC],
-            'desc' => ['category.name' => SORT_DESC],
-        ];
         $this->load($params);
 
         if (!$this->validate()) {
@@ -68,14 +60,12 @@ class FoodSearch extends Food
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
-            'user_id' => $this->user_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'food.name', $this->name])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

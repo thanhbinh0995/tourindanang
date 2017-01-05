@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Category;
+use common\models\Address;
 
 /**
- * CategorySearch represents the model behind the search form about `common\models\Category`.
+ * AddressSearch represents the model behind the search form about `common\models\Address`.
  */
-class CategorySearch extends Category
+class AddressSearch extends Address
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'image'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CategorySearch extends Category
      */
     public function search($params)
     {
-        $query = Category::find();
+        $query = Address::find();
 
         // add conditions that should always apply here
 
@@ -65,8 +65,7 @@ class CategorySearch extends Category
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

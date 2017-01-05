@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Tour;
+use common\models\TourAddress;
 
 /**
- * TourSearch represents the model behind the search form about `common\models\Tour`.
+ * TourAddressSearch represents the model behind the search form about `common\models\TourAddress`.
  */
-class TourSearch extends Tour
+class TourAddressSearch extends TourAddress
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class TourSearch extends Tour
     public function rules()
     {
         return [
-            [['id', 'dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'info', 'itinerary', 'avatar'], 'safe'],
+            [['id', 'tourId', 'addressId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class TourSearch extends Tour
      */
     public function search($params)
     {
-        $query = Tour::find();
+        $query = TourAddress::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +59,12 @@ class TourSearch extends Tour
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dayTour' => $this->dayTour,
+            'tourId' => $this->tourId,
+            'addressId' => $this->addressId,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'info', $this->info])
-            ->andFilterWhere(['like', 'itinerary', $this->itinerary])
-            ->andFilterWhere(['like', 'avatar', $this->avatar]);
 
         return $dataProvider;
     }

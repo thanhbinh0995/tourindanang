@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Device;
+use common\models\Image;
 
 /**
- * DeviceSearch represents the model behind the search form about `common\models\Device`.
+ * ImageSearch represents the model behind the search form about `common\models\Image`.
  */
-class DeviceSearch extends Device
+class ImageSearch extends Image
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class DeviceSearch extends Device
     public function rules()
     {
         return [
-            [['id', 'user_id', 'device_type', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['device_token'], 'safe'],
+            [['id', 'tourId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class DeviceSearch extends Device
      */
     public function search($params)
     {
-        $query = Device::find();
+        $query = Image::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,13 @@ class DeviceSearch extends Device
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'device_type' => $this->device_type,
+            'tourId' => $this->tourId,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'device_token', $this->device_token]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

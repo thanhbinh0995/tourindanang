@@ -9,17 +9,18 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
- * @property string $address
  * @property integer $dayTour
- * @property string $itinerary
- * @property string $type
  * @property string $info
- * @property string $image
+ * @property string $itinerary
+ * @property string $avatar
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $deleted_at
  *
+ * @property Image[] $images
  * @property Price[] $prices
+ * @property Touraddress[] $touraddresses
+ * @property Tourtype[] $tourtypes
  */
 class Tour extends \yii\db\ActiveRecord
 {
@@ -37,10 +38,10 @@ class Tour extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'dayTour', 'itinerary', 'type', 'info', 'image', 'created_at', 'updated_at'], 'required'],
+            [['name', 'dayTour', 'info', 'itinerary', 'avatar', 'created_at', 'updated_at', 'deleted_at'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'address', 'itinerary', 'type', 'info'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 50],
+            [['name', 'info', 'itinerary'], 'string', 'max' => 255],
+            [['avatar'], 'string', 'max' => 50],
         ];
     }
 
@@ -52,12 +53,10 @@ class Tour extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'address' => 'Address',
             'dayTour' => 'Day Tour',
-            'itinerary' => 'Itinerary',
-            'type' => 'Type',
             'info' => 'Info',
-            'image' => 'Image',
+            'itinerary' => 'Itinerary',
+            'avatar' => 'Avatar',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'deleted_at' => 'Deleted At',
@@ -67,8 +66,32 @@ class Tour extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['tourId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPrices()
     {
         return $this->hasMany(Price::className(), ['tourId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTouraddresses()
+    {
+        return $this->hasMany(Touraddress::className(), ['tourId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTourtypes()
+    {
+        return $this->hasMany(Tourtype::className(), ['tourId' => 'id']);
     }
 }

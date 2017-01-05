@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Page;
+use common\models\TourType;
 
 /**
- * PageSearch represents the model behind the search form about `common\models\Page`.
+ * TourTypeSearch represents the model behind the search form about `common\models\TourType`.
  */
-class PageSearch extends Page
+class TourTypeSearch extends TourType
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class PageSearch extends Page
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'content'], 'safe'],
+            [['id', 'tourId', 'typeId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find();
+        $query = TourType::find();
 
         // add conditions that should always apply here
 
@@ -60,13 +59,12 @@ class PageSearch extends Page
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'tourId' => $this->tourId,
+            'typeId' => $this->typeId,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

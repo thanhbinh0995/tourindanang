@@ -13,6 +13,7 @@ class m170105_030611_init_tourAddress_tbl extends Migration
         }
 
         $this->createTable('{{%tourAddress}}', [
+            'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
             'addressId' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
