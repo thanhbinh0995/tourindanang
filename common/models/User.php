@@ -213,9 +213,6 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public static function findIdentityByAccessToken($token, $type = null): IdentityInterface {
-        
-    }
     public static function listRole(){
         $array = [
             1 => 'admin',
@@ -223,4 +220,9 @@ class User extends ActiveRecord implements IdentityInterface
         ];
         return $array;
     }
+
+    public static function findIdentityByAccessToken($token, $type = null) {
+        
+    }
+
 }
