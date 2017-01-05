@@ -3,7 +3,9 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "tour".
  *
@@ -22,26 +24,34 @@ use Yii;
  * @property Touraddress[] $touraddresses
  * @property Tourtype[] $tourtypes
  */
-class Tour extends \yii\db\ActiveRecord
+class Tour extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
+    public $file_image;
     public static function tableName()
     {
         return 'tour';
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'dayTour', 'info', 'itinerary', 'avatar', 'created_at', 'updated_at', 'deleted_at'], 'required'],
+            [['name', 'dayTour', 'info', 'itinerary', 'avatar'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'info', 'itinerary'], 'string', 'max' => 255],
+            [['name', 'info'], 'string', 'max' => 255],
+            [['itinerary'], 'string'],
             [['avatar'], 'string', 'max' => 50],
+            [['file_image'], 'file', 'extensions' => 'png, jpg','maxSize' => 1024 * 1024 * 2, 'skipOnEmpty' => true],
         ];
     }
 
@@ -93,5 +103,8 @@ class Tour extends \yii\db\ActiveRecord
     public function getTourtypes()
     {
         return $this->hasMany(Tourtype::className(), ['tourId' => 'id']);
+    }
+    public static function listTour(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

@@ -58,4 +58,7 @@ class Address extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Touraddress::className(), ['addressId' => 'id']);
     }
+    public static function listAddress(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
+    }
 }

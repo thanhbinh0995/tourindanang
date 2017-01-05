@@ -8,11 +8,12 @@ use common\models\TypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\BaseController;
 
 /**
  * TypeController implements the CRUD actions for Type model.
  */
-class TypeController extends Controller
+class TypeController extends BaseController
 {
     /**
      * @inheritdoc
