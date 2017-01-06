@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "tour".
  *
@@ -93,5 +93,8 @@ class Tour extends \yii\db\ActiveRecord
     public function getTourtypes()
     {
         return $this->hasMany(Tourtype::className(), ['tourId' => 'id']);
+    }
+    public static function listTour(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

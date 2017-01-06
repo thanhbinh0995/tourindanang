@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "image".
  *
@@ -18,6 +18,7 @@ use Yii;
  */
 class Image extends \yii\db\ActiveRecord
 {
+    public $file;
     /**
      * @inheritdoc
      */
@@ -32,9 +33,11 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tourId', 'name', 'created_at', 'updated_at', 'deleted_at'], 'required'],
+            [['tourId', 'name'], 'required'],
             [['tourId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 50],
+            [['file'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
+
             [['tourId'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tourId' => 'id']],
         ];
     }
@@ -53,7 +56,12 @@ class Image extends \yii\db\ActiveRecord
             'deleted_at' => 'Deleted At',
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

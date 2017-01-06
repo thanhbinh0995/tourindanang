@@ -22,10 +22,10 @@ use common\components\Util;
                 <li>
                     
                 <?=
-                \lajax\languagepicker\widgets\LanguagePicker::widget([
-                    'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_DROPDOWN,
-                    'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_LARGE
-                ]);
+               \lajax\languagepicker\widgets\LanguagePicker::widget([
+                   'skin' => \lajax\languagepicker\widgets\LanguagePicker::SKIN_DROPDOWN,
+                   'size' => \lajax\languagepicker\widgets\LanguagePicker::SIZE_LARGE
+               ]);
                 ?>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->

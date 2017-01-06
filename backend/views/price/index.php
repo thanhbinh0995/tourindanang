@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use common\models\Tour;
+use common\models\Hotel;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PriceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,11 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'tourId',
-            'hotelId',
+           
+            [
+                'attribute' => 'tourId',
+                'filter' => Tour::listTour(),
+                'value' => function ($model) {
+                    return $model->tour->name;
+                },
+            ],
+            [
+                'attribute' => 'hotelId',
+                'filter' => Hotel::listHotel(),
+                'value' => function ($model) {
+                    return $model->hotel->name;
+                },
+            ],
             'info',
-            'created_at',
+            
             // 'updated_at',
             // 'deleted_at',
 

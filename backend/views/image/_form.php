@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
+use common\components\Util;
+use common\models\Tour;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Image */
@@ -10,17 +13,25 @@ use yii\widgets\ActiveForm;
 
 <div class="image-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+    'options'=>['enctype'=>'multipart/form-data'] // important
+    ]); ?>  
 
-    <?= $form->field($model, 'tourId')->textInput() ?>
+    <?= $form->field($model, 'tourId')->dropDownList(Tour::listTour()) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'deleted_at')->textInput() ?>
+    <?= $form->field($model, 'file')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'allowedFileExtensions'=>['jpg', 'gif', 'png'],
+            'initialPreview'=>[
+                Html::img(Util::getUrlImage($model->name))
+            ],
+            'overwriteInitial'=>true,
+            'showUpload' => false,
+            'showCaption' => false,
+        ]
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
