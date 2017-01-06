@@ -3,7 +3,11 @@
 namespace common\models;
 
 use Yii;
+
 use yii\behaviors\TimestampBehavior;
+
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "hotel".
@@ -64,12 +68,15 @@ class Hotel extends \yii\db\ActiveRecord
             'deleted_at' => 'Deleted At',
         ];
     }
-
+                        
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getPrices()
     {
         return $this->hasMany(Price::className(), ['hotelId' => 'id']);
+    }
+      public static function listHotel(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

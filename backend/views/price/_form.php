@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use common\components\Util;
+use common\models\Tour;
+use common\models\Hotel;
 /* @var $this yii\web\View */
 /* @var $model common\models\Price */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,17 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tourId')->textInput() ?>
+    <?= $form->field($model, 'tourId')->dropDownList(Tour::listTour()) ?>
 
-    <?= $form->field($model, 'hotelId')->textInput() ?>
+    <?= $form->field($model, 'hotelId')->dropDownList(Hotel::listHotel()) ?>
 
     <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'deleted_at')->textInput() ?>
+  
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

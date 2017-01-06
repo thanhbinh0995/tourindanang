@@ -8,7 +8,8 @@ use common\models\ImageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
+use common\components\Util;
 /**
  * ImageController implements the CRUD actions for Image model.
  */
@@ -64,9 +65,26 @@ class ImageController extends Controller
     public function actionCreate()
     {
         $model = new Image();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+      //  $model->scenario = 'create';
+         if ($model->load(Yii::$app->request->post())) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->file) {
+                $model->name = Yii::$app->security->generateRandomString() . '.' . $model->file->extension;
+            } 
+            // else{
+            //     var_dump($model);
+            //     exit();
+            // }    
+         if ($model->save()) {
+                if (!empty($model->name)) {
+                    Util::uploadFile($model->file, $model->name);
+                }
+                  return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                        'model' => $model,
+            ]);
+        }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,12 +100,31 @@ class ImageController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
+       $model = $this->findModel($id);
+       
+        if($model->load(Yii::$app->request->post())){
+            $model->file = UploadedFile::getInstance($model, 'file');   
+            $old_image = "";
+            if ($model->file) {
+                $old_image = $model->name;
+                $model->name = Yii::$app->security->generateRandomString() . '.' . $model->file->extension;
+            }
+       
+            if ($model->save()) {
+                if (!empty($model->file)) {
+                    Util::deleteFile($old_image);
+                    Util::uploadFile($model->file, $model->name);
+                }  
+             
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else{
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }

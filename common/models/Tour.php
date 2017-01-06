@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;

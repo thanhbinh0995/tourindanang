@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "price".
  *
@@ -35,7 +36,7 @@ class Price extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tourId', 'info', 'created_at', 'updated_at'], 'required'],
+            [['tourId', 'info'], 'required'],
             [['tourId', 'hotelId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['info'], 'string', 'max' => 255],
             [['hotelId'], 'exist', 'skipOnError' => true, 'targetClass' => Hotel::className(), 'targetAttribute' => ['hotelId' => 'id']],
@@ -58,7 +59,12 @@ class Price extends \yii\db\ActiveRecord
             'deleted_at' => 'Deleted At',
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -81,5 +87,8 @@ class Price extends \yii\db\ActiveRecord
     public function getTour()
     {
         return $this->hasOne(Tour::className(), ['id' => 'tourId']);
+    }
+      public static function listPrice(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'info');
     }
 }

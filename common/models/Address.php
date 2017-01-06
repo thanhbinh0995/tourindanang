@@ -1,7 +1,12 @@
 <?php
 
 namespace common\models;
+<<<<<<< HEAD
 use yii\helpers\ArrayHelper;
+=======
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+>>>>>>> b72d89e186554d14e12b77d2f9afc42a899e9626
 use Yii;
 
 /**
@@ -31,7 +36,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at', 'deleted_at'], 'required'],
+            [['name'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -48,6 +53,12 @@ class Address extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'deleted_at' => 'Deleted At',
+        ];
+    }
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 

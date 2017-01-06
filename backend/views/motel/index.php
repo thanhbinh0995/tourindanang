@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use common\models\Price;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\MotelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,11 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'priceId',
+          
+            [
+                'attribute' => 'priceId',
+                'filter' => Price::listPrice(),
+                'value' => function ($model) {
+                    return $model->price->info;
+                },
+            ],
             'numberPax',
             'price',
-            'created_at',
+     
             // 'updated_at',
             // 'deleted_at',
 
