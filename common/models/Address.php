@@ -1,12 +1,9 @@
 <?php
 
 namespace common\models;
-<<<<<<< HEAD
 use yii\helpers\ArrayHelper;
-=======
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
->>>>>>> b72d89e186554d14e12b77d2f9afc42a899e9626
 use Yii;
 
 /**

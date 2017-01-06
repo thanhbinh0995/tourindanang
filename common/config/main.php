@@ -11,18 +11,18 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
-        'languagepicker' => [
-            'class' => 'lajax\languagepicker\Component',
-            'languages' => ['en', 'de', 'fr',"vi"]                   // List of available languages (icons only)
-        ],
-        'i18n' => [
-            'translations' => [
-                'app*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@approot/messages',
-                 ]
-            ]
-        ],
+//        'languagepicker' => [
+//            'class' => 'lajax\languagepicker\Component',
+//            'languages' => ['en',"vi"]                   // List of available languages (icons only)
+//        ],
+//        'i18n' => [
+//            'translations' => [
+//                'app*' => [
+//                    'class' => 'yii\i18n\PhpMessageSource',
+//                    'basePath' => '@approot/messages',
+//                 ]
+//            ]
+//        ],
         'view' => [
             'theme' => [
                 'pathMap' => [
