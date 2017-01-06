@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**

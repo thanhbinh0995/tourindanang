@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0fcc857a139dc1c09c1f8ef7651a9241",
-    "content-hash": "d2db8b81bcbea874c67b47fd7290695d",
+    "hash": "3d2ff5db7a74e829c90cad1eeae8ce3a",
+    "content-hash": "97047ae291f5248b3bc9cf355a6de3f7",
     "packages": [
+        {
+            "name": "2amigos/yii2-multi-select-widget",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-multi-select-widget.git",
+                "reference": "8e3d743ea48db77a78778e09c4ce0d20825a69cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-multi-select-widget/zipball/8e3d743ea48db77a78778e09c4ce0d20825a69cc",
+                "reference": "8e3d743ea48db77a78778e09c4ce0d20825a69cc",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\multiselect\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "ramirez.cobos@gmail.com",
+                    "homepage": "http://www.ramirezcobos.com"
+                }
+            ],
+            "description": "Multiselect Bootstrap widget for Yii2.",
+            "keywords": [
+                "extension",
+                "multiselect",
+                "widget",
+                "yii"
+            ],
+            "time": "2014-05-10 18:32:51"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v2.3.8",
