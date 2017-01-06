@@ -8,11 +8,12 @@ use common\models\TourAddressSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\BaseController;
 
 /**
  * TourAddressController implements the CRUD actions for TourAddress model.
  */
-class TourAddressController extends Controller
+class TourAddressController extends BaseController
 {
     /**
      * @inheritdoc

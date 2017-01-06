@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "tourtype".
  *
@@ -26,14 +26,19 @@ class TourType extends \yii\db\ActiveRecord
     {
         return 'tourtype';
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['tourId', 'typeId', 'created_at', 'updated_at', 'deleted_at'], 'required'],
+            [['tourId', 'typeId' ], 'required'],
             [['tourId', 'typeId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['tourId'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tourId' => 'id']],
             [['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['typeId' => 'id']],

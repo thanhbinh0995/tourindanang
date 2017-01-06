@@ -8,11 +8,14 @@ use common\models\TourSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\BaseController;
+use common\components\Util;
+use yii\web\UploadedFile;
 
 /**
  * TourController implements the CRUD actions for Tour model.
  */
-class TourController extends Controller
+class TourController extends BaseController
 {
     /**
      * @inheritdoc
@@ -65,8 +68,21 @@ class TourController extends Controller
     {
         $model = new Tour();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file_image = UploadedFile::getInstance($model, 'file_image');
+            if ($model->file_image) {
+                $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
+            }
+            if ($model->save()) {
+                if (!empty($model->avatar)) {
+                    Util::uploadFile($model->file_image, $model->avatar);
+                }
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +100,24 @@ class TourController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->file_image = UploadedFile::getInstance($model, 'file_image');   
+            $old_image = "";
+            if ($model->file_image) {
+                $old_image = $model->avatar;
+                $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
+            }
+            if ($model->save()) {
+                if (!empty($model->file_image)) {
+                    Util::deleteFile($old_image);
+                    Util::uploadFile($model->file_image, $model->avatar);
+                }
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'dayTour',
             'info',
-            'itinerary',
+//            'itinerary',
             // 'avatar',
             // 'created_at',
             // 'updated_at',

@@ -29,8 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'tourId',
-            'typeId',
+            [
+                'attribute'=>'tourId',
+                'value'=>  $model->tour->name,
+            ],
+            [
+                'attribute'=>'typeId',
+                'value'=>  $model->type->name,
+            ],
             'created_at',
             'updated_at',
             'deleted_at',

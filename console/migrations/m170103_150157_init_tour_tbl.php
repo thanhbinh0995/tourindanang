@@ -17,7 +17,7 @@ class m170103_150157_init_tour_tbl extends Migration
             'name' => $this->string()->notNull(),
             'dayTour' => $this->integer()->notNull(),
             'info' => $this->string()->notNull(),
-            'itinerary' => $this->string()->notNull(),
+            'itinerary' => $this->text()->notNull(),
             'avatar' => $this->string(50)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

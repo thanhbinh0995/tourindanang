@@ -3,7 +3,9 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "type".
  *
@@ -15,7 +17,7 @@ use Yii;
  *
  * @property Tourtype[] $tourtypes
  */
-class Type extends \yii\db\ActiveRecord
+class Type extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -24,14 +26,19 @@ class Type extends \yii\db\ActiveRecord
     {
         return 'type';
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at', 'deleted_at'], 'required'],
+            [['name'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -57,5 +64,8 @@ class Type extends \yii\db\ActiveRecord
     public function getTourtypes()
     {
         return $this->hasMany(Tourtype::className(), ['typeId' => 'id']);
+    }
+    public static function listType(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }
