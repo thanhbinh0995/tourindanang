@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use backend\components\BaseController;
 use common\components\Util;
 use yii\web\UploadedFile;
-
+ use yii\imagine\Image;  
+ use Imagine\Image\Box; 
 /**
  * TourController implements the CRUD actions for Tour model.
  */
@@ -75,6 +76,7 @@ class TourController extends BaseController
             }
             if ($model->save()) {
                 if (!empty($model->avatar)) {
+                    $uploadPath = \Yii::getAlias('@uploadPath');
                     Util::uploadFile($model->file_image, $model->avatar);
                 }
                 return $this->redirect(['index']);

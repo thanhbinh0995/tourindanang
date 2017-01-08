@@ -1,5 +1,7 @@
 <?php
 namespace common\components;
+ use yii\imagine\Image;  
+ use Imagine\Image\Box;  
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,8 +29,11 @@ class Util {
     
     public static function uploadFile($file, $fileName) {
         if ($file) {
-            $uploadPath = \Yii::getAlias('@uploadPath');            
+            $uploadPath = \Yii::getAlias('@uploadPath');
             $file->saveAs(Yii::getAlias($uploadPath . '/' . $fileName));
+            Image::thumbnail(Yii::getAlias($uploadPath . '/' . $fileName), 400, 250)
+                ->resize(new Box(400,250))
+                ->save(Yii::getAlias($uploadPath . '/' . $fileName),['quality' => 70]);
             return true;
         }
         return false;
