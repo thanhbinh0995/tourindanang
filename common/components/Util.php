@@ -30,10 +30,8 @@ class Util {
     public static function uploadFile($file, $fileName) {
         if ($file) {
             $uploadPath = \Yii::getAlias('@uploadPath');
-            $file->saveAs(Yii::getAlias($uploadPath . '/' . $fileName));
-            Image::thumbnail(Yii::getAlias($uploadPath . '/' . $fileName), 400, 250)
-                ->resize(new Box(400,250))
-                ->save(Yii::getAlias($uploadPath . '/' . $fileName),['quality' => 70]);
+            Image::thumbnail($file->tempName, 300, 300)
+                ->save(Yii::getAlias(Yii::getAlias($uploadPath . '/' . $fileName)), ['quality' => 80]);
             return true;
         }
         return false;
