@@ -1,17 +1,17 @@
 <?php
- 
+
 use yii\db\Migration;
 
-class m170105_032125_init_fk_tourType_tbl_type_tbl extends Migration
+class m170113_151537_init_fk_tour_type_tbl_tour_tbl extends Migration
 {
     public function up()
     {
-        $this->addForeignKey("fk_tourType_tbl_type_tbl", 'tourtype', 'typeId', 'type', 'id', "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_tour_type_tbl_tour_tbl", 'tour_type', 'tourId', 'tour', 'id', "CASCADE", "RESTRICT");
     }
 
     public function down()
     {
-        $this->dropForeignKey("fk_tourType_tbl_type_tbl", "tourtype");
+        $this->dropForeignKey("fk_tour_type_tbl_tour_tbl", "tour_type");
     }
 
     /*

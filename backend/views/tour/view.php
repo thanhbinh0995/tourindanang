@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\components\Util;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
 
@@ -32,12 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'dayTour',
             'info',
-            'itinerary',
-            [
-                'attribute'=>'image',
-                'value'=>  Util::getUrlImage($model->avatar),
-                'format' => ['image',['width'=>'200','height'=>'200']],
-            ],
+            'itinerary:ntext',
+            'avatar',
             'created_at',
             'updated_at',
             'deleted_at',

@@ -4,8 +4,9 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 /**
- * This is the model class for table "tourtype".
+ * This is the model class for table "tour_type".
  *
  * @property integer $id
  * @property integer $tourId
@@ -22,23 +23,24 @@ class TourType extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
-        return 'tourtype';
-    }
-    public function behaviors()
+     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
         ];
     }
+    public static function tableName()
+    {
+        return 'tour_type';
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['tourId', 'typeId' ], 'required'],
+            [['tourId', 'typeId'], 'required'],
             [['tourId', 'typeId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['tourId'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tourId' => 'id']],
             [['typeId'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['typeId' => 'id']],

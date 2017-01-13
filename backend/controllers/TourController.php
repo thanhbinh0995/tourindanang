@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\controllers;
 
 use Yii;
@@ -70,6 +69,7 @@ class TourController extends BaseController
         $model = new Tour();
 
         if ($model->load(Yii::$app->request->post())) {
+            
             $model->file_image = UploadedFile::getInstance($model, 'file_image');
             if ($model->file_image) {
                 $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
@@ -103,7 +103,7 @@ class TourController extends BaseController
     {
         $model = $this->findModel($id);
         var_dump($model->getTypes());
-        exit();
+        // exit();
         if ($model->load(Yii::$app->request->post())) {
             $model->file_image = UploadedFile::getInstance($model, 'file_image');   
             $old_image = "";

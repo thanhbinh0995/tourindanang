@@ -8,28 +8,12 @@ use common\models\TourTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\BaseController;
 
 /**
  * TourTypeController implements the CRUD actions for TourType model.
  */
 class TourTypeController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all TourType models.
      * @return mixed
@@ -66,18 +50,8 @@ class TourTypeController extends BaseController
     {
         $model = new TourType();
 
-        if ($model->load(Yii::$app->request->post())) {
-            var_dump(Yii::$app->request->post());
-            exit();
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else{
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-            
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

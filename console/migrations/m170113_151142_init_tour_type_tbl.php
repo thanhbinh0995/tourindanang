@@ -1,8 +1,8 @@
 <?php
- 
+
 use yii\db\Migration;
 
-class m170105_030630_init_tourType_tbl extends Migration
+class m170113_151142_init_tour_type_tbl extends Migration
 {
     public function up()
     {
@@ -12,7 +12,7 @@ class m170105_030630_init_tourType_tbl extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tourtype}}', [
+        $this->createTable('{{%tour_type}}', [
             'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
             'typeId' => $this->integer()->notNull(),
@@ -24,7 +24,7 @@ class m170105_030630_init_tourType_tbl extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%tourtype}}');
+        $this->dropTable('{{%tour_type}}');
     }
 
     /*

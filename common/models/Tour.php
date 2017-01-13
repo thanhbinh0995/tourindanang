@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
@@ -25,26 +24,27 @@ use common\models\TourType;
  *
  * @property Image[] $images
  * @property Price[] $prices
+ * @property TourType[] $tourTypes
  * @property Touraddress[] $touraddresses
- * @property Tourtype[] $tourtypes
  */
-class Tour extends ActiveRecord
+class Tour extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public $file_image;
     public $types = array();
-    public static function tableName()
-    {
-        return 'tour';
-    }
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
         ];
     }
+    public static function tableName()
+    {
+        return 'tour';
+    }
+
     /**
      * @inheritdoc
      */
@@ -53,11 +53,11 @@ class Tour extends ActiveRecord
         return [
             [['name', 'dayTour', 'info', 'itinerary', 'avatar'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'info'], 'string', 'max' => 255],
             [['itinerary'], 'string'],
+            [['name', 'info'], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
-            [['file_image'], 'file', 'extensions' => 'png, jpg','maxSize' => 1024 * 1024 * 2, 'skipOnEmpty' => true],
-            [['types'], 'safe']
+            [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
+            [['types'], 'safe'],
         ];
     }
 
@@ -98,43 +98,31 @@ class Tour extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTouraddresses()
+    public function getTourTypes()
     {
-        return $this->hasMany(Touraddress::className(), ['tourId' => 'id']);
+        return $this->hasMany(TourType::className(), ['tourId' => 'id'])->viaTable('tour_type', ['typeId' => 'id']);;
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getType()
+    public function getTouraddresses()
     {
-        return $this->hasMany(Type::className(), ['id'=>'typeId'])->viaTable(tourtype::tableName(), ['tourId' => 'id']);
+        return $this->hasMany(Touraddress::className(), ['tourId' => 'id']);
     }
-    public function getTourTypes()
-    {
-        return $this->hasMany(Tourtype::className(), ['tourId' => 'id']);
-    }
+
     public static function listTour(){
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 
     public function getTypes(){
-        $types = $this->getType();
-        var_dump($types);
-        exit();
-        foreach ($types as $value) {
-            # code...
-            var_dump($value);
-        }
-        exit();
-
-        // return ArrayHelper::map($types, 'id', 'desc');
-        return ArrayHelper::index($types, 'typeId');
-        // foreach ($types as $type){
-            // $tourType = new tourType();
-
-        // }
+        $types = $this->getTourTypes();
+        // var_dump($types);
+        // exit();
         return $types;
+        // return $this->types;
+        // return $this->hasMany(TourType::className(), ['tourId' => 'id']);
+        // return ArrayHelper::index($types, 'tourId');
     }
 
     public function setTypes(){

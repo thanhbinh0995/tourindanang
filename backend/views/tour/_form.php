@@ -9,29 +9,25 @@ use common\models\Tour;
 use yii\redactor\widgets\Redactor;
 use dosamigos\multiselect\MultiSelect;
 use kartik\select2\Select2;
-/* @var $this yii\web\View */
-/* @var $model common\models\Tour */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="tour-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>    
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'dayTour')->textInput() ?>
 
     <?= $form->field($model, 'info')->textInput(['maxlength' => true]) ?>
-    
+
     <?= $form->field($model, 'itinerary')->widget(Redactor::className(), [
         'clientOptions' => [
-            'minHeight'=> 200, // pixels
+            'minHeight'=> 200,
         ]
     ]) ?>
     
     <?php 
-        // Multiple select without model
         $data = Type::listType();
         echo $form->field($model, 'types')->widget(Select2::classname(), [
             'data' => $data,

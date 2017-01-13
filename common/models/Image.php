@@ -37,7 +37,6 @@ class Image extends \yii\db\ActiveRecord
             [['tourId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 50],
             [['file'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-
             [['tourId'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tourId' => 'id']],
         ];
     }
