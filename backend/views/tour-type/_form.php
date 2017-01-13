@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use common\models\Tour;
 use common\models\Type;
 use dosamigos\multiselect\MultiSelect;
+use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\TourType */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,23 +16,20 @@ use dosamigos\multiselect\MultiSelect;
     <?php $form = ActiveForm::begin(); ?>
     
     <?= $form->field($model, 'tourId')->dropDownList(Tour::listTour()) ?>
-
-    <?= $form->field($model, 'typeId')->dropDownList(Type::listType()) ?>
     
-    <?= 
-            MultiSelect::widget([
-        'id'=>"multiXX",
-        "options" => ['multiple'=>"multiple"], // for the actual multiselect
-        'data' => [ 0 => 'super', 7 => 'natural'], // data as array
-        'value' => [ 0, 7], // if preselected
-        'name' => 'multti', // name for the form
-        "clientOptions" => 
-            [
-                "includeSelectAllOption" => true,
-                'numberDisplayed' => 7
-            ], 
-    ]);    
+    <?php 
+        // Multiple select without model
+        $data = Type::listType();
+
+        echo Select2::widget([
+            'name' => 'typeId',
+            'value' => '',
+            'data' => $data,
+            'options' => ['multiple' => true, 'placeholder' => 'Select states ...']
+        ]);
     ?>
+
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

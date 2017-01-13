@@ -4,7 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use common\components\Util;
+use common\models\Type;
+use common\models\Tour;
 use yii\redactor\widgets\Redactor;
+use dosamigos\multiselect\MultiSelect;
+use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
 /* @var $form yii\widgets\ActiveForm */
@@ -25,6 +29,19 @@ use yii\redactor\widgets\Redactor;
             'minHeight'=> 200, // pixels
         ]
     ]) ?>
+    
+    <?php 
+        // Multiple select without model
+        $data = Type::listType();
+        echo $form->field($model, 'types')->widget(Select2::classname(), [
+            'data' => $data,
+            'language' => 'de',
+            'options' => ['multiple' => true, 'placeholder' => 'Select states ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
 
     <?= $form->field($model, 'file_image')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],

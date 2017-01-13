@@ -66,9 +66,18 @@ class TourTypeController extends BaseController
     {
         $model = new TourType();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            var_dump(Yii::$app->request->post());
+            exit();
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else{
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
             
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -7,6 +7,9 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
+use common\models\Type;
+use yii\db\ActiveQuery;
+use common\models\TourType;
 /**
  * This is the model class for table "tour".
  *
@@ -31,6 +34,7 @@ class Tour extends ActiveRecord
      * @inheritdoc
      */
     public $file_image;
+    public $types = array();
     public static function tableName()
     {
         return 'tour';
@@ -53,6 +57,7 @@ class Tour extends ActiveRecord
             [['itinerary'], 'string'],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg','maxSize' => 1024 * 1024 * 2, 'skipOnEmpty' => true],
+            [['types'], 'safe']
         ];
     }
 
@@ -101,11 +106,44 @@ class Tour extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTourtypes()
+    public function getType()
+    {
+        return $this->hasMany(Type::className(), ['id'=>'typeId'])->viaTable(tourtype::tableName(), ['tourId' => 'id']);
+    }
+    public function getTourTypes()
     {
         return $this->hasMany(Tourtype::className(), ['tourId' => 'id']);
     }
     public static function listTour(){
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
+    }
+
+    public function getTypes(){
+        $types = $this->getType();
+        var_dump($types);
+        exit();
+        foreach ($types as $value) {
+            # code...
+            var_dump($value);
+        }
+        exit();
+
+        // return ArrayHelper::map($types, 'id', 'desc');
+        return ArrayHelper::index($types, 'typeId');
+        // foreach ($types as $type){
+            // $tourType = new tourType();
+
+        // }
+        return $types;
+    }
+
+    public function setTypes(){
+        $values = $this->types;
+        foreach ($values as $value) {
+            $tourType = new TourType();
+            $tourType->tourId = $this->id;
+            $tourType->typeId = $value;
+            $tourType->save();
+        }
     }
 }
