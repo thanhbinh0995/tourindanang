@@ -8,7 +8,7 @@ use common\models\TourTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\components\BaseController;
 /**
  * TourTypeController implements the CRUD actions for TourType model.
  */

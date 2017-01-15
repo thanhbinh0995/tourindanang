@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use common\models\Type;
 use yii\db\ActiveQuery;
 use common\models\TourType;
+use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 /**
  * This is the model class for table "tour".
  *
@@ -27,7 +28,7 @@ use common\models\TourType;
  * @property TourType[] $tourTypes
  * @property Touraddress[] $touraddresses
  */
-class Tour extends \yii\db\ActiveRecord
+class Tour extends \alexinator1\jta\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -38,6 +39,9 @@ class Tour extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => ManyToManyBehavior::className(),
+            ],
         ];
     }
     public static function tableName()
@@ -100,9 +104,15 @@ class Tour extends \yii\db\ActiveRecord
      */
     public function getTourTypes()
     {
-        return $this->hasMany(TourType::className(), ['tourId' => 'id'])->viaTable('tour_type', ['typeId' => 'id']);;
+        return $this->hasMany(TourType::className(), ['tourId' => 'id']);
+        // return $this->hasMany(Type::className(), ['id' => 'typeId'])
+        //     ->viaTable('tour_type', ['tourId' => 'id']);
     }
-
+    public function getTypes()
+    {
+        return $this->hasMany(Type::className(), ['id' => 'typeId'])->viaTable('{{%tour_type}}', ['tourId' => 'id']);
+        // return $this->hasMany(Type::className(), ['id' => 'typeId'])->via('tourTypes');
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -115,15 +125,23 @@ class Tour extends \yii\db\ActiveRecord
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 
-    public function getTypes(){
-        $types = $this->getTourTypes();
+    // public function getTypes(){
+        // $types = $this->getTourTypes();
+        // $types = TourType::find()->where(['tourId' => 'id']);
+        // var_dump($types);
+        // echo $this->id;
+        // exit();
+        // return $types;
+        // return ArrayHelper::index($types, 'id');
+        // $tour = Tour::findOne($this->id);
+        // return $this->hasMany(Tour::className(), ['id' => 'tourId'])->viaTable('tour_type', ['typeId' => 'id']);
         // var_dump($types);
         // exit();
-        return $types;
+        // return $types;
         // return $this->types;
         // return $this->hasMany(TourType::className(), ['tourId' => 'id']);
         // return ArrayHelper::index($types, 'tourId');
-    }
+    // }
 
     public function setTypes(){
         $values = $this->types;

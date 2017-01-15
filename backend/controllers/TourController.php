@@ -103,7 +103,7 @@ class TourController extends BaseController
     {
         $model = $this->findModel($id);
         var_dump($model->getTypes());
-        // exit();
+        exit();
         if ($model->load(Yii::$app->request->post())) {
             $model->file_image = UploadedFile::getInstance($model, 'file_image');   
             $old_image = "";

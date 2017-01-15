@@ -32,7 +32,9 @@
         "2amigos/yii2-multi-select-widget": "*",
         "yiisoft/yii2-imagine": "~2.0.0",
         "himiklab/yii2-easy-thumbnail-image-helper": "*",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "arogachev/yii2-many-to-many": "^0.2.1",
+        "alexinator1/yii2-jta": "^0.2.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
