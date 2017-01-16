@@ -4,6 +4,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Tour;
 use common\models\TourSearch;
+use common\models\TourType;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -102,8 +103,11 @@ class TourController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        var_dump($model->getTypes());
-        exit();
+        $types = $model->getTypes($id);
+        foreach ($types as $type ) {
+            array_push($model->types,$type['typeId']);
+        }
+        
         if ($model->load(Yii::$app->request->post())) {
             $model->file_image = UploadedFile::getInstance($model, 'file_image');   
             $old_image = "";

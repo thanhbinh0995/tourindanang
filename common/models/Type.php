@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property TourType[] $tourTypes
  */
-class Type extends \alexinator1\jta\ActiveRecord
+class Type extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -67,10 +67,10 @@ class Type extends \alexinator1\jta\ActiveRecord
     }
     public function getTours()
     {
-        return $this->hasMany(Tour::className(), ['id' => 'tourId'])->viaTable('{{%tour_type}}', ['typeId' => 'id']);
-        // return $this->hasMany(Type::className(), ['id' => 'typeId'])->via('tourTypes');
+        // return $this->hasMany(Tour::className(), ['id' => 'tourId'])->viaTable('{{%tour_type}}', ['typeId' => 'id']);
+        return $this->hasMany(Type::className(), ['id' => 'tourId'])->via('tourTypes');
     }
-    public static function listType(){
+    public static function listType($id=NULL){
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

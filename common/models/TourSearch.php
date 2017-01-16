@@ -15,6 +15,7 @@ class TourSearch extends Tour
     /**
      * @inheritdoc
      */
+    // public $types;
     public function rules()
     {
         return [
@@ -41,8 +42,8 @@ class TourSearch extends Tour
      */
     public function search($params)
     {
+        // $query = Tour::find()->innerJoinWith('types', true);
         $query = Tour::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -70,6 +71,7 @@ class TourSearch extends Tour
             ->andFilterWhere(['like', 'info', $this->info])
             ->andFilterWhere(['like', 'itinerary', $this->itinerary])
             ->andFilterWhere(['like', 'avatar', $this->avatar]);
+            // ->andFilterWhere(['like', 'types', $this->types]);
 
         return $dataProvider;
     }
