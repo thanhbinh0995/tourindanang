@@ -1,7 +1,9 @@
 <?php
 
 namespace common\models;
-
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -13,7 +15,7 @@ use Yii;
  * @property integer $updated_at
  * @property integer $deleted_at
  *
- * @property TourAddress[] $tourAddresses
+ * @property Touraddress[] $touraddresses
  */
 class Address extends \yii\db\ActiveRecord
 {
@@ -31,7 +33,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at'], 'required'],
+            [['name'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -50,12 +52,20 @@ class Address extends \yii\db\ActiveRecord
             'deleted_at' => 'Deleted At',
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getTourAddresses()
     {
         return $this->hasMany(TourAddress::className(), ['addressId' => 'id']);
+    }
+    public static function listAddress(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }
