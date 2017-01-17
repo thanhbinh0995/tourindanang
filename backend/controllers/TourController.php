@@ -1,22 +1,18 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
 use common\models\Tour;
 use common\models\TourSearch;
-use common\models\TourType;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\BaseController;
-use common\components\Util;
-use yii\web\UploadedFile;
-use yii\imagine\Image;  
-use Imagine\Image\Box; 
+
 /**
  * TourController implements the CRUD actions for Tour model.
  */
-class TourController extends BaseController
+class TourController extends Controller
 {
     /**
      * @inheritdoc
@@ -69,24 +65,8 @@ class TourController extends BaseController
     {
         $model = new Tour();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->file_image = UploadedFile::getInstance($model, 'file_image');
-            if ($model->file_image) {
-                $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
-            }
-            if ($model->save()) {
-                $model->setTypes();
-                if (!empty($model->avatar)) {
-                    $uploadPath = \Yii::getAlias('@uploadPath');
-                    Util::uploadFile($model->file_image, $model->avatar);
-                }
-                return $this->redirect(['index']);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -103,29 +83,9 @@ class TourController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $types = $model->getTypes($id);
-        foreach ($types as $type ) {
-            array_push($model->types,$type['typeId']);
-        }
-        
-        if ($model->load(Yii::$app->request->post())) {
-            $model->file_image = UploadedFile::getInstance($model, 'file_image');   
-            $old_image = "";
-            if ($model->file_image) {
-                $old_image = $model->avatar;
-                $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
-            }
-            if ($model->save()) {
-                if (!empty($model->file_image)) {
-                    Util::deleteFile($old_image);
-                    Util::uploadFile($model->file_image, $model->avatar);
-                }
-                return $this->redirect(['index']);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

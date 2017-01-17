@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use common\models\Tour;
-use common\models\Address;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourAddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,22 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            [
-                'attribute' => 'tourId',
-                'filter' => Tour::listTour(),
-                'value' => function ($model) {
-                    return $model->tour->name;
-                },
-            ],
-            [
-                'attribute' => 'addressId',
-                'filter' => Address::listAddress(),
-                'value' => function ($model) {
-                    return $model->address->name;
-                },
-            ],
-//            'created_at',
-//            'updated_at',
+            'tourId',
+            'addressId',
+            'created_at',
+            'updated_at',
             // 'deleted_at',
 
             ['class' => 'yii\grid\ActionColumn'],

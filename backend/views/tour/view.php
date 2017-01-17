@@ -33,17 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'dayTour',
             'info',
             'itinerary:ntext',
-            // [
-            //     'label' => 'Types',
-            //     'format' => 'ntext',
-            //     'attribute'=>'types',
-            //     'value' => function($model) {
-            //         foreach ($model->types as $type) {
-            //             $types[] = $group->types;
-            //         }
-            //         return implode("\n", $groupNames);
-            //     },
-            // ],
             'avatar',
             'created_at',
             'updated_at',

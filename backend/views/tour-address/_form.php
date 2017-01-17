@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Tour;
-use common\models\Address;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\TourAddress */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,10 +11,16 @@ use common\models\Address;
 <div class="tour-address-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= $form->field($model, 'tourId')->dropDownList(Tour::listTour()) ?>
 
-    <?= $form->field($model, 'addressId')->dropDownList(Address::listAddress()) ?>
+    <?= $form->field($model, 'tourId')->textInput() ?>
+
+    <?= $form->field($model, 'addressId')->textInput() ?>
+
+    <?= $form->field($model, 'created_at')->textInput() ?>
+
+    <?= $form->field($model, 'updated_at')->textInput() ?>
+
+    <?= $form->field($model, 'deleted_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

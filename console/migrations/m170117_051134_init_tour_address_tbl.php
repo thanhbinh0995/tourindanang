@@ -1,10 +1,10 @@
 <?php
- 
+
 use yii\db\Migration;
 
-class m170105_030611_init_tourAddress_tbl extends Migration
+class m170117_051134_init_tour_address_tbl extends Migration
 {
-    public function up()
+       public function up()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -12,7 +12,7 @@ class m170105_030611_init_tourAddress_tbl extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%touraddress}}', [
+        $this->createTable('{{%tour_address}}', [
             'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
             'addressId' => $this->integer()->notNull(),
@@ -24,7 +24,7 @@ class m170105_030611_init_tourAddress_tbl extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%touraddress}}');
+        $this->dropTable('{{%tour_address}}');
     }
 
     /*
