@@ -103,7 +103,7 @@ class TourController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $types = $model->getTypes($id);
+        $types = $model->getTypes();
         foreach ($types as $type ) {
             array_push($model->types,$type['typeId']);
         }
@@ -116,6 +116,8 @@ class TourController extends BaseController
                 $model->avatar = Yii::$app->security->generateRandomString() . '.' . $model->file_image->extension;
             }
             if ($model->save()) {
+                $model->deleteTypes();
+                $model->setTypes();
                 if (!empty($model->file_image)) {
                     Util::deleteFile($old_image);
                     Util::uploadFile($model->file_image, $model->avatar);

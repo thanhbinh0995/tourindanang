@@ -140,4 +140,14 @@ class Tour extends \yii\db\ActiveRecord
             $tourType->save();
         }
     }
+    public function deleteTypes()
+    {
+        $values = TourType::findAll([
+            'tourId' => $this->id,
+        ]);
+        foreach($values as $value) {
+            $value->delete();
+        }
+    }
+
 }
