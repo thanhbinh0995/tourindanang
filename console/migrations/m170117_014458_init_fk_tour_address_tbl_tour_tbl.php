@@ -1,18 +1,19 @@
 <?php
- 
+
 use yii\db\Migration;
 
-class m170105_032012_init_fk_tourAddress_tbl_tour_tbl extends Migration
+class m170117_014458_init_fk_tour_address_tbl_tour_tbl extends Migration
 {
     public function up()
     {
-        $this->addForeignKey("fk_tourAddress_tbl_tour_tbl", 'touraddress', 'tourId', 'tour', 'id', "CASCADE", "RESTRICT");
+        $this->addForeignKey("fk_tour_address_tbl_tour_tbl", 'tour_address', 'tourId', 'tour', 'id', "CASCADE", "RESTRICT");
     }
 
     public function down()
     {
-        $this->dropForeignKey("fk_tourAddress_tbl_tour_tbl", "touraddress");
+        $this->dropForeignKey("fk_tour_address_tbl_tour_tbl", "tour_address");
     }
+
 
     /*
     // Use safeUp/safeDown to run migration code within a transaction
