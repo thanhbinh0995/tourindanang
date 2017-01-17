@@ -77,6 +77,7 @@ class TourController extends BaseController
             }
             if ($model->save()) {
                 $model->setTypes();
+                $model->setAddresses();
                 if (!empty($model->avatar)) {
                     $uploadPath = \Yii::getAlias('@uploadPath');
                     Util::uploadFile($model->file_image, $model->avatar);
@@ -104,10 +105,13 @@ class TourController extends BaseController
     {
         $model = $this->findModel($id);
         $types = $model->getTypes();
+        $addresses = $model->getAddresses();
         foreach ($types as $type ) {
             array_push($model->types,$type['typeId']);
         }
-        
+        foreach ($addresses as $address ) {
+            array_push($model->addresses,$address['addressId']);
+        }
         if ($model->load(Yii::$app->request->post())) {
             $model->file_image = UploadedFile::getInstance($model, 'file_image');   
             $old_image = "";
@@ -118,6 +122,8 @@ class TourController extends BaseController
             if ($model->save()) {
                 $model->deleteTypes();
                 $model->setTypes();
+                $model->deleteAddresses();
+                $model->setAddresses();
                 if (!empty($model->file_image)) {
                     Util::deleteFile($old_image);
                     Util::uploadFile($model->file_image, $model->avatar);

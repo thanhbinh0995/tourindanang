@@ -31,9 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'tourId',
             'typeId',
-            'created_at',
-            'updated_at',
-            'deleted_at',
+            'created_at:date',
+            'updated_at:date'
         ],
     ]) ?>
 

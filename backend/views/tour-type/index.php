@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use common\models\Tour;
+use common\models\Type;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,10 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'tourId',
-            'typeId',
-            'created_at',
-            'updated_at',
+              [
+                'attribute' => 'tourId',
+                'filter' => Tour::listTour(),
+                'value' => function ($model) {
+                    return $model->tour->name;
+                },
+            ],
+            [
+                'attribute' => 'typeId',
+                'filter' => Type::listType(),
+                'value' => function ($model) {
+                    return $model->type->name;
+                },
+            ],
+            
             // 'deleted_at',
 
             ['class' => 'yii\grid\ActionColumn'],

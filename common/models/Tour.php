@@ -35,6 +35,7 @@ class Tour extends \yii\db\ActiveRecord
      */
     public $file_image;
     public $types = array();
+    public $addresses = array();
     public function behaviors()
     {
         return [
@@ -55,13 +56,14 @@ class Tour extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'dayTour', 'info', 'itinerary', 'avatar'], 'required'],
+            [['name', 'dayTour', 'info', 'itinerary', 'avatar','types','addresses'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['itinerary'], 'string'],
             [['name', 'info'], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
             [['types'], 'safe'],
+            [['addresses'], 'safe'],
         ];
     }
 
@@ -143,6 +145,33 @@ class Tour extends \yii\db\ActiveRecord
     public function deleteTypes()
     {
         $values = TourType::findAll([
+            'tourId' => $this->id,
+        ]);
+        foreach($values as $value) {
+            $value->delete();
+        }
+    }
+
+    public function getAddresses()
+    {
+        $addresses = TourAddress::findAll([
+            'tourId' => $this->id,
+        ]);
+        return $addresses;
+    }
+
+    public function setAddresses(){
+        $values = $this->addresses;
+        foreach ($values as $value) {
+            $tourAddress = new TourAddress();
+            $tourAddress->tourId = $this->id;
+            $tourAddress->addressId = $value;
+            $tourAddress->save();
+        }
+    }
+    public function deleteAddresses()
+    {
+        $values = TourAddress::findAll([
             'tourId' => $this->id,
         ]);
         foreach($values as $value) {
