@@ -32,7 +32,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at'], 'required'],
+            [['name'], 'required'],
             [['created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
