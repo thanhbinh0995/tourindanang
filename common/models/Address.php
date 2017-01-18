@@ -3,7 +3,8 @@
 namespace common\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "address".
  *
@@ -51,11 +52,21 @@ class Address extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getTourAddresses()
     {
         return $this->hasMany(TourAddress::className(), ['addressId' => 'id']);
+    }
+    public static function listAddress(){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

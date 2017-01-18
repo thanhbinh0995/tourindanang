@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use common\components\Util;
 use common\models\Type;
+use common\models\Address;
 use common\models\Tour;
 use yii\redactor\widgets\Redactor;
 use dosamigos\multiselect\MultiSelect;
@@ -28,9 +29,9 @@ use kartik\select2\Select2;
     ]) ?>
     
     <?php 
-        $data = Type::listType();
+        $data_types = Type::listType();
         echo $form->field($model, 'types')->widget(Select2::classname(), [
-            'data' => $data,
+            'data' => $data_types,
             'language' => 'de',
             'options' => ['multiple' => true, 'placeholder' => 'Select states ...'],
             'pluginOptions' => [
@@ -38,7 +39,17 @@ use kartik\select2\Select2;
             ],
         ]);
     ?>
-
+    <?php 
+        $data_addresses = Address::listAddress();
+        echo $form->field($model, 'addresses')->widget(Select2::classname(), [
+            'data' => $data_addresses,
+            'language' => 'de',
+            'options' => ['multiple' => true, 'placeholder' => 'Select address ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
     <?= $form->field($model, 'file_image')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => [
