@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use common\models\Tour;
+use common\components\Util;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
 
@@ -33,22 +34,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'dayTour',
             'info',
             'itinerary:ntext',
-            // [
-            //     'label' => 'Types',
-            //     'format' => 'ntext',
-            //     'attribute'=>'types',
-            //     'value' => function($model) {
-            //         foreach ($model->types as $type) {
-            //             $types[] = $group->types;
-            //         }
-            //         return implode("\n", $groupNames);
-            //     },
-            // ],
-            'avatar',
+            [
+                'label' => 'Types',
+                'value' => Tour::getTypesName($model),
+            ],
+            [
+                'attribute'=>'image',
+                'value'=>  Util::getUrlImage($model->avatar),
+                'format' => ['image',['width'=>'200','height'=>'200']],
+            ],
             'created_at',
             'updated_at',
             'deleted_at',
         ],
     ]) ?>
+    <?php
+        foreach($model->tourTypes as $t){
+    ?>
+    <?php
+        echo $t->type->name;
+        }
+    ?>
 
 </div>

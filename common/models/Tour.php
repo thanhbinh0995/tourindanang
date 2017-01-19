@@ -132,7 +132,7 @@ class Tour extends \yii\db\ActiveRecord
         ]);
         return $types;
     }
-
+    
     public function setTypes(){
         $values = $this->types;
         foreach ($values as $value) {
@@ -178,5 +178,14 @@ class Tour extends \yii\db\ActiveRecord
             $value->delete();
         }
     }
+    public static function getTypesName($model)
+    {
+        $types = array();
+        foreach($model->tourTypes as $tourType){
+            array_push($types, $tourType->type->name);
+        }
+        return implode(", ",$types);
+    }
+
 
 }
