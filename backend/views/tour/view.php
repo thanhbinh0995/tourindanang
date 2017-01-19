@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\Tour;
 use common\components\Util;
+use common\models\Type;
+use common\models\Address;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
 
@@ -28,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+      //  'types' => $model->types,
         'attributes' => [
             'id',
             'name',
@@ -39,21 +42,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => Tour::getTypesName($model),
             ],
             [
+                'format' => 'html',
+                'attribute' => 'Adresses',
+                'value' => Tour::toStringArray($model->addresses,Address::listAddress()),
+            ],
+            [
                 'attribute'=>'image',
                 'value'=>  Util::getUrlImage($model->avatar),
                 'format' => ['image',['width'=>'200','height'=>'200']],
             ],
-            'created_at',
-            'updated_at',
-            'deleted_at',
+            'created_at:date',
+            'updated_at:date',
+            // 'deleted_at',    
         ],
     ]) ?>
-    <?php
-        foreach($model->tourTypes as $t){
-    ?>
-    <?php
-        echo $t->type->name;
-        }
-    ?>
 
 </div>

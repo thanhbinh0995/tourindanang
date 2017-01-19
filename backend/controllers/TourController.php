@@ -55,8 +55,18 @@ class TourController extends BaseController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);   
+        $types = $model->getTypes();
+        $addresses = $model->getAddresses();
+        foreach ($types as $type ) {
+            array_push($model->types,$type['typeId']);
+        }
+        foreach ($addresses as $address ) {
+            array_push($model->addresses,$address['addressId']);
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+           //    'types' => $model->types,
         ]);
     }
 
