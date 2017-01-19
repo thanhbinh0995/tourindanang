@@ -178,5 +178,26 @@ class Tour extends \yii\db\ActiveRecord
             $value->delete();
         }
     }
+    public static  function toString($arrays)
+    {
+        $text = '';
+        foreach($arrays as $array){
+            $text.= "d";
+            $text.=" ";
+        }
+        return $text;
+        
+    }
+    public static function toStringArray($array, $listDetailView){
+      //  $array = $this->getTypes();
+     // $typeNames = Type::listType();
+      for($i = 0; $i < count($array); $i++){
+          $array[$i] = $listDetailView[$array[$i]];
+         
+      }
+      return implode('<br/>', $array);
+      return $text;
+        
+    }
 
 }

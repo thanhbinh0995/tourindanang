@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use common\models\Tour;
+use common\models\Type;
+use common\components\Util;
+use common\models\Address;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
 
@@ -27,28 +30,47 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+      //  'types' => $model->types,
         'attributes' => [
             'id',
             'name',
             'dayTour',
             'info',
             'itinerary:ntext',
-            // [
-            //     'label' => 'Types',
-            //     'format' => 'ntext',
-            //     'attribute'=>'types',
-            //     'value' => function($model) {
-            //         foreach ($model->types as $type) {
-            //             $types[] = $group->types;
-            //         }
-            //         return implode("\n", $groupNames);
-            //     },
-            // ],
-            'avatar',
-            'created_at',
-            'updated_at',
-            'deleted_at',
+            [
+                // 'label' => 'types',
+                'format' => 'html',
+                'attribute' => 'types',
+                'value' => Tour::toStringArray($model->types,Type::listType()),
+            ],
+            [
+                'format' => 'html',
+                'attribute' => 'Adresses',
+                'value' => Tour::toStringArray($model->addresses,Address::listAddress()),
+            ],
+             [
+                'attribute'=>'avatar',
+                'value'=>  Util::getUrlImage($model->avatar),
+                'format' => ['image',['width'=>'200','height'=>'200']],
+            ],
+             'created_at:date',
+            'updated_at:date',
+            // 'deleted_at',
         ],
     ]) ?>
 
 </div>
+
+
+
+<?php
+
+// function myArr() {
+//       $types = $model->getTypes();
+//         foreach ($types as $type ) {
+//             array_push($model->types,$type['typeId']);
+//         }
+//         return $model->types;
+// }
+
+// var_dump($model->types);
