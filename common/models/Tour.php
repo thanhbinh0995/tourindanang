@@ -196,14 +196,12 @@ class Tour extends \yii\db\ActiveRecord
             $text.=" ";
         }
         return $text;
-        
     }
     public static function toStringArray($array, $listDetailView){
       //  $array = $this->getTypes();
      // $typeNames = Type::listType();
       for($i = 0; $i < count($array); $i++){
           $array[$i] = $listDetailView[$array[$i]];
-         
       }
       return implode('<br/>', $array);
       return $text;
