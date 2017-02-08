@@ -171,6 +171,8 @@ class Tour extends \yii\db\ActiveRecord
         $addresses = TourAddress::findAll([
             'tourId' => $this->id,
         ]);
+        // var_dump($addresses);
+        //   exit();
         return $addresses;
     }
 
@@ -205,14 +207,17 @@ class Tour extends \yii\db\ActiveRecord
 
 
 
-    public static function toStringArray($array, $listDetailView){
+    public static function getAddressesName($array, $listDetailView){
       //  $array = $this->getTypes();
      // $typeNames = Type::listType();
+    
       for($i = 0; $i < count($array); $i++){
           $array[$i] = $listDetailView[$array[$i]];
       }
+    //    var_dump($array);
+    //     exit();    
       return implode('<br/>', $array);
-      return $text;
+     
         
     }
 

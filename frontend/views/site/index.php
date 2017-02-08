@@ -8,8 +8,10 @@
 
 use yii\db\QueryBuilder;
 use yii\db\Query ;
-
-
+use common\models\Tour;
+use common\models\Price;
+use common\models\TourAddress;
+use common\models\Address;
 /* @var $this yii\web\View */
 /* @var $model common\models\Hotel */
 /* @var $form yii\widgets\ActiveForm */
@@ -73,8 +75,12 @@ use yii\db\Query ;
     </div>  </div></div>	</header>
 <div id="main">
 	<div class="featured-wrapper clearfix"><div class="container_12 clearfix"><div id="content" class="grid_12" role="main">	
-	<article id="post-0" class="landing">
-<div id="landing-text" class="one_half alpha"><h1>My Son sanctuary tour</h1><p>Half day tour to UNESCO World Heritage site of My Son sanctuary, discover ancient Champa religion and cultures</p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/my-son-sanctuary-halfday-tour/index">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/wp-content/uploads/my-son-sanctuary-2_0.jpg" alt="My Son tour from Da nang" /></p></div>		</article>
+	<?php 
+		$tours = Tour::find()->limit(2)->orderBy('id DESC')->one();
+		$idFeature = $tours->id;
+	?>
+	<article id="<?php echo $tours->id ?>" class="landing">
+<div id="landing-text" class="one_half alpha"><h1><?php echo $tours->name ?></h1><p><?php echo $tours->info ?></p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/my-son-sanctuary-halfday-tour/index">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/api/uploads/<?php echo $tours->avatar ?>" alt="<?php echo $tours->name ?>" /></p></div>		</article>
 </div>
 </div><!-- #container -->
 </div><!-- featured wrapper -->
@@ -85,30 +91,45 @@ use yii\db\Query ;
 <div id="content" class="grid_8 " role="main">
 	<?php
 		
-		$query = new Query;
-		$query->select(['tour.id','name','dayTour','tour.info','itinerary','avatar','price.info'])->from(['tour','price'])->limit(4)->orderBy(['tour.id'=>SORT_DESC])->where(['tour.id' => 'price.tourId']);
-		$command = $query->createCommand();
-		$listTour = $command->queryAll(); 
-		var_dump($command);
-		exit();
-		for($count = 0; $count < 4; $count++){?>
-			<article id="<?php echo $listTour[$count]['id'] ?>" class="<?php echo $listTour[$count]['id'] ?> tour type-tour has-post-thumbnail ">
-		<figure class="thumbt"><a href="tour/hue-city-tour/index" title=" echo <?php $listTour[$count]['name'] ?>"><img width="150" height="150" src="/api/uploads/<?php echo $listTour[$count]['avatar'] ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="Imperial Hue City Tour" /></a></figure>	<header class="entry-header">
-		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $listTour[$count]['name'] ?>" rel="bookmark"><?php echo $listTour[$count]['name'] ?></a></h2>	</header>
+		// $query = new Query;
+		// $query->select(['tour.id','name','dayTour','tour.info','itinerary','avatar','price.info'])->from(['tour','price'])->limit(4)->orderBy(['tour.id'=>SORT_DESC])->where(['tour.id' => 'price.tourId']);
+		// $command = $query->createCommand();
+		$tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+		foreach($tours as $tour){
+			if($tour->id == $idFeature) continue;
+			$price = Price::find()->where(['tourId'=>$tour->id])->orderBy('info ASC')->one();
+			$addresses = TourAddress::find()->where(['tourId'=>$tour->id])->select('addressId')->all();
+			$addressId = array();
+			$count = 0;
+			foreach($addresses as $address){
+            	array_push($addressId, $address->addressId);
+       		}
+			// var_dump($addressId);
+			// exit();
+			$addressAll = Address::listAddress();
+			$addressId = Tour::getAddressesName($addressId,$addressAll);
+			$addressId = explode('<br/>',$addressId);
+			// var_dump($addressId);
+			//  exit();
+			
+		?>
+			<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
+		<figure class="thumbt"><a href="tour/hue-city-tour/index" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
+		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
-		<span class='price'>from <span><?php echo $listTour[$count]['price.info']?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
+		<span class='price'>from <span><?php echo $price->info ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
 		<?php 
-			$query = new Query;
-		$query->select('address.name')->from('tour-address','address')->where(['tour-address.tourId => $count','tour-address.addressId => address.id']);
-		$command = $query->createCommand();
-		$price = $command->queryAll();
-		for($countAddress = 0; $countAddress < count($price) ; $countAddress++){
+		// 	$query = new Query;
+		// $query->select('address.name')->from('tour-address','address')->where(['tour-address.tourId => $count','tour-address.addressId => address.id']);
+		// $command = $query->createCommand();
+		// $price = $command->queryAll();
+		for($countAddress = 0; $countAddress < count($addressId) ; $countAddress++) {
 		?>
-			<a href='destination/hue/index'><?php echo $price[$countAddress]?></a>, 
-		<?php } ?>
+			<a href='destination/hue/index'><?php echo $addressId[$countAddress];?></a>, 
+		<?php }?>
 		 	
-		 <p>In comparison with other ancient capitals in South East Asia, Hue is the one that still preserves comparatively the intact appearance of a complex of the monarchic capital consisting of walls,..</p>	</div>
+		 <p><?php echo $tour->info ?></p>	</div>
 	</article>
 	<?php	}
 

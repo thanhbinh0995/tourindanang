@@ -58,12 +58,14 @@ class TourController extends BaseController
         $model = $this->findModel($id);   
         $types = $model->getTypes();
         $addresses = $model->getAddresses();
+       
         foreach ($types as $type ) {
             array_push($model->types,$type['typeId']);
         }
         foreach ($addresses as $address ) {
             array_push($model->addresses,$address['addressId']);
         }
+        
         return $this->render('view', [
             'model' => $model,
            //    'types' => $model->types,
@@ -174,6 +176,14 @@ class TourController extends BaseController
      public function actionSlug($slug)
     { 
       $model = Tour::find()->where(['slug'=>$slug])->one();
+       $types = $model->getTypes();
+        $addresses = $model->getAddresses();
+          foreach ($types as $type ) {
+            array_push($model->types,$type['typeId']);
+        }
+        foreach ($addresses as $address ) {
+            array_push($model->addresses,$address['addressId']);
+        }
       if (!is_null($model)) {
           return $this->render('view', [
               'model' => $model,

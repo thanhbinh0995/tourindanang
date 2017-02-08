@@ -21,7 +21,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-<<<<<<< HEAD
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- This site is optimized with the Yoast SEO plugin v4.0 - https://yoast.com/wordpress/plugins/seo/ -->
@@ -70,9 +70,7 @@ AppAsset::register($this);
 <link rel="apple-touch-icon-precomposed" href="/wp-content/uploads/inDanang_wbg.png" />
 <meta name="msapplication-TileImage" content="http://tourindanang.com//wp-content/uploads/inDanang_wbg.png" />
 <link rel="shortcut icon" href="/wp-content/themes/tourindanang/favicon.ico" />
-=======
-    <link rel="stylesheet" href="/css/test.css">
->>>>>>> bf085f8b1f2f6643786a4a3042b52a99a4b7d5e8
+ <link rel="stylesheet" href="/css/test.css">
 </head>
 <body>
 

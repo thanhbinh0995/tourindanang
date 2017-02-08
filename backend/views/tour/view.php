@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        
       //  'types' => $model->types,
         'attributes' => [
             'id',
@@ -44,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'html',
                 'attribute' => 'Adresses',
-                'value' => Tour::toStringArray($model->addresses,Address::listAddress()),
+                'value' => Tour::getAddressesName($model->addresses,Address::listAddress()),
             ],
             [
                 'attribute'=>'image',
@@ -55,6 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at:date',
             // 'deleted_at',    
         ],
-    ]) ?>
+    ]) 
+    ?>
+   
 
 </div>
