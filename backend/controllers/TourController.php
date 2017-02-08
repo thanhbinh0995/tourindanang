@@ -171,6 +171,17 @@ class TourController extends BaseController
      * @return Tour the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+     public function actionSlug($slug)
+    { 
+      $model = Tour::find()->where(['slug'=>$slug])->one();
+      if (!is_null($model)) {
+          return $this->render('view', [
+              'model' => $model,
+          ]);      
+      } else {
+        return $this->redirect('/tour/index');
+      }
+    }
     protected function findModel($id)
     {
         if (($model = Tour::findOne($id)) !== null) {
