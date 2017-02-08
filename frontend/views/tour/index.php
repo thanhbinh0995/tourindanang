@@ -1,4 +1,5 @@
 
+
 <body class="archive post-type-archive post-type-archive-tour single-author multi">
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -248,4 +249,5 @@
 </body>
 
 <!-- Mirrored from tourindanang.com/tour/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Jan 2017 09:19:24 GMT -->
+
 
