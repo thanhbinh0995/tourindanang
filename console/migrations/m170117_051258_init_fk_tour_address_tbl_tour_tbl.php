@@ -14,14 +14,5 @@ class m170117_051258_init_fk_tour_address_tbl_tour_tbl extends Migration
         $this->dropForeignKey("fk_tour_address_tbl_tour_tbl", "tour_address");
     }
 
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
 
-    public function safeDown()
-    {
-    }
-    */
 }

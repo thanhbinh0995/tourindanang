@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+
 use Yii;
 use common\models\Tour;
 use common\models\TourSearch;
@@ -13,26 +14,8 @@ use common\models\TourType;
  * TourController implements the CRUD actions for Tour model.
  */
 class TourController extends Controller
-{
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
-    /**
-     * Lists all Tour models.
-     * @return mixed
-     */
+{
     public function actionIndex()
     {
         $searchModel = new Tour();
@@ -77,5 +60,7 @@ class TourController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+        return $this->render('index');
     }
+
 }

@@ -21,6 +21,7 @@ class Address extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public  $slug;
     public static function tableName()
     {
         return 'address';
@@ -56,6 +57,7 @@ class Address extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            
         ];
     }
 

@@ -48,8 +48,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_at',
             // 'updated_at',
             // 'deleted_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn',
+                     'template'=>'{view} {update} {delete}',
+                       'buttons'=>[
+               'view' => function ($url, $model) {     
+                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', 'tour/'.$model->slug, ['title' => Yii::t('yii', 'View'),]);  
+                             }
+                           ],
+            ],        
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

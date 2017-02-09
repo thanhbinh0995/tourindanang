@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use common\models\Type;
 use yii\db\ActiveQuery;
 use common\models\TourType;
+
 use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 /**
  * This is the model class for table "tour".
@@ -36,6 +37,7 @@ class Tour extends \yii\db\ActiveRecord
     public $file_image;
     public $types = array();
     public $addresses = array();
+    // public $slug;
     public function behaviors()
     {
         return [
@@ -43,6 +45,18 @@ class Tour extends \yii\db\ActiveRecord
             [
                 'class' => ManyToManyBehavior::className(),
             ],
+            'slug' => [
+                'class' => 'Zelenin\yii\behaviors\Slug',
+                'slugAttribute' => 'slug',
+                'attribute' => 'name',
+                // optional params
+                'ensureUnique' => true,
+                'replacement' => '-',
+                'lowercase' => true,
+                'immutable' => false,
+                // If intl extension is enabled, see http://userguide.icu-project.org/transforms/general. 
+                'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
+             ]
         ];
     }
     public static function tableName()
@@ -59,10 +73,10 @@ class Tour extends \yii\db\ActiveRecord
             [['name', 'dayTour', 'info', 'itinerary', 'avatar','types','addresses'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['itinerary'], 'string'],
-            [['name', 'info'], 'string', 'max' => 255],
+            [['name', 'info','slug'], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            [['types'], 'safe'],
+            [['types', 'slug'], 'safe'],
             [['addresses'], 'safe'],
         ];
     }
@@ -157,6 +171,8 @@ class Tour extends \yii\db\ActiveRecord
         $addresses = TourAddress::findAll([
             'tourId' => $this->id,
         ]);
+        // var_dump($addresses);
+        //   exit();
         return $addresses;
     }
 
@@ -188,23 +204,20 @@ class Tour extends \yii\db\ActiveRecord
         return implode(", ",$types);
     }
 
-    public static  function toString($arrays)
-    {
-        $text = '';
-        foreach($arrays as $array){
-            $text.= "d";
-            $text.=" ";
-        }
-        return $text;
-    }
-    public static function toStringArray($array, $listDetailView){
+
+
+
+    public static function getAddressesName($array, $listDetailView){
       //  $array = $this->getTypes();
      // $typeNames = Type::listType();
+    
       for($i = 0; $i < count($array); $i++){
           $array[$i] = $listDetailView[$array[$i]];
       }
+    //    var_dump($array);
+    //     exit();    
       return implode('<br/>', $array);
-      return $text;
+     
         
     }
 
