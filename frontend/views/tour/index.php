@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Tour;
+use common\models\Type;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourSearch */
@@ -13,28 +15,37 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="tour-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php 
+        var_dump($models);
+        // $tour = new Tour();
+        // var_dump($tour); 
+        // var_dump($this);
+        // exit();
+        // foreach ($dataProvider as $tour) {
+            // var_dump($tour)." <br/>";
+        // }
+        // var_dump(Tour::listTour());
+        // exit();
+    
+    ?>
+    <?php 
+    // echo  GridView::widget([
+    //     'dataProvider' => $dataProvider,
+    //     'filterModel' => $searchModel,
+    //     'columns' => [
+    //         ['class' => 'yii\grid\SerialColumn'],
 
-    <p>
-        <?= Html::a('Create Tour', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    //         'id',
+    //         'name',
+    //         'dayTour',
+    //         'info',
+    //         // 'itinerary:ntext',
+    //         // 'created_at',
+    //         // 'updated_at',
+    //         // 'deleted_at',
 
-            'id',
-            'name',
-            'dayTour',
-            'info',
-            'itinerary:ntext',
-            // 'avatar',
-            // 'created_at',
-            // 'updated_at',
-            // 'deleted_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    //         ['class' => 'yii\grid\ActionColumn'],
+    //     ],
+    // ]); 
+    ?>
 </div>

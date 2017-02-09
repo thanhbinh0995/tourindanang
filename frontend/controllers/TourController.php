@@ -8,7 +8,7 @@ use common\models\TourSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\models\TourType;
 /**
  * TourController implements the CRUD actions for Tour model.
  */
@@ -35,12 +35,27 @@ class TourController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TourSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModel = new Tour();
+        // $dataProvider = $searchModel->find(Yii::$app->request->queryParams);
+        // var_dump($searchModel);
+        $dataProvider = $searchModel->find()->all();
+        // var_dump($dataProvider);
+        echo "<br/><br/><br/><br/>";
+        $models = array();
+        foreach ($dataProvider as $tour) {
+            $model = $this->findModel($tour->id);
+            $types = $model->Types;
+            foreach ($types as $type ) {
+                array_push($models,$type['typeId']);
+            }
+            // var_dump($types);
+            // echo $tour->id ."<br/>";
+        }
+        // var_dump($models);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'models' => $models,
         ]);
     }
 
@@ -55,64 +70,6 @@ class TourController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
-    /**
-     * Creates a new Tour model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Tour();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing Tour model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing Tour model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Tour model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Tour the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Tour::findOne($id)) !== null) {
