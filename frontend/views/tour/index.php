@@ -1,3 +1,54 @@
+<<<<<<< HEAD
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+use common\models\Tour;
+use common\models\Type;
+
+/* @var $this yii\web\View */
+/* @var $searchModel common\models\TourSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Tours';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="tour-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php 
+        var_dump($models);
+        // $tour = new Tour();
+        // var_dump($tour); 
+        // var_dump($this);
+        // exit();
+        // foreach ($dataProvider as $tour) {
+            // var_dump($tour)." <br/>";
+        // }
+        // var_dump(Tour::listTour());
+        // exit();
+    
+    ?>
+    <?php 
+    // echo  GridView::widget([
+    //     'dataProvider' => $dataProvider,
+    //     'filterModel' => $searchModel,
+    //     'columns' => [
+    //         ['class' => 'yii\grid\SerialColumn'],
+
+    //         'id',
+    //         'name',
+    //         'dayTour',
+    //         'info',
+    //         // 'itinerary:ntext',
+    //         // 'created_at',
+    //         // 'updated_at',
+    //         // 'deleted_at',
+
+    //         ['class' => 'yii\grid\ActionColumn'],
+    //     ],
+    // ]); 
+    ?>
 
 
 <body class="archive post-type-archive post-type-archive-tour single-author multi">
@@ -221,6 +272,7 @@
 	<div class="container_12 clearfix">
 		
 <div id="footer-widget-area" class="visible-desktop clearfix" role="complementary">
+>>>>>>> 4433f2e97baed9b01aab91c2870b10f03f691fab
 </div>
 		<div id="footer-menu" class="grid_12" role="complementary">		
 		<div class="footer-menu"><ul id="menu-footer" class="menu"><li id="menu-item-280" class="menu-item menu-item-type-taxonomy menu-item-object-duration menu-item-280"><a href="../duration/day-tour/index">Day tour</a></li>

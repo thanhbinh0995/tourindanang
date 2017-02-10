@@ -73,19 +73,7 @@ AppAsset::register($this);
  <link rel="stylesheet" href="/css/test.css">
 </head>
 <body>
-
-	
- 
-
-    
-      
         <?= $content ?>
-    
-
-
-
-
-
 </body>
 </html>
 <?php $this->endPage() ?>

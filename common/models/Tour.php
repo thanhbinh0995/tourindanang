@@ -198,6 +198,13 @@ class Tour extends \yii\db\ActiveRecord
     public static function getTypesName($model)
     {
         $types = array();
+        $tours = Tour::find()->one();
+
+        // foreach($tours->tourTypes as $tourType){
+        //     var_dump($tourType->type->name); 
+           
+        // }
+        // exit();
         foreach($model->tourTypes as $tourType){
             array_push($types, $tourType->type->name);
         }
@@ -207,18 +214,18 @@ class Tour extends \yii\db\ActiveRecord
 
 
 
-    public static function getAddressesName($array, $listDetailView){
+    public static function getAddressesName($model){
       //  $array = $this->getTypes();
      // $typeNames = Type::listType();
-    
-      for($i = 0; $i < count($array); $i++){
-          $array[$i] = $listDetailView[$array[$i]];
-      }
-    //    var_dump($array);
-    //     exit();    
-      return implode('<br/>', $array);
+     $addresses = array();
+      foreach($model->tourAddresses as $tourAddress){
+            array_push($addresses, $tourAddress->address->name);
+        }
+        return implode("<br/> ",$addresses);
      
         
     }
 
+    public static function getPricesName()
+    {}
 }

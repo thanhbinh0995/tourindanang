@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'format' => 'html',
                 'attribute' => 'Adresses',
-                'value' => Tour::getAddressesName($model->addresses,Address::listAddress()),
+                'value' => Tour::getAddressesName($model),
             ],
             [
                 'attribute'=>'image',

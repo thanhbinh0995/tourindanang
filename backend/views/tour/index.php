@@ -18,6 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Tour', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php 
+
+        // $tour = new Tour();
+        // var_dump($tour); 
+        // var_dump($this);
+        // exit();
+        // foreach ($dataProvider as $tour) {
+            // echo $tour . " <br/>";
+            // var_dump($tour);
+            
+        // }
+        // var_dump(Tour::listTour());
+        // exit();
+    
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

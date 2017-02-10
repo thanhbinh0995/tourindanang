@@ -13,7 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\helpers\Url;
-
+use common\models\Tour;
 /**
  * Site controller
  */
@@ -86,11 +86,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-    public function actionIndexx()
-    {
-        return $this->render('indexx');
+        $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+        return $this->render('index', [
+              'tours' => $tours
+       
+        ]);
     }
 
     /**
