@@ -18,11 +18,8 @@ class TourController extends Controller
 {
     public function actionIndex()
     {
-        
         $searchModel = new Tour();
         $dataProvider = $searchModel->find()->all();
-
-        echo "<br/><br/><br/><br/>";
         $addresses = [];
         foreach ($dataProvider as $tour) {
             $address = (new \yii\db\Query())
