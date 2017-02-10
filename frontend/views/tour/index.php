@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Tour;
 use common\models\Type;
-
+use yii\data\ActiveDataProvider;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,23 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     ?>
     <?php 
-    //     echo DetailView::widget([
-    //     'model' => $model,
-    //     'attributes' => [
-    //         'id',
-    //         'name',
-    //         'dayTour',
-    //         'info',
-    //         'itinerary:ntext',
-    //         'avatar',
-    //         'created_at',
-    //         'updated_at',
-    //         'deleted_at',
-    //     ],
-    // ]) 
+        $listType = new ActiveDataProvider([
+			'query' => Type::find(),
+		]);
+		echo GridView::widget([
+			'dataProvider' => $listType,
+			'summary' => '',
+			'columns' => [
+				'name',
+			],
+		]);	
     ?>
 
-<!--
+
 <body class="archive post-type-archive post-type-archive-tour single-author multi">
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -291,4 +287,4 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/prettify.js'></script>
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/voyageedfb.js?ver=1.3.8'></script>
 <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/wp-embed.min.js?ver=4.6.1'></script>
-</body>-->
+</body>

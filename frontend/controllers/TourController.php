@@ -34,6 +34,7 @@ class TourController extends Controller
                 ->all();
             array_push($addresses, ['tourName' => $tour->name, 'addressName' => $address]);
         }
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
