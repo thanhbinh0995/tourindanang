@@ -18,27 +18,26 @@ class TourController extends Controller
 {
     public function actionIndex()
     {
+        
         $searchModel = new Tour();
-        // $dataProvider = $searchModel->find(Yii::$app->request->queryParams);
-        // var_dump($searchModel);
         $dataProvider = $searchModel->find()->all();
-        // var_dump($dataProvider);
+
         echo "<br/><br/><br/><br/>";
-        $models = array();
+        $addresses = [];
         foreach ($dataProvider as $tour) {
-            $model = $this->findModel($tour->id);
-            $types = $model->Types;
-            foreach ($types as $type ) {
-                array_push($models,$type['typeId']);
-            }
-            // var_dump($types);
-            // echo $tour->id ."<br/>";
+            $address = (new \yii\db\Query())
+                ->select('a.name')
+                ->from('address a')
+                ->join('JOIN','tour_address ta','a.id = ta.addressId')
+                ->join('JOIN','tour t','t.id = ta.tourId')
+                ->where(['t.id' => $tour->id])
+                ->all();
+            array_push($addresses, ['tourName' => $tour->name, 'addressName' => $address]);
         }
-        // var_dump($models);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'models' => $models,
+            'addresses' => $addresses,
         ]);
     }
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 use yii\helpers\Html;
@@ -17,40 +16,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php 
-        var_dump($models);
-        // $tour = new Tour();
-        // var_dump($tour); 
-        // var_dump($this);
-        // exit();
-        // foreach ($dataProvider as $tour) {
-            // var_dump($tour)." <br/>";
-        // }
-        // var_dump(Tour::listTour());
-        // exit();
-    
+        foreach ($addresses as $address) {
+			echo "Tour: " . $address['tourName'] . "<br/>";
+			echo "Address: ";
+			foreach ($address['addressName'] as $a) {
+				echo $a['name'] . ",";
+			}
+			echo "<br/><br/><br/>";
+        }
     ?>
     <?php 
-    // echo  GridView::widget([
-    //     'dataProvider' => $dataProvider,
-    //     'filterModel' => $searchModel,
-    //     'columns' => [
-    //         ['class' => 'yii\grid\SerialColumn'],
-
+    //     echo DetailView::widget([
+    //     'model' => $model,
+    //     'attributes' => [
     //         'id',
     //         'name',
     //         'dayTour',
     //         'info',
-    //         // 'itinerary:ntext',
-    //         // 'created_at',
-    //         // 'updated_at',
-    //         // 'deleted_at',
-
-    //         ['class' => 'yii\grid\ActionColumn'],
+    //         'itinerary:ntext',
+    //         'avatar',
+    //         'created_at',
+    //         'updated_at',
+    //         'deleted_at',
     //     ],
-    // ]); 
+    // ]) 
     ?>
 
-
+<!--
 <body class="archive post-type-archive post-type-archive-tour single-author multi">
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -62,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
   ga('send', 'pageview');
 
 </script>
+
 <div id="wrapper">
 <header id="masthead" class="site-header clearfix">
 	<div class="screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div><div id="branding" class="container_12 clearfix">
@@ -266,8 +259,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 	
 
-</div><!-- #container -->
-</div><!-- #main -->
+</div>
+</div>
 <div id="footer" role="contentinfo">
 	<div class="container_12 clearfix">
 		
@@ -288,18 +281,14 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div id="site-info" class="grid_6">
 		&copy; 2017<a href="/site" title="tour in Danang" rel="home">
 			tour in Danang</a>
-		</div><!-- #site-info -->
-	</div><!-- #footer-container -->		
+		</div>
+	</div>	
 	<div class="back-to-top"><a href="#masthead"><span class="icon-chevron-up"></span> TOP</a></div>
-</div><!-- #footer -->
-</div><!-- #wrapper -->
+</div>
+</div>
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/bootstrap.min254d.js?ver=2.3.1'></script>
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/jquery.colorbox-min877b.js?ver=1.3.30'></script>
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/prettify.js'></script>
 <script type='text/javascript' src='../wp-content/themes/tourindanang/js/voyageedfb.js?ver=1.3.8'></script>
 <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/wp-embed.min.js?ver=4.6.1'></script>
-</body>
-
-<!-- Mirrored from tourindanang.com/tour/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Jan 2017 09:19:24 GMT -->
-
-
+</body>-->

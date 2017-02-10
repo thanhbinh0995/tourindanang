@@ -118,7 +118,7 @@ use common\models\Address;
 		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
-		<span class='price'>from <span><?php echo $price->info ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
+		
 		<?php 
 		// 	$query = new Query;
 		// $query->select('address.name')->from('tour-address','address')->where(['tour-address.tourId => $count','tour-address.addressId => address.id']);

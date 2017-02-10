@@ -45,18 +45,18 @@ class Tour extends \yii\db\ActiveRecord
             [
                 'class' => ManyToManyBehavior::className(),
             ],
-            'slug' => [
-                'class' => 'Zelenin\yii\behaviors\Slug',
-                'slugAttribute' => 'slug',
-                'attribute' => 'name',
-                // optional params
-                'ensureUnique' => true,
-                'replacement' => '-',
-                'lowercase' => true,
-                'immutable' => false,
-                // If intl extension is enabled, see http://userguide.icu-project.org/transforms/general. 
-                'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
-             ]
+            // 'slug' => [
+            //     'class' => 'Zelenin\yii\behaviors\Slug',
+            //     'slugAttribute' => 'slug',
+            //     'attribute' => 'name',
+            //     // optional params
+            //     'ensureUnique' => true,
+            //     'replacement' => '-',
+            //     'lowercase' => true,
+            //     'immutable' => false,
+            //     // If intl extension is enabled, see http://userguide.icu-project.org/transforms/general. 
+            //     'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
+            //  ]
         ];
     }
     public static function tableName()
@@ -73,10 +73,10 @@ class Tour extends \yii\db\ActiveRecord
             [['name', 'dayTour', 'info', 'itinerary', 'avatar','types','addresses'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['itinerary'], 'string'],
-            [['name', 'info','slug'], 'string', 'max' => 255],
+            [['name', 'info',], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            [['types', 'slug'], 'safe'],
+            [['types'], 'safe'],
             [['addresses'], 'safe'],
         ];
     }

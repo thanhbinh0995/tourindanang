@@ -173,25 +173,25 @@ class TourController extends BaseController
      * @return Tour the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-     public function actionSlug($slug)
-    { 
-      $model = Tour::find()->where(['slug'=>$slug])->one();
-       $types = $model->getTypes();
-        $addresses = $model->getAddresses();
-          foreach ($types as $type ) {
-            array_push($model->types,$type['typeId']);
-        }
-        foreach ($addresses as $address ) {
-            array_push($model->addresses,$address['addressId']);
-        }
-      if (!is_null($model)) {
-          return $this->render('view', [
-              'model' => $model,
-          ]);      
-      } else {
-        return $this->redirect('/tour/index');
-      }
-    }
+    // public function actionSlug($slug)
+    // { 
+    //   $model = Tour::find()->where(['slug'=>$slug])->one();
+    //    $types = $model->getTypes();
+    //     $addresses = $model->getAddresses();
+    //       foreach ($types as $type ) {
+    //         array_push($model->types,$type['typeId']);
+    //     }
+    //     foreach ($addresses as $address ) {
+    //         array_push($model->addresses,$address['addressId']);
+    //     }
+    //   if (!is_null($model)) {
+    //       return $this->render('view', [
+    //           'model' => $model,
+    //       ]);      
+    //   } else {
+    //     return $this->redirect('/tour/index');
+    //   }
+    // }
     protected function findModel($id)
     {
         if (($model = Tour::findOne($id)) !== null) {

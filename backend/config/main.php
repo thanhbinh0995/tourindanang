@@ -37,19 +37,21 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+            // 'rules' => [
+            //     'tour' => 'tour/index',
+            //     'tour/index' => 'tour/index',
+            //     'tour/create' => 'tour/create',
+            //     'tour/view/<id:\d+>' => 'tour/view',  
+            //     'tour/update/<id:\d+>' => 'tour/update',  
+            //     'tour/delete/<id:\d+>' => 'tour/delete',  
+            //     'tour/<slug>' => 'tour/slug',
+            // ],  
+        ],
     ],
-    // 'urlManager' => [
-    //       'showScriptName' => false,
-    //       'enablePrettyUrl' => true,
-    //       'rules' => [
-    //           'tour' => 'tour/index',
-    //           'tour/index' => 'tour/index',
-    //           'tour/create' => 'tour/create',
-    //           'tour/view/<id:\d+>' => 'tour/view',  
-    //           'tour/update/<id:\d+>' => 'tour/update',  
-    //           'tour/delete/<id:\d+>' => 'tour/delete',  
-    //           'tour/<slug>' => 'tour/slug',
-    //       ],  
-    // ],
+    
     'params' => $params,
 ];
