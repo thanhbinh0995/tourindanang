@@ -38,28 +38,13 @@ class TourController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'addresses' => $addresses,
+
+        // $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+        // return $this->render('index', [
+        //       'tours' => $tours
+       
         ]);
     }
 
-    /**
-     * Displays a single Tour model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-    protected function findModel($id)
-    {
-        if (($model = Tour::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-        return $this->render('index');
-    }
 
 }

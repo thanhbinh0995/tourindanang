@@ -1,20 +1,10 @@
-
-<!--<head>
-<meta charset="UTF-8" />
-<title>Tour in Da Nang, Vietnam - Da Nang Tours by local</title>
-
-</head>-->
 <?php
-
-use yii\db\QueryBuilder;
-use yii\db\Query ;
 use common\models\Tour;
-use common\models\Price;
-use common\models\TourAddress;
-use common\models\Address;
-/* @var $this yii\web\View */
-/* @var $model common\models\Hotel */
-/* @var $form yii\widgets\ActiveForm */
+function checkTourAvailable($tourTemp){
+	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
+		 return true;
+	else return false;
+}
 ?>
 <body class="home blog single-author multi">
 <script>
@@ -76,11 +66,22 @@ use common\models\Address;
 <div id="main">
 	<div class="featured-wrapper clearfix"><div class="container_12 clearfix"><div id="content" class="grid_12" role="main">	
 	<?php 
-		$tours = Tour::find()->limit(2)->orderBy('id DESC')->one();
-		$idFeature = $tours->id;
+		$count = 0;
+		foreach($tours as $tour){
+			if(checkTourAvailable($tour)){ 
+			$idFeature = $tour->id;
+			?>
+				<article id="<?php echo $tour->id ?>" class="landing">
+<div id="landing-text" class="one_half alpha"><h1><?php echo $tour->name ?></h1><p><?php echo $tour->info ?></p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/my-son-sanctuary-halfday-tour/index">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/api/uploads/<?php echo $tour->avatar ?>" alt="<?php echo $tour->name ?>" /></p></div>		</article>
+		<?php	break; } 
+			$count++;
+		}
+		if($count == count($tours)) { ?>
+			<article class="landing">
+<div id="landing-text" class="one_half alpha"></div><p>Tour not found</p><div id="landing-media" class="one_half omega"></div>		</article>
+		<?php }
 	?>
-	<article id="<?php echo $tours->id ?>" class="landing">
-<div id="landing-text" class="one_half alpha"><h1><?php echo $tours->name ?></h1><p><?php echo $tours->info ?></p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/my-son-sanctuary-halfday-tour/index">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/api/uploads/<?php echo $tours->avatar ?>" alt="<?php echo $tours->name ?>" /></p></div>		</article>
+	
 </div>
 </div><!-- #container -->
 </div><!-- featured wrapper -->
@@ -90,57 +91,38 @@ use common\models\Address;
 </div>
 <div id="content" class="grid_8 " role="main">
 	<?php
-		
-		// $query = new Query;
-		// $query->select(['tour.id','name','dayTour','tour.info','itinerary','avatar','price.info'])->from(['tour','price'])->limit(4)->orderBy(['tour.id'=>SORT_DESC])->where(['tour.id' => 'price.tourId']);
-		// $command = $query->createCommand();
-		$tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
 		foreach($tours as $tour){
-			if($tour->id == $idFeature) continue;
-			$price = Price::find()->where(['tourId'=>$tour->id])->orderBy('info ASC')->one();
-			$addresses = TourAddress::find()->where(['tourId'=>$tour->id])->select('addressId')->all();
-			$addressId = array();
-			$count = 0;
-			foreach($addresses as $address){
-            	array_push($addressId, $address->addressId);
-       		}
-			// var_dump($addressId);
-			// exit();
-			$addressAll = Address::listAddress();
-			$addressId = Tour::getAddressesName($addressId,$addressAll);
-			$addressId = explode('<br/>',$addressId);
-			// var_dump($addressId);
-			//  exit();
-			
+			if( checkTourAvailable($tour) ){
+				if($tour->id == $idFeature) continue;
+				$prices = $tour->prices;
+				$minPrice = 100000000000000000;
+				foreach($prices as $price){
+					$minPrice = min($minPrice,(int)$price->info);
+				}
+				$addresses =Tour::getAddressesName($tour);
+				$addresses = explode('<br/>',$addresses);
+				$types =Tour::getTypesName($tour);
+				$types = explode(',',$types);	
 		?>
 			<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
 		<figure class="thumbt"><a href="tour/hue-city-tour/index" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
 		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
-		
+
+		<span class='price'>from <span><?php echo $minPrice ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
 		<?php 
-		// 	$query = new Query;
-		// $query->select('address.name')->from('tour-address','address')->where(['tour-address.tourId => $count','tour-address.addressId => address.id']);
-		// $command = $query->createCommand();
-		// $price = $command->queryAll();
-		for($countAddress = 0; $countAddress < count($addressId) ; $countAddress++) {
+		for($countAddress = 0; $countAddress < count($addresses) ; $countAddress++) {
 		?>
-			<a href='destination/hue/index'><?php echo $addressId[$countAddress];?></a>, 
+			<a href='destination/hue/index'><?php echo $addresses[$countAddress];?></a>, 
 		<?php }?>
 		 	
 		 <p><?php echo $tour->info ?></p>	</div>
 	</article>
-	<?php	}
-
+	<?php	
+			}
+		}
 	?>
-	<!--<article id="post-382" class="post-382 tour type-tour has-post-thumbnail duration-day-tour travel-style-sightseeing destination-hue">
-		<figure class="thumbt"><a href="tour/hue-city-tour/index" title="Imperial Hue City Tour"><img width="150" height="150" src="/wp-content/uploads/minh-mang-tomb-1-150x150.jpg" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="Imperial Hue City Tour" /></a></figure>	<header class="entry-header">
-		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="Imperial Hue City Tour" rel="bookmark">Imperial Hue City Tour</a></h2>	</header>
-		
-		<div class="entry-content clearfix">
-		<span class='price'>from <span>$40</span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i>  <a href='destination/hue/index'>Hue</a>, 	<p>In comparison with other ancient capitals in South East Asia, Hue is the one that still preserves comparatively the intact appearance of a complex of the monarchic capital consisting of walls,..</p>	</div>
-	</article>-->
 </div>
 	
 		<div id="sidebar_one" class="grid_4 widget-area blog-widgets" role="complementary">
