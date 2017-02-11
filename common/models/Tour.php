@@ -10,7 +10,7 @@ use common\models\Type;
 use yii\db\ActiveQuery;
 use common\models\TourType;
 use common\models\Image;
-
+use yii\behaviors\SluggableBehavior;
 use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 /**
  * This is the model class for table "tour".
@@ -38,7 +38,7 @@ class Tour extends \yii\db\ActiveRecord
     public $file_image;
     public $types = array();
     public $addresses = array();
-    // public $slug;
+    public $slug;
     public function behaviors()
     {
         return [
@@ -46,6 +46,12 @@ class Tour extends \yii\db\ActiveRecord
             [
                 'class' => ManyToManyBehavior::className(),
             ],
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                // 'slugAttribute' => 'slug',
+            ],
+            
             // 'slug' => [
             //     'class' => 'Zelenin\yii\behaviors\Slug',
             //     'slugAttribute' => 'slug',
@@ -74,10 +80,10 @@ class Tour extends \yii\db\ActiveRecord
             [['name', 'dayTour', 'info', 'itinerary', 'avatar','types','addresses'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['itinerary'], 'string'],
-            [['name', 'info',], 'string', 'max' => 255],
+            [['name', 'info','slug'], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            [['types'], 'safe'],
+            [['types', 'slug'], 'safe'],
             [['addresses'], 'safe'],
         ];
     }
@@ -216,14 +222,4 @@ class Tour extends \yii\db\ActiveRecord
 
     public static function getPricesName()
     {}
-
-    public static function getImageSrc($model)
-    {
-        $images = array();
-        $tours = Tour::find()->one();
-        foreach($model->tourImages as $tourImage){
-            array_push($images, $tourImage->image->name);
-        }
-        return implode(" ",$types);
-    }
 }

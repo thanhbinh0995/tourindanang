@@ -1,0 +1,12 @@
+@media screen and (max-width: 960px ){.container_12, .container_16 { width: auto } }
+.featured .carousel-inner .small-thumbnail,
+.featured .carousel-inner .no-thumbnail,
+.featured .carousel-inner .item {height:
+300px;}
+.featured-blog .carousel-inner .item { height: 300px; }
+#site-title {font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif;}
+#site-description {font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif;}
+#site-title a,
+#site-description {
+	color: #057fa5 !important;
+}

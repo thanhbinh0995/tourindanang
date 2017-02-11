@@ -17,13 +17,13 @@ class AppAsset extends AssetBundle
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
         'css/bootstrap.min.css',
         'css/font-awesome.min.css',
-        'css/lightblueedfb.css',
         'css/responsive.min.css',
-        'css/voyage-styleedfb.css',
         'css/widget1c9b.css',
         'css/related1c9b.css',
         'css/styles_thumbnails.css192d.css',
-        
+        'css/voyage-styleedfb.css',
+        'css/lightblueedfb.css',
+        'css/index.css',
     ];
     public $js = [
         'js/bootstrap.min254d.js',
