@@ -10,11 +10,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\TourType;
+use common\models\Type;
 /**
  * TourController implements the CRUD actions for Tour model.
  */
 class TourController extends Controller
-
 {
     public function actionIndex()
     {
@@ -31,18 +31,58 @@ class TourController extends Controller
                 ->all();
             array_push($addresses, ['tourName' => $tour->name, 'addressName' => $address]);
         }
-        
+        $typesName = (new \yii\db\Query())
+                ->select('name')
+                ->from('type')
+                ->all();
+        $addressesName = (new \yii\db\Query())
+                ->select('name')
+                ->from('address')
+                ->all();     
+        $days = (new \yii\db\Query())
+                ->select('dayTour')
+                ->from('tour')
+                ->all();  
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'addresses' => $addresses,
-
+            'typesName' => $typesName,
+            'addressesName' => $addressesName,
+            'days' => $days,
         // $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
         // return $this->render('index', [
         //       'tours' => $tours
        
         ]);
     }
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);   
+        $types = $model->getTypes();
+        $addresses = $model->getAddresses();
+        $images = $model->getImages();
+        foreach ($types as $type ) {
+            array_push($model->types,$type['typeId']);
+        }
+        foreach ($addresses as $address ) {
+            array_push($model->addresses,$address['addressId']);
+        }
 
+        return $this->render('view', [
+            'model' => $model,
+            'types' => $model->types,
+            'addresses' => $model->addresses,
+        ]);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Tour::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 
 }

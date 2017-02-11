@@ -18,25 +18,6 @@ use Imagine\Image\Box;
  */
 class TourController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * Lists all Tour models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new TourSearch();
@@ -65,7 +46,7 @@ class TourController extends BaseController
         foreach ($addresses as $address ) {
             array_push($model->addresses,$address['addressId']);
         }
-        
+
         return $this->render('view', [
             'model' => $model,
            //    'types' => $model->types,
