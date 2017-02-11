@@ -14,6 +14,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\helpers\Url;
 use common\models\Tour;
+use common\models\Price;
 /**
  * Site controller
  */
@@ -87,8 +88,21 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+        $tourAddress = [];
+        $tourPrice =[];
+        foreach($tours as $tour){
+            $addresses =Tour::getAddressesName($tour);
+            $addresses = explode('<br/>',$addresses);
+            if($addresses) $tourAddress[$tour->name] = $addresses;
+            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('id ASC')->one();
+            if($price){
+               $tourPrice[$tour->name] = $price->info;
+            }
+        }
         return $this->render('index', [
-              'tours' => $tours
+              'tours' => $tours,
+              'tourAddress' => $tourAddress,
+              'tourPrice' => $tourPrice,
        
         ]);
     }
