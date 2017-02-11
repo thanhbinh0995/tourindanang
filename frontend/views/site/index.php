@@ -94,26 +94,17 @@ function checkTourAvailable($tourTemp){
 		foreach($tours as $tour){
 			if( checkTourAvailable($tour) ){
 				if($tour->id == $idFeature) continue;
-				$prices = $tour->prices;
-				$minPrice = 100000000000000000;
-				foreach($prices as $price){
-					$minPrice = min($minPrice,(int)$price->info);
-				}
-				$addresses =Tour::getAddressesName($tour);
-				$addresses = explode('<br/>',$addresses);
-				$types =Tour::getTypesName($tour);
-				$types = explode(',',$types);	
 		?>
 			<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
 		<figure class="thumbt"><a href="tour/hue-city-tour/index" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
 		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
-		<span class='price'>from <span><?php echo $minPrice ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
+		<span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
 		<?php 
-		for($countAddress = 0; $countAddress < count($addresses) ; $countAddress++) {
+		for($countAddress = 0; $countAddress < count($tourAddress[$tour->name]) ; $countAddress++) {
 		?>
-			<a href='destination/hue/index'><?php echo $addresses[$countAddress];?></a>, 
+			<a href='destination/hue/index'><?php echo $tourAddress[$tour->name][$countAddress];?></a>, 
 		<?php }?>
 		 	
 		 <p><?php echo $tour->info ?></p>	</div>
