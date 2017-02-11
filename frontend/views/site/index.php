@@ -100,7 +100,9 @@ function checkTourAvailable($tourTemp){
 		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
+
 		<span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
+
 		<?php 
 		for($countAddress = 0; $countAddress < count($tourAddress[$tour->name]) ; $countAddress++) {
 		?>

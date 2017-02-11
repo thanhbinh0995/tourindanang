@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use common\models\Type;
 use yii\db\ActiveQuery;
 use common\models\TourType;
+use common\models\Image;
 
 use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 /**
@@ -45,18 +46,18 @@ class Tour extends \yii\db\ActiveRecord
             [
                 'class' => ManyToManyBehavior::className(),
             ],
-            'slug' => [
-                'class' => 'Zelenin\yii\behaviors\Slug',
-                'slugAttribute' => 'slug',
-                'attribute' => 'name',
-                // optional params
-                'ensureUnique' => true,
-                'replacement' => '-',
-                'lowercase' => true,
-                'immutable' => false,
-                // If intl extension is enabled, see http://userguide.icu-project.org/transforms/general. 
-                'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
-             ]
+            // 'slug' => [
+            //     'class' => 'Zelenin\yii\behaviors\Slug',
+            //     'slugAttribute' => 'slug',
+            //     'attribute' => 'name',
+            //     // optional params
+            //     'ensureUnique' => true,
+            //     'replacement' => '-',
+            //     'lowercase' => true,
+            //     'immutable' => false,
+            //     // If intl extension is enabled, see http://userguide.icu-project.org/transforms/general. 
+            //     'transliterateOptions' => 'Russian-Latin/BGN; Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC;'
+            //  ]
         ];
     }
     public static function tableName()
@@ -73,10 +74,10 @@ class Tour extends \yii\db\ActiveRecord
             [['name', 'dayTour', 'info', 'itinerary', 'avatar','types','addresses'], 'required'],
             [['dayTour', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
             [['itinerary'], 'string'],
-            [['name', 'info','slug'], 'string', 'max' => 255],
+            [['name', 'info',], 'string', 'max' => 255],
             [['avatar'], 'string', 'max' => 50],
             [['file_image'], 'file', 'extensions' => 'png, jpg', 'skipOnEmpty' => true],
-            [['types', 'slug'], 'safe'],
+            [['types'], 'safe'],
             [['addresses'], 'safe'],
         ];
     }
@@ -171,8 +172,6 @@ class Tour extends \yii\db\ActiveRecord
         $addresses = TourAddress::findAll([
             'tourId' => $this->id,
         ]);
-        // var_dump($addresses);
-        //   exit();
         return $addresses;
     }
 
@@ -199,20 +198,11 @@ class Tour extends \yii\db\ActiveRecord
     {
         $types = array();
         $tours = Tour::find()->one();
-
-        // foreach($tours->tourTypes as $tourType){
-        //     var_dump($tourType->type->name); 
-           
-        // }
-        // exit();
         foreach($model->tourTypes as $tourType){
             array_push($types, $tourType->type->name);
         }
         return implode(", ",$types);
     }
-
-
-
 
     public static function getAddressesName($model){
       //  $array = $this->getTypes();
@@ -221,11 +211,19 @@ class Tour extends \yii\db\ActiveRecord
       foreach($model->tourAddresses as $tourAddress){
             array_push($addresses, $tourAddress->address->name);
         }
-        return implode("<br/> ",$addresses);
-     
-        
+        return implode(", ",$addresses);   
     }
 
     public static function getPricesName()
     {}
+
+    public static function getImageSrc($model)
+    {
+        $images = array();
+        $tours = Tour::find()->one();
+        foreach($model->tourImages as $tourImage){
+            array_push($images, $tourImage->image->name);
+        }
+        return implode(" ",$types);
+    }
 }
