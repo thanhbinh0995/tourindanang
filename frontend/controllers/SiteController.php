@@ -99,10 +99,26 @@ class SiteController extends Controller
                $tourPrice[$tour->name] = $price->info;
             }
         }
+        $typesName = (new \yii\db\Query())
+                ->select('name')
+                ->from('type')
+                ->all();
+        $addressesName = (new \yii\db\Query())
+                ->select('name')
+                ->from('address')
+                ->all();     
+        $days = (new \yii\db\Query())
+                ->select('dayTour')
+                ->from('tour')
+                ->all();  
         return $this->render('index', [
               'tours' => $tours,
               'tourAddress' => $tourAddress,
               'tourPrice' => $tourPrice,
+              'addresses' => $addresses,
+              'typesName' => $typesName,
+              'addressesName' => $addressesName,
+              'days' => $days,
        
         ]);
     }
