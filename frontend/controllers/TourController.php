@@ -88,6 +88,27 @@ class TourController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSlug($slug)
+    { 
+        $model = Tour::find()->where(['slug'=>$slug])->one();
+        $types = $model->getTypes();
+        $addresses = $model->getAddresses();
+            foreach ($types as $type ) {
+            array_push($model->types,$type['typeId']);
+        }
+        foreach ($addresses as $address ) {
+            array_push($model->addresses,$address['addressId']);
+        }
+        if (!is_null($model)) {
+            return $this->render('view', [
+                'model' => $model,
+            ]);      
+        } else {
+            return $this->redirect('/tour/index');
+        }
+    }
+    
     // protected function findModelBySlug($slug)
     // {
     //     if (($model = Post::findOne(['slug' => $slug])) !== null) {
