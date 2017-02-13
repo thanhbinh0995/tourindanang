@@ -215,7 +215,7 @@ class Tour extends \yii\db\ActiveRecord
      // $typeNames = Type::listType();
      $addresses = array();
       foreach($model->tourAddresses as $tourAddress){
-            array_push($addresses, $tourAddress->address->name);
+            $addresses[] = $tourAddress->address->name;
         }
         return implode(", ",$addresses);   
     }

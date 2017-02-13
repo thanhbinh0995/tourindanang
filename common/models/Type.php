@@ -73,4 +73,14 @@ class Type extends \yii\db\ActiveRecord
     public static function listType($id=NULL){
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
+    public static function getToursName($model)
+    {
+        $tours = array();
+        $types = Type::find()->one();
+        foreach($model->tourTypes as $tourType){
+            array_push($tours, $tourType->tour);
+        }
+        return $tours;
+    }
+
 }
