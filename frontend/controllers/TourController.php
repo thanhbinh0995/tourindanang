@@ -50,10 +50,6 @@ class TourController extends Controller
             'typesName' => $typesName,
             'addressesName' => $addressesName,
             'days' => $days,
-        // $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
-        // return $this->render('index', [
-        //       'tours' => $tours
-       
         ]);
     }
     public function actionView($id)
@@ -68,11 +64,6 @@ class TourController extends Controller
         foreach ($addresses as $address ) {
             array_push($model->addresses,$address['addressId']);
         }
-        // return $this->render('view', [
-        //     'model' => $this->findModelBySlug($slug),
-        //     'types' => $model->types,
-        //     'addresses' => $model->addresses,
-        // ]);
         return $this->render('view', [
             'model' => $model,
             'types' => $model->types,
