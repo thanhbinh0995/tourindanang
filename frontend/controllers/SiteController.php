@@ -92,13 +92,14 @@ class SiteController extends Controller
         $tourPrice =[];
         foreach($tours as $tour){
             $addresses =Tour::getAddressesName($tour);
-            $addresses = explode('<br/>',$addresses);
+            $addresses = explode(', ',$addresses);
             if($addresses) $tourAddress[$tour->name] = $addresses;
             $price = Price::find()->where(['tourId'=>$tour->id])->orderby('id ASC')->one();
             if($price){
                $tourPrice[$tour->name] = $price->info;
             }
         }
+       
         $typesName = (new \yii\db\Query())
                 ->select('name')
                 ->from('type')

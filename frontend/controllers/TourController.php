@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\TourType;
 use common\models\Type;
+use common\models\Price;
 /**
  * TourController implements the CRUD actions for Tour model.
  */
@@ -18,18 +19,23 @@ class TourController extends Controller
 {
     public function actionIndex()
     {
-        $searchModel = new Tour();
-        $dataProvider = $searchModel->find()->all();
-        $addresses = [];
-        foreach ($dataProvider as $tour) {
-            $address = (new \yii\db\Query())
-                ->select('a.name')
-                ->from('address a')
-                ->join('JOIN','tour_address ta','a.id = ta.addressId')
-                ->join('JOIN','tour t','t.id = ta.tourId')
-                ->where(['t.id' => $tour->id])
-                ->all();
-            array_push($addresses, ['tourName' => $tour->name, 'addressName' => $address]);
+        $types = Type::find()->all();
+        $tourType = [];
+        foreach($types as $type){
+            $tours = $type->getToursName($type);
+            if($tours) $tourType[$type->name] = $tours;
+        }
+        $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+        $tourAddress = [];
+        $tourPrice =[];
+        foreach($tours as $tour){
+            $addresses =Tour::getAddressesName($tour);
+            $addresses = explode(', ',$addresses);
+            if($addresses) $tourAddress[$tour->name] = $addresses;
+            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('id ASC')->one();
+            if($price){
+               $tourPrice[$tour->name] = $price->info;
+            }
         }
         $typesName = (new \yii\db\Query())
                 ->select('name')
@@ -44,16 +50,14 @@ class TourController extends Controller
                 ->from('tour')
                 ->all();  
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'tourAddress' => $tourAddress,
+            'tourPrice' => $tourPrice,
             'addresses' => $addresses,
+            'types' => $types,
+            'tourType' => $tourType,
             'typesName' => $typesName,
             'addressesName' => $addressesName,
-            'days' => $days,
-        // $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
-        // return $this->render('index', [
-        //       'tours' => $tours
-       
+            'days' => $days,       
         ]);
     }
     public function actionView($id)

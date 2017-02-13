@@ -21,51 +21,7 @@ function checkTourAvailable($tourTemp){
 
 </script>
 <div id="wrapper">
-	<header id="masthead" class="site-header clearfix">
-	<div class="screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div><div id="branding" class="container_12 clearfix">
-  <div class="grid_12 clearfix">
 
-		<div id="site-title"><a href="/site" title="tour in Danang" rel="home">tour in Danang</a>
-		  <span id="site-description">your insider companion</span></div>
-<div class="quickcontact"><a href="tel:+84 129 377 3333"><i class="fa fa-phone fa-2x"></i></a><span class="hidden-phone">+84 129-377-3333</span> <a href="mailto:igo@tourindanang.com"><i class="fa fa-envelope-o fa-2x"></i></a>
-		</div>
-  </div>
-</div>
-<div id="mainmenu" class="navbar clearfix">
-  <div class="container_12">
-  	<div class="navbar-inner">
-	  <nav id="section-menu" class="section-menu">	
-          	<a class="brand" rel="nofollow" href="/site">
-				<img src="/wp-content/uploads/hvg-travel.png" width="98" height="38" alt="tour in Danang" />			</a>
-		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
-		<div class="nav-collapse">
-    <form method="get" id="searchform" action="http://tourindanang.com/" class="navbar-search pull-right ">
-    	<input type="text" class="search-query" name="s" id="s1" placeholder="Search">
-		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
-    </form>
-<div class="section-menu-container"><ul id="menu-top-menu" class="nav"><li id="nav-menu-item-138" class="main-menu-item  menu-item-depth-0 parent dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="/tour/index" class="menu-link">Tours</a><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
-<ul class="dropdown-menu menu-depth-1">
-	<li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style"><a href="travel-style/sightseeing/index" class="menu-link">Sightseeing</a></li>
-	<li id="nav-menu-item-341" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style"><a href="travel-style/active-tours/index" class="menu-link">Active tours</a></li>
-	<li id="nav-menu-item-343" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style"><a href="travel-style/foodie-tours/index" class="menu-link">Foodie tours</a></li>
-	<li id="nav-menu-item-344" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style"><a href="travel-style/golfing/index" class="menu-link">Golfing</a></li>
-	<li id="nav-menu-item-375" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style"><a href="travel-style/beach-break/index" class="menu-link">Beach break</a></li>
-</ul>
-</li>
-<li id="nav-menu-item-220" class="main-menu-item  menu-item-depth-0 menu-item menu-item-type-taxonomy menu-item-object-duration"><a href="duration/day-tour/index" class="menu-link">Day trips</a></li>
-<li id="nav-menu-item-99" class="main-menu-item  menu-item-depth-0 parent dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="guide/index" class="menu-link">Things to do</a><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
-<ul class="dropdown-menu menu-depth-1">
-	<li id="nav-menu-item-223" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-things-to-do"><a href="things-to-do/attractions/index" class="menu-link">Attractions</a></li>
-	<li id="nav-menu-item-224" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-things-to-do"><a href="things-to-do/eat-and-drink/index" class="menu-link">Eat and Drink</a></li>
-	<li id="nav-menu-item-225" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-things-to-do"><a href="things-to-do/shopping/index" class="menu-link">Shopping</a></li>
-	<li id="nav-menu-item-226" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-things-to-do"><a href="things-to-do/show-and-event/index" class="menu-link">Show and Event</a></li>
-	<li id="nav-menu-item-227" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-things-to-do"><a href="things-to-do/travel-tips/index" class="menu-link">Travel tips</a></li>
-</ul>
-</li>
-<li id="nav-menu-item-222" class="main-menu-item  menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="about-us/index" class="menu-link">About us</a></li>
-<li id="nav-menu-item-79" class="main-menu-item  menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="contact-us/index" class="menu-link">Contact us</a></li>
-</ul></div>		</div>	</nav>
-    </div>  </div></div>	</header>
 <div id="main">
 	<div class="featured-wrapper clearfix"><div class="container_12 clearfix"><div id="content" class="grid_12" role="main">	
 	<?php 
@@ -104,10 +60,11 @@ function checkTourAvailable($tourTemp){
 		
 		<div class="entry-content clearfix">
 
-		<span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'>Day tour</a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
+		<span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'><?php echo ($tour->dayTour == 1) ?  "Day tour" :  $tour->dayTour." days" ?></a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
 
 		<?php 
 		for($countAddress = 0; $countAddress < count($tourAddress[$tour->name]) ; $countAddress++) {
+			
 		?>
 			<a href='destination/hue/index'><?php echo $tourAddress[$tour->name][$countAddress];?></a>, 
 		<?php }?>
