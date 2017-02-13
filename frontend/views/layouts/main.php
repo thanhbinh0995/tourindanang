@@ -36,7 +36,7 @@ AppAsset::register($this);
             ->from('address')
             ->all();     
     $days = (new \yii\db\Query())
-            ->select('id, dayTour')
+            ->select('dayTour')
             ->from('tour')
             ->all();  
 
@@ -121,7 +121,7 @@ AppAsset::register($this);
 
                                     echo Menu::widget([
                                         'items' => [
-                                            ['label' => $typeName['name'], 'url' => ['/type/view?id='.$typeName['id'].'']],
+                                            ['label' => $typeName['name'], 'url' => ['/type/view?typeId='.$typeName['id'].'']],
                                         ],
                                     ]);
                                 }							
@@ -153,7 +153,7 @@ AppAsset::register($this);
                                 $i=0;
                                 foreach ($days as $day) {
                             ?>
-                                <a href='/day/view?id=<?= $day["dayTour"]?>' class='tag-link-37 tag-link-position-1' title='1 topic' style='font-size: <?= 22-$i?>pt;'>
+                                <a href='/day-tour/view?dayTour=<?= $day["dayTour"]?>' class='tag-link-37 tag-link-position-1' title='1 topic' style='font-size: <?= 22-$i?>pt;'>
                                     <?php 
                                         if ($day['dayTour'] > 1) echo $day['dayTour'] . " days";
                                         else echo "Day Tour";

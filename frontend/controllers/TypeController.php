@@ -1,12 +1,26 @@
 <?php
 
 namespace frontend\controllers;
-
-class TypeController extends \yii\web\Controller
+use Yii;
+use common\models\Tour;
+use common\models\TourSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+class TypeController extends Controller
 {
-    public function actionIndex()
+    public function actionView($typeId)
     {
-        return $this->render('index');
+        $model = new Tour();
+        $dataProvider = $model->find()
+            ->join('JOIN', 'tour_type tt', 'tour.id = tt.tourId')
+            ->join('JOIN', 'type t', 'tt.typeId = t.id')
+            ->where(['t.id' => $typeId])
+            ->all();
+        return $this->render('view', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
 }
