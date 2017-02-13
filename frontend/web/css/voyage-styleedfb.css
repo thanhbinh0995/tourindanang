@@ -981,7 +981,7 @@ span#site-description {
 }
 
 #masthead .search-query {
-	background: url(../images/search.png) no-repeat 0px center;
+	background: url(/api/uploads/search.png) no-repeat 0px center;
     padding-left: 24px; 
 	-webkit-border-radius: 10px;
 	-webkit-transition-duration: 400ms;

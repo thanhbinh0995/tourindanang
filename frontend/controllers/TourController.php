@@ -68,7 +68,11 @@ class TourController extends Controller
         foreach ($addresses as $address ) {
             array_push($model->addresses,$address['addressId']);
         }
-
+        // return $this->render('view', [
+        //     'model' => $this->findModelBySlug($slug),
+        //     'types' => $model->types,
+        //     'addresses' => $model->addresses,
+        // ]);
         return $this->render('view', [
             'model' => $model,
             'types' => $model->types,
@@ -84,5 +88,13 @@ class TourController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    // protected function findModelBySlug($slug)
+    // {
+    //     if (($model = Post::findOne(['slug' => $slug])) !== null) {
+    //         return $model;
+    //     } else {
+    //         throw new NotFoundHttpException();
+    //     }
+    // }
 
 }
