@@ -1,5 +1,8 @@
 <?php
 use common\models\Tour;
+use yii\data\ActiveDataProvider;
+use yii\widgets\Menu;
+
 function checkTourAvailable($tourTemp){
 	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
 		 return true;
@@ -72,7 +75,7 @@ function checkTourAvailable($tourTemp){
 			$idFeature = $tour->id;
 			?>
 				<article id="<?php echo $tour->id ?>" class="landing">
-<div id="landing-text" class="one_half alpha"><h1><?php echo $tour->name ?></h1><p><?php echo $tour->info ?></p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/my-son-sanctuary-halfday-tour/index">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/api/uploads/<?php echo $tour->avatar ?>" alt="<?php echo $tour->name ?>" /></p></div>		</article>
+<div id="landing-text" class="one_half alpha"><h1><?php echo $tour->name ?></h1><p><?php echo $tour->info ?></p><p class="action-full"><a class="btn btn-primary btn-large" href="tour/view/<?= $tour->id ?>">See details</a></p></div><div id="landing-media" class="one_half omega"><p><img src="/api/uploads/<?php echo $tour->avatar ?>" alt="<?php echo $tour->name ?>" /></p></div>		</article>
 		<?php	break; } 
 			$count++;
 		}
@@ -96,8 +99,8 @@ function checkTourAvailable($tourTemp){
 				if($tour->id == $idFeature) continue;
 		?>
 			<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
-		<figure class="thumbt"><a href="tour/hue-city-tour/index" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
-		<h2 class="entry-title"><a href="tour/hue-city-tour/index" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
+		<figure class="thumbt"><a href="tour/view/<?= $tour->id ?>" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
+		<h2 class="entry-title"><a href="tour/view/<?= $tour->id ?>" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
 
@@ -117,39 +120,56 @@ function checkTourAvailable($tourTemp){
 	?>
 </div>
 	
-		<div id="sidebar_one" class="grid_4 widget-area blog-widgets" role="complementary">
-		<ul class="xoxo">		
-<li id="nav_menu-2" class="widget-container widget_nav_menu"><h4 class="widget-title">Da Nang Tour</h4><div class="menu-da-nang-tour-container"><ul id="menu-da-nang-tour" class="menu"><li id="menu-item-261" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-261"><a href="travel-style/sightseeing/index">Sightseeing</a></li>
-<li id="menu-item-263" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-263"><a href="travel-style/foodie-tours/index">Foodie tours</a></li>
-<li id="menu-item-352" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-352"><a href="travel-style/active-tours/index">Active tours</a></li>
-<li id="menu-item-393" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-393"><a href="travel-style/golfing/index">Golfing</a></li>
-<li id="menu-item-374" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-374"><a href="travel-style/beach-break/index">Beach break</a></li>
-</ul></div></li>		</ul>
-		</div>
-		<div id="sidebar_two" class="grid_4 widget-area blog-widgets pull-right" role="complementary">
-			<ul class="xoxo">
-				<li id="tag_cloud-2" class="widget-container widget_tag_cloud"><h4 class="widget-title">Destinations</h4><div class="tagcloud"><a href='destination/da-nang/index' class='tag-link-33 tag-link-position-1' title='21 topics' style='font-size: 22pt;'>Da Nang</a>
-<a href='destination/hoi-an/index' class='tag-link-35 tag-link-position-2' title='13 topics' style='font-size: 19.442307692308pt;'>Hoi An</a>
-<a href='destination/hue/index' class='tag-link-32 tag-link-position-3' title='12 topics' style='font-size: 18.903846153846pt;'>Hue</a>
-<a href='destination/quang-binh/index' class='tag-link-36 tag-link-position-4' title='3 topics' style='font-size: 12.038461538462pt;'>Quang Binh</a>
-<a href='destination/quang-tri/index' class='tag-link-53 tag-link-position-5' title='1 topic' style='font-size: 8pt;'>Quang Tri</a></div>
-</li><li id="tag_cloud-4" class="widget-container widget_tag_cloud"><h4 class="widget-title">Plan for days?</h4><div class="tagcloud"><a href='duration/day-tour/index' class='tag-link-37 tag-link-position-1' title='24 topics' style='font-size: 22pt;'>Day tour</a>
-<a href='duration/4-days/index' class='tag-link-40 tag-link-position-2' title='3 topics' style='font-size: 11.818181818182pt;'>4 days</a>
-<a href='duration/3-days/index' class='tag-link-39 tag-link-position-3' title='2 topics' style='font-size: 10.290909090909pt;'>3 days</a>
-<a href='duration/7-days/index' class='tag-link-48 tag-link-position-4' title='2 topics' style='font-size: 10.290909090909pt;'>7 days</a>
-<a href='duration/6-days/index' class='tag-link-52 tag-link-position-5' title='1 topic' style='font-size: 8pt;'>6 days</a>
-<a href='duration/5-days/index' class='tag-link-41 tag-link-position-6' title='1 topic' style='font-size: 8pt;'>5 days</a>
-<a href='duration/2-days/index' class='tag-link-38 tag-link-position-7' title='1 topic' style='font-size: 8pt;'>2 days</a></div>
-</li><li id="nav_menu-4" class="widget-container widget_nav_menu"><h4 class="widget-title">Travel with us</h4><div class="menu-see-also-container"><ul id="menu-see-also" class="menu"><li id="menu-item-401" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-401"><a href="daily-group-tours/index">Daily Group Tours (Seat in Coach Tours)</a></li>
-<li id="menu-item-402" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-402"><a href="ticket-booking/index">Ticket booking</a></li>
-<li id="menu-item-403" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-403"><a href="car-rental-da-nang/index">Car rental Da Nang</a></li>
-<li id="menu-item-404" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-404"><a href="hotel-room-booking/index">Book hotel rooms in Da Nang</a></li>
-</ul></div></li>			</ul>
-		</div>
-	
+		 <div id="sidebar_one" class="grid_4 widget-area blog-widgets" role="complementary">
+                    <ul class="xoxo">
+                        <li id="nav_menu-2" class="widget-container widget_nav_menu">
+                            <h4 class="widget-title">Da Nang Tour</h4>
+                            <div class="menu-da-nang-tour-container">
+								<?php 
+									foreach ($typesName as $typeName) {
+										echo Menu::widget([
+											'items' => [
+												['label' => $typeName['name'], 'url' => ['type/index']],
+											],
+										]);
+									}							
+								?>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="sidebar_two" class="grid_4 widget-area blog-widgets pull-right" role="complementary">
+                    <ul class="xoxo">
+                        <li id="tag_cloud-2" class="widget-container widget_tag_cloud">
+                            <h4 class="widget-title">Destinations</h4>
+                            <div class="tagcloud">
+                                <?php 
+                                    foreach ($addressesName as $addressName) {
+										echo Menu::widget([
+											'items' => [
+												['label' => $addressName['name'], 'url' => ['address/index']],
+											],
+										]);
+									}
+                                ?>
+                            </div>
+                        </li>
+                        <li id="tag_cloud-4" class="widget-container widget_tag_cloud">
+                            <h4 class="widget-title">Plan for days?</h4>
+                            <div class="tagcloud"><a href='../duration/day-tour/index' class='tag-link-37 tag-link-position-1' title='24 topics' style='font-size: 22pt;'>Day tour</a>
+                                <?php 
+                                    foreach ($days as $day) {
+                                ?>
+                                    <a href='' class='tag-link-38 tag-link-position-7' title='1 topic' style='font-size: 8pt;'><?= $day['dayTour']; ?></a>
+                                <?php } ?>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-</div><!-- #container -->
-</div><!-- #main -->
+
+            </div>
+        </div>
 <div id="footer" role="contentinfo">
 	<div class="container_12 clearfix">
 		
