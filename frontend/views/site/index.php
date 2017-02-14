@@ -20,10 +20,7 @@ function checkTourAvailable($tourTemp){
   ga('send', 'pageview');
 
 </script>
-
 <div id="wrapper">
-
-
 <div id="main">
 	<div class="featured-wrapper clearfix"><div class="container_12 clearfix"><div id="content" class="grid_12" role="main">	
 	<?php 

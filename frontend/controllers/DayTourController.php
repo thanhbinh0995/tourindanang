@@ -1,14 +1,19 @@
 <?php
 
 namespace frontend\controllers;
-
-class DayTourController extends \yii\web\Controller
+use Yii;
+use common\models\Tour;
+use common\models\TourSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+class DayTourController extends Controller
 {
-    public function actionView($id)
+    public function actionView($dayTour)
     {
         $model = new Tour();
         $dataProvider = $model->find()
-            ->where(['tour.dayTour' => $id])
+            ->where(['tour.dayTour' => $dayTour])
             ->all();
         return $this->render('view', [
             'model' => $model,
