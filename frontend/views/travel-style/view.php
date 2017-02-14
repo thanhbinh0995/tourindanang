@@ -34,8 +34,8 @@ function checkTourAvailable($tourTemp){
 			
 		?>
 			<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
-		<figure class="thumbt"><a href="tour/view/<?= $tour->id ?>" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
-		<h2 class="entry-title"><a href="tour/view/<?= $tour->id ?>" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
+		<figure class="thumbt"><a href="../tour/view/<?= $tour->id ?>" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
+		<h2 class="entry-title"><a href="../tour/view/<?= $tour->id ?>" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
 		
 		<div class="entry-content clearfix">
 
@@ -54,39 +54,8 @@ function checkTourAvailable($tourTemp){
 		}
 	?>
 	
-
-</div><!-- #container -->
-</div><!-- #main -->
-<div id="footer" role="contentinfo">
-	<div class="container_12 clearfix">
-		
-<div id="footer-widget-area" class="visible-desktop clearfix" role="complementary">
 </div>
-		<div id="footer-menu" class="grid_12" role="complementary">		
-		<div class="footer-menu"><ul id="menu-footer" class="menu"><li id="menu-item-280" class="menu-item menu-item-type-taxonomy menu-item-object-duration menu-item-280"><a href="../../duration/day-tour/index.html">Day tour</a></li>
-<li id="menu-item-282" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-282"><a href="../../tour/index.html">Package tours</a></li>
-<li id="menu-item-281" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-281"><a href="../../guide/index.html">Things to do</a></li>
-<li id="menu-item-284" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-284"><a href="../../destination/da-nang/index.html">Da Nang tours</a></li>
-<li id="menu-item-658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-658"><a href="http://tourinhanoi.com/">Hanoi tours</a></li>
-<li id="menu-item-657" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-657"><a href="../../contact-us/index.html">Contact us</a></li>
-</ul></div>	
-		<div class="social-links bottom medium-icon"><ul><li><a class="url_facebook" href="http://www.facebook.com/AproTravel" title="Facebook" target="_blank">Facebook</a></li></ul></div>			
-		</div>
 
-		<div id="site-info" class="grid_6">
-		&copy; 2017<a href="../../index.html" title="tour in Danang" rel="home">
-			tour in Danang</a>
-		</div><!-- #site-info -->
-	</div><!-- #footer-container -->		
-	<div class="back-to-top"><a href="#masthead"><span class="icon-chevron-up"></span> TOP</a></div>
-</div><!-- #footer -->
-</div><!-- #wrapper -->
-<script type='text/javascript' src='../../wp-content/themes/tourindanang/js/bootstrap.min254d.js?ver=2.3.1'></script>
-<script type='text/javascript' src='../../wp-content/themes/tourindanang/js/jquery.colorbox-min877b.js?ver=1.3.30'></script>
-<script type='text/javascript' src='../../wp-content/themes/tourindanang/js/prettify.js'></script>
-<script type='text/javascript' src='../../wp-content/themes/tourindanang/js/voyageedfb.js?ver=1.3.8'></script>
-<script type='text/javascript' src='http://tourindanang.com/wp-includes/js/wp-embed.min.js?ver=4.6.1'></script>
 </body>
 
-<!-- Mirrored from tourindanang.com/travel-style/active-tours/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Jan 2017 09:20:01 GMT -->
-</html>
+

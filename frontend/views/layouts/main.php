@@ -68,14 +68,14 @@ AppAsset::register($this);
                                 </form>
                                 <div class="section-menu-container">
                                     <ul id="menu-top-menu" class="nav">
-                                        <li id="nav-menu-item-138" class="main-menu-item  menu-item-depth-0 parent dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="../index.html" class="menu-link">Tours</a><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
+                                        <li id="nav-menu-item-138" class="main-menu-item  menu-item-depth-0 parent dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="../../tour" class="menu-link">Tours</a><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
                                             <ul class="dropdown-menu menu-depth-1">
                                                
                                                 <?php 
                                                     // $typesName = Type::listType();
                                                     foreach ($typesName as $typeName) {
                                                 ?>
-                                                    <li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent"><a href="../../travel-style/sightseeing/index.html" class="menu-link"><?= $typeName['name']; ?></a>
+                                                    <li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent"><a href="../../travel-style/view?typeId=<?= $typeName['id']; ?>" class="menu-link"><?= $typeName['name']; ?></a>
                                                     </li>
                                                 <?php } ?>
                                             </ul>

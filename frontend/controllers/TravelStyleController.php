@@ -18,9 +18,9 @@ class TravelStyleController extends \yii\web\Controller
         return $this->render('index');
     }
 
-    public function actionView($id)
+    public function actionView($typeId)
     {
-        $model = Type::find()->where(['id'=>$id])->one();
+        $model = Type::find()->where(['id'=>$typeId])->one();
         $tours = $model->getToursName($model);
         $tourAddress = [];
         $tourPrice =[];
