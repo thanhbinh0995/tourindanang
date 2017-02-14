@@ -208,12 +208,24 @@ AppAsset::register($this);
         <div class="back-to-top"><a href="#masthead"><span class="icon-chevron-up"></span> TOP</a>
         </div>
     </div>
-    <script type='text/javascript' src='../wp-content/themes/tourindanang/js/bootstrap.min254d.js?ver=2.3.1'></script>
-    <script type='text/javascript' src='../wp-content/themes/tourindanang/js/jquery.colorbox-min877b.js?ver=1.3.30'></script>
-    <script type='text/javascript' src='../wp-content/themes/tourindanang/js/prettify.js'></script>
-    <script type='text/javascript' src='../wp-content/themes/tourindanang/js/voyageedfb.js?ver=1.3.8'></script>
-    <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/wp-embed.min.js?ver=4.6.1'></script>
 <?php $this->endBody() ?>
+<script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('.tabs .tab-links a').on('click', function(e) {
+                var currentAttrValue = jQuery(this).attr('href');
+
+                // Show/Hide Tabs
+                jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+
+                // Change/remove current tab to active
+                jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+                e.preventDefault();
+            });
+            var element = jQuery('.info,.error,.success').clone(true);
+            element.appendTo('#message');
+        });
+    </script>
 </div>
 </body>
 </html>

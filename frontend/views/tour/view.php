@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
             })
         });
     </script>
+    
     <style type="text/css">
         #site-title a,
         #site-description {
@@ -254,23 +255,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                                 </div>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                            jQuery(document).ready(function() {
-                                jQuery('.tabs .tab-links a').on('click', function(e) {
-                                    var currentAttrValue = jQuery(this).attr('href');
-
-                                    // Show/Hide Tabs
-                                    jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
-
-                                    // Change/remove current tab to active
-                                    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
-
-                                    e.preventDefault();
-                                });
-                                var element = jQuery('.info,.error,.success').clone(true);
-                                element.appendTo('#message');
-                            });
-                        </script>
                     </div>
                     <div class='yarpp-related'>
                         <h3>See also:</h3>
@@ -291,103 +275,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                     </div>
                 </article>
             </div>
-
-            <div id="sidebar_one" class="grid_4 widget-area blog-widgets" role="complementary">
-                <ul class="xoxo">
-                    <li id="nav_menu-2" class="widget-container widget_nav_menu">
-                        <h4 class="widget-title">Da Nang Tour</h4>
-                        <div class="menu-da-nang-tour-container">
-                            <ul id="menu-da-nang-tour" class="menu">
-                                <li id="menu-item-261" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent menu-item-261"><a href="../../travel-style/sightseeing/index.html">Sightseeing</a>
-                                </li>
-                                <li id="menu-item-263" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-263"><a href="../../travel-style/foodie-tours/index.html">Foodie tours</a>
-                                </li>
-                                <li id="menu-item-352" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-352"><a href="../../travel-style/active-tours/index.html">Active tours</a>
-                                </li>
-                                <li id="menu-item-393" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-393"><a href="../../travel-style/golfing/index.html">Golfing</a>
-                                </li>
-                                <li id="menu-item-374" class="menu-item menu-item-type-taxonomy menu-item-object-travel-style menu-item-374"><a href="../../travel-style/beach-break/index.html">Beach break</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div id="sidebar_two" class="grid_4 widget-area blog-widgets pull-right" role="complementary">
-                <ul class="xoxo">
-                    <li id="tag_cloud-2" class="widget-container widget_tag_cloud">
-                        <h4 class="widget-title">Destinations</h4>
-                        <div class="tagcloud"><a href='../../destination/da-nang/index.html' class='tag-link-33 tag-link-position-1' title='21 topics' style='font-size: 22pt;'>Da Nang</a>
-                            <a href='../../destination/hoi-an/index.html' class='tag-link-35 tag-link-position-2' title='13 topics' style='font-size: 19.442307692308pt;'>Hoi An</a>
-                            <a href='../../destination/hue/index.html' class='tag-link-32 tag-link-position-3' title='12 topics' style='font-size: 18.903846153846pt;'>Hue</a>
-                            <a href='../../destination/quang-binh/index.html' class='tag-link-36 tag-link-position-4' title='3 topics' style='font-size: 12.038461538462pt;'>Quang Binh</a>
-                            <a href='../../destination/quang-tri/index.html' class='tag-link-53 tag-link-position-5' title='1 topic' style='font-size: 8pt;'>Quang Tri</a>
-                        </div>
-                    </li>
-                    <li id="tag_cloud-4" class="widget-container widget_tag_cloud">
-                        <h4 class="widget-title">Plan for days?</h4>
-                        <div class="tagcloud"><a href='../../duration/day-tour/index.html' class='tag-link-37 tag-link-position-1' title='24 topics' style='font-size: 22pt;'>Day tour</a>
-                            <a href='../../duration/4-days/index.html' class='tag-link-40 tag-link-position-2' title='3 topics' style='font-size: 11.818181818182pt;'>4 days</a>
-                            <a href='../../duration/3-days/index.html' class='tag-link-39 tag-link-position-3' title='2 topics' style='font-size: 10.290909090909pt;'>3 days</a>
-                            <a href='../../duration/7-days/index.html' class='tag-link-48 tag-link-position-4' title='2 topics' style='font-size: 10.290909090909pt;'>7 days</a>
-                            <a href='../../duration/6-days/index.html' class='tag-link-52 tag-link-position-5' title='1 topic' style='font-size: 8pt;'>6 days</a>
-                            <a href='../../duration/5-days/index.html' class='tag-link-41 tag-link-position-6' title='1 topic' style='font-size: 8pt;'>5 days</a>
-                            <a href='../../duration/2-days/index.html' class='tag-link-38 tag-link-position-7' title='1 topic' style='font-size: 8pt;'>2 days</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-
-        </div>
-        <!-- #container -->
-    </div>
-    <!-- #main -->
-    <div id="footer" role="contentinfo">
-        <div class="container_12 clearfix">
-
-            <div id="footer-widget-area" class="visible-desktop clearfix" role="complementary">
-            </div>
-            <div id="footer-menu" class="grid_12" role="complementary">
-                <div class="footer-menu">
-                    <ul id="menu-footer" class="menu">
-                        <li id="menu-item-280" class="menu-item menu-item-type-taxonomy menu-item-object-duration current-tour-ancestor current-menu-parent current-tour-parent menu-item-280"><a href="../../duration/day-tour/index.html">Day tour</a>
-                        </li>
-                        <li id="menu-item-282" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-282"><a href="../index.html">Package tours</a>
-                        </li>
-                        <li id="menu-item-281" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-281"><a href="../../guide/index.html">Things to do</a>
-                        </li>
-                        <li id="menu-item-284" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-284"><a href="../../destination/da-nang/index.html">Da Nang tours</a>
-                        </li>
-                        <li id="menu-item-658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-658"><a href="http://tourinhanoi.com/">Hanoi tours</a>
-                        </li>
-                        <li id="menu-item-657" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-657"><a href="../../contact-us/index.html">Contact us</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="social-links bottom medium-icon">
-                    <ul>
-                        <li><a class="url_facebook" href="http://www.facebook.com/AproTravel" title="Facebook" target="_blank">Facebook</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="site-info" class="grid_6">
-                &copy; 2017<a href="../../index.html" title="tour in Danang" rel="home">
-        tour in Danang</a>
-            </div>
-            <!-- #site-info -->
-        </div>
-        <!-- #footer-container -->
-        <div class="back-to-top"><a href="#masthead"><span class="icon-chevron-up"></span> TOP</a>
-        </div>
-    </div>
-    <!-- #footer -->
-    <link rel='stylesheet' id='yarppRelatedCss-css' href='../../wp-content/plugins/yet-another-related-posts-plugin/style/related1c9b.css?ver=4.6.1' type='text/css' media='all' />
-    <link rel='stylesheet' id='yarpp-thumbnails-yarpp-thumbnail-css' href='../../wp-content/plugins/yet-another-related-posts-plugin/includes/styles_thumbnails.css192d.css?width=120&amp;height=120&amp;ver=4.3.1' type='text/css' media='all' />
-    <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
-    <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.11.4'></script>
     <script type='text/javascript'>
         jQuery(document).ready(function(jQuery) {
             jQuery.datepicker.setDefaults({
@@ -406,12 +293,4 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
             });
         });
     </script>
-    <script type='text/javascript' src='../../wp-content/themes/tourindanang/js/bootstrap.min254d.js?ver=2.3.1'></script>
-    <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/comment-reply.min.js?ver=4.6.1'></script>
-    <script type='text/javascript' src='../../wp-content/themes/tourindanang/js/jquery.colorbox-min877b.js?ver=1.3.30'></script>
-    <script type='text/javascript' src='../../wp-content/themes/tourindanang/js/prettify.js'></script>
-    <script type='text/javascript' src='../../wp-content/themes/tourindanang/js/voyageedfb.js?ver=1.3.8'></script>
-    <script type='text/javascript' src='http://tourindanang.com/wp-includes/js/wp-embed.min.js?ver=4.6.1'></script>
-</body>
 
-</div>
