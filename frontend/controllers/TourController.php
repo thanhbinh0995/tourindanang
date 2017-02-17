@@ -32,9 +32,9 @@ class TourController extends Controller
             $addresses =Tour::getAddressesName($tour);
             $addresses = explode(', ',$addresses);
             if($addresses) $tourAddress[$tour->name] = $addresses;
-            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('id ASC')->one();
+            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
-               $tourPrice[$tour->name] = $price->info;
+               $tourPrice[$tour->name] = $price->ninePax;
             }
         }
         $typesName = (new \yii\db\Query())
@@ -64,19 +64,28 @@ class TourController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);   
-        $types = $model->getTypes();
-        $addresses = $model->getAddresses();
-        $images = $model->getImages();
-        foreach ($types as $type ) {
-            array_push($model->types,$type['typeId']);
-        }
-        foreach ($addresses as $address ) {
-            array_push($model->addresses,$address['addressId']);
+        $addresses = $model->getAddressesName($model);
+        $addresses = explode(', ',$addresses);
+        $addressIds = $model->tourAddresses;
+        $addressHotel = [];
+        $tourHotels = $model->tourHotels;
+        $tourPrices = $model->prices;
+        foreach($addressIds as  $addressId){
+            
+            //$addressHotel[$addressId->address->name] = $addressId->address->hotel;
+            foreach( $addressId->address->hotel as $hotel){
+                $addressHotel[$addressId->address->name][$hotel->level] = $hotel->name;
+            }
         }
         return $this->render('view', [
             'model' => $model,
-            'types' => $model->types,
-            'addresses' => $model->addresses,
+            'addresses' => $addresses,
+            'price' => $model->prices,
+            'tourHotel' => $model->tourHotels,
+            'addressHotel' => $addressHotel,
+            'tourHotels' => $tourHotels,
+            'tourPrices' => $tourPrices,
+            
         ]);
     }
 

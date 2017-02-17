@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Price;
-use common\models\PriceSearch;
+use common\models\TourHotel;
+use common\models\TourHotelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PriceController implements the CRUD actions for Price model.
+ * TourHotelController implements the CRUD actions for TourHotel model.
  */
-class PriceController extends Controller
+class TourHotelController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class PriceController extends Controller
     }
 
     /**
-     * Lists all Price models.
+     * Lists all TourHotel models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PriceSearch();
+        $searchModel = new TourHotelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class PriceController extends Controller
     }
 
     /**
-     * Displays a single Price model.
+     * Displays a single TourHotel model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class PriceController extends Controller
     }
 
     /**
-     * Creates a new Price model.
+     * Creates a new TourHotel model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Price();
+        $model = new TourHotel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class PriceController extends Controller
     }
 
     /**
-     * Updates an existing Price model.
+     * Updates an existing TourHotel model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class PriceController extends Controller
     }
 
     /**
-     * Deletes an existing Price model.
+     * Deletes an existing TourHotel model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class PriceController extends Controller
     }
 
     /**
-     * Finds the Price model based on its primary key value.
+     * Finds the TourHotel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Price the loaded model
+     * @return TourHotel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Price::findOne($id)) !== null) {
+        if (($model = TourHotel::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

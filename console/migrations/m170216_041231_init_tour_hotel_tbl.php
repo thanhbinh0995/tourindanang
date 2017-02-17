@@ -1,8 +1,8 @@
 <?php
 
 use yii\db\Migration;
- 
-class m170103_150207_init_hotel_tbl extends Migration
+
+class m170216_041231_init_tour_hotel_tbl extends Migration
 {
     public function up()
     {
@@ -12,11 +12,14 @@ class m170103_150207_init_hotel_tbl extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%hotel}}', [
+        $this->createTable('{{%tour_hotel}}', [
             'id' => $this->primaryKey(),
-            'addressId' => $this->integer()->notNull(),
-            'name' => $this->string()->notNull(),
+            'tourId' => $this->integer()->notNull(),
             'level' => $this->string()->notNull(),
+            'twoPax' => $this->integer()->notNull(),
+            'threeFivePax' => $this->integer()->notNull(),
+            'sixEightPax' => $this->integer()->notNull(),
+            'ninePax' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'deleted_at' => $this->integer()->notNull()->defaultValue(0),
@@ -25,7 +28,7 @@ class m170103_150207_init_hotel_tbl extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%hotel}}');
+        $this->dropTable('{{%tour_hotel}}');
     }
 
     /*

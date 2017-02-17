@@ -15,8 +15,11 @@ class m170103_150218_init_price_tbl extends Migration
         $this->createTable('{{%price}}', [
             'id' => $this->primaryKey(),
             'tourId' => $this->integer()->notNull(),
-            'hotelId' => $this->integer(),
-            'info' => $this->string()->notNull(),
+            'name' => $this->string()->notNull(),
+            'twoPax' => $this->integer()->notNull(),
+            'threeFivePax' => $this->integer()->notNull(),
+            'sixEightPax' => $this->integer()->notNull(),
+            'ninePax' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
             'deleted_at' => $this->integer()->notNull()->defaultValue(0),

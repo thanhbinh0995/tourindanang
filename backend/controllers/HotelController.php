@@ -8,14 +8,27 @@ use common\models\HotelSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\BaseController;
-use common\components\Util;
 
 /**
  * HotelController implements the CRUD actions for Hotel model.
  */
-class HotelController extends BaseController
+class HotelController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Lists all Hotel models.
      * @return mixed
@@ -30,7 +43,7 @@ class HotelController extends BaseController
             'dataProvider' => $dataProvider,
         ]);
     }
-    
+
     /**
      * Displays a single Hotel model.
      * @param integer $id
@@ -51,7 +64,7 @@ class HotelController extends BaseController
     public function actionCreate()
     {
         $model = new Hotel();
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

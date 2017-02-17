@@ -68,6 +68,10 @@ class Address extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TourAddress::className(), ['addressId' => 'id']);
     }
+    public function getHotel()
+    {
+        return $this->hasMany(Hotel::className(), ['addressId' => 'id']);
+    }
     public static function listAddress()
     {
         return ArrayHelper::map(self::find()->all(), 'id', 'name');

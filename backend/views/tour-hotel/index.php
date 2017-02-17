@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\PriceSearch */
+/* @var $searchModel common\models\TourHotelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Prices';
+$this->title = 'Tour Hotels';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="price-index">
+<div class="tour-hotel-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Price', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tour Hotel', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'tourId',
-            'name',
+            'level',
             'twoPax',
             'threeFivePax',
             'sixEightPax',

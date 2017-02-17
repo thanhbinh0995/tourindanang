@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Hotel;
+use common\models\TourHotel;
 
 /**
- * HotelSearch represents the model behind the search form about `common\models\Hotel`.
+ * TourHotelSearch represents the model behind the search form about `common\models\TourHotel`.
  */
-class HotelSearch extends Hotel
+class TourHotelSearch extends TourHotel
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class HotelSearch extends Hotel
     public function rules()
     {
         return [
-            [['id', 'addressId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['name', 'level'], 'safe'],
+            [['id', 'tourId', 'twoPax', 'threeFivePax', 'sixEightPax', 'ninePax', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['level'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class HotelSearch extends Hotel
      */
     public function search($params)
     {
-        $query = Hotel::find();
+        $query = TourHotel::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,17 @@ class HotelSearch extends Hotel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'addressId' => $this->addressId,
+            'tourId' => $this->tourId,
+            'twoPax' => $this->twoPax,
+            'threeFivePax' => $this->threeFivePax,
+            'sixEightPax' => $this->sixEightPax,
+            'ninePax' => $this->ninePax,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'level', $this->level]);
+        $query->andFilterWhere(['like', 'level', $this->level]);
 
         return $dataProvider;
     }
