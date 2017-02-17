@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PriceSearch */
+/* @var $model common\models\TourHotelSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="price-search">
+<div class="tour-hotel-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,13 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tourId') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'level') ?>
 
     <?= $form->field($model, 'twoPax') ?>
 
     <?= $form->field($model, 'threeFivePax') ?>
 
-    <?=  $form->field($model, 'sixEightPax') ?>
+    <?=   $form->field($model, 'sixEightPax') ?>
 
     <?=  $form->field($model, 'ninePax') ?>
 

@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use common\models\Type;
 use yii\db\ActiveQuery;
 use common\models\TourType;
+use common\models\TourHotel;
 use common\models\Image;
 use yii\behaviors\SluggableBehavior;
 use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
@@ -137,6 +138,10 @@ class Tour extends \yii\db\ActiveRecord
         return $this->hasMany(TourAddress::className(), ['tourId' => 'id']);
     }
 
+    public function getTourHotels()
+    {
+        return $this->hasMany(TourHotel::className(), ['tourId' => 'id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

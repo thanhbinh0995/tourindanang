@@ -94,9 +94,9 @@ class SiteController extends Controller
             $addresses =Tour::getAddressesName($tour);
             $addresses = explode(', ',$addresses);
             if($addresses) $tourAddress[$tour->name] = $addresses;
-            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('id ASC')->one();
+            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
-               $tourPrice[$tour->name] = $price->info;
+               $tourPrice[$tour->name] = $price->ninePax;
             }
         }
        

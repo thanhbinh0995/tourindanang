@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Hotel */
+/* @var $model common\models\TourHotel */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Hotels', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Tour Hotels', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="hotel-view">
+<div class="tour-hotel-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,9 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'addressId',
-            'name',
+            'tourId',
             'level',
+            'twoPax',
+            'threeFivePax',
+            'sixEightPax',
+            'ninePax',
             'created_at',
             'updated_at',
             'deleted_at',

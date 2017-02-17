@@ -107,7 +107,15 @@ use common\components\Util;
                             ['label' => Yii::t('app', 'Create Type'), 'icon' => 'fa fa-circle-o', 'url' => ['/type/create'],],
                         ],
                     ],
-                    
+                      [
+                        'label' => Yii::t('app', 'TourHotel'),
+                        'icon' => 'fa fa-asterisk',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => Yii::t('app', 'List TourHotel'), 'icon' => 'fa fa-circle-o', 'url' => ['/tour-hotel'],],
+                            ['label' => Yii::t('app', 'Create TourHotel'), 'icon' => 'fa fa-circle-o', 'url' => ['/tour-hotel/create'],],
+                        ],
+                    ],
                     ['label' => 'Login', 'icon' => 'fa  fa-sign-out', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                 ],
             ]

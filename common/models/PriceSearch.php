@@ -18,8 +18,8 @@ class PriceSearch extends Price
     public function rules()
     {
         return [
-            [['id', 'tourId', 'hotelId', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
-            [['info'], 'safe'],
+            [['id', 'tourId', 'twoPax', 'threeFivePax', 'sixEightPax', 'ninePax', 'created_at', 'updated_at', 'deleted_at'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,13 +61,16 @@ class PriceSearch extends Price
         $query->andFilterWhere([
             'id' => $this->id,
             'tourId' => $this->tourId,
-            'hotelId' => $this->hotelId,
+            'twoPax' => $this->twoPax,
+            'threeFivePax' => $this->threeFivePax,
+            'sixEightPax' => $this->sixEightPax,
+            'ninePax' => $this->ninePax,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
         ]);
 
-        $query->andFilterWhere(['like', 'info', $this->info]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

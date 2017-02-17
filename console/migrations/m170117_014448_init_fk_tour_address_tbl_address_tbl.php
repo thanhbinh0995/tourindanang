@@ -11,7 +11,7 @@ class m170117_014448_init_fk_tour_address_tbl_address_tbl extends Migration
 
     public function down()
     {
-        $this->dropForeignKey("fk_tour_address_tbl_tour_tbl", "tour_address");
+        $this->dropForeignKey("fk_tour_address_tbl_address_tbl", "tour_address");
     }
 
     /*

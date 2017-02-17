@@ -6,11 +6,11 @@ use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
- * This is the model class for table "price".
+ * This is the model class for table "tour_hotel".
  *
  * @property integer $id
  * @property integer $tourId
- * @property string $name
+ * @property string $level
  * @property integer $twoPax
  * @property integer $threeFivePax
  * @property integer $sixEightPax
@@ -19,15 +19,14 @@ use Yii;
  * @property integer $updated_at
  * @property integer $deleted_at
  *
- * @property Motel[] $motels
  * @property Tour $tour
  */
-class Price extends \yii\db\ActiveRecord
+class TourHotel extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
-       public function behaviors()
+      public function behaviors()
     {
         return [
             TimestampBehavior::className(),
@@ -36,7 +35,7 @@ class Price extends \yii\db\ActiveRecord
     }
     public static function tableName()
     {
-        return 'price';
+        return 'tour_hotel';
     }
 
     /**
@@ -45,9 +44,9 @@ class Price extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tourId', 'name', 'twoPax', 'threeFivePax', 'sixEightPax', 'ninePax'], 'required'],
+            [['tourId', 'level', 'twoPax', 'threeFivePax', 'sixEightPax', 'ninePax'], 'required'],
             [['tourId', 'twoPax', 'threeFivePax', 'sixEightPax', 'ninePax'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['level'], 'string', 'max' => 255],
             [['tourId'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tourId' => 'id']],
         ];
     }
@@ -60,7 +59,7 @@ class Price extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'tourId' => 'Tour ID',
-            'name' => 'Name',
+            'level' => 'Level',
             'twoPax' => 'Two Pax',
             'threeFivePax' => 'Three Five Pax',
             'sixEightPax' => 'Six Eight Pax',
@@ -69,14 +68,6 @@ class Price extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'deleted_at' => 'Deleted At',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMotels()
-    {
-        return $this->hasMany(Motel::className(), ['priceId' => 'id']);
     }
 
     /**

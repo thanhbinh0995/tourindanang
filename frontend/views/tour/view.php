@@ -123,34 +123,89 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
 
                                 <div id="price" class="tab">
                                     <h4>Tour price</h4>
-                                    <p><strong>Private tour Hue city 1 day<br />
+                                   
+                                    <p><strong><?= $model->name; ?><br />
                                     </strong>
                                     </p>
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td>No of travelers</td>
-                                                <td>2 pax</td>
-                                                <td>3-5 pax</td>
-                                                <td>6-8 pax</td>
-                                                <td>9 pax above</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Price in USD/person
-                                                    <br /> From Da Nang</td>
-                                                <td>$86</td>
-                                                <td>$69</td>
-                                                <td>$52</td>
-                                                <td>$45</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Price in USD/person
-                                                    <br /> From Hue</td>
-                                                <td>$76</td>
-                                                <td>$60</td>
-                                                <td>$46</td>
-                                                <td>$40</td>
-                                            </tr>
+                                             <tr>
+                                                    <td>Number of travellers</td>
+                                                    <td>2 pax</td>
+                                                    <td>3 - 5 pax</td>
+                                                    <td>6 -8 pax</td>
+                                                    <td>9 pax</td>
+                                                 </tr>
+                                            <?php
+                                                foreach($tourPrices as $tourPrice){ ?>
+                                                  <tr>
+                                                    <td><?= $tourPrice->name ?></td>
+                                                    <td><?= $tourPrice->twoPax ?></td>
+                                                    <td><?= $tourPrice->threeFivePax ?></td>
+                                                    <td><?= $tourPrice->sixEightPax ?></td>
+                                                    <td><?= $tourPrice->ninePax ?></td>
+                                                 </tr>
+                                            <?php 
+                                               }    
+                                               
+                                             ?>
+                                           
+                                        </tbody>
+                                    </table>
+                                    <h4>Hotel price</h4>
+                                    </p>
+                                    <table>
+                                        <tbody>
+                                             <tr>
+                                                    <td>Tour Class </td>
+                                                    <td>2 pax</td>
+                                                    <td>3 - 5 pax</td>
+                                                    <td>6 -8 pax</td>
+                                                    <td>9 pax</td>
+                                                 </tr>
+                                            <?php
+                                                foreach($tourHotels as $tourHotel){ ?>
+                                                  <tr>
+                                                    <td><?= $tourHotel->level ?></td>
+                                                    <td><?= $tourHotel->twoPax ?></td>
+                                                    <td><?= $tourHotel->threeFivePax ?></td>
+                                                    <td><?= $tourHotel->sixEightPax ?></td>
+                                                    <td><?= $tourHotel->ninePax ?></td>
+                                                 </tr>
+                                            <?php 
+                                               }    
+                                               
+                                             ?>
+                                           
+                                        </tbody>
+                                    </table>
+                                    <h4>Hotel proposal</h4>
+                                    </p>
+                                    <table>
+                                        <tbody>
+                                             <tr>
+                                                    <td>Destination</td>
+                                                    <td>Superior 3 star hotel</td>
+                                                    <td>Deluxe
+4 star hotel</td>
+                                                    <td>Luxury
+5 star hotel</td>
+                                                 
+                                                 </tr>
+                                            <?php
+                                          
+                                                foreach($addresses as $address){ ?>
+                                                  <tr>
+                                                    <td><?php echo $address; ?></td>
+                                                    <td><?php echo $addressHotel[$address]['Superior'] ;?></td>
+                                                    <td><?php echo $addressHotel[$address]['Deluxe'] ;?></td>
+                                                    <td><?php echo $addressHotel[$address]['Luxury'] ;?></td>
+                                                 </tr>
+                                            <?php 
+                                               }    
+                                               
+                                             ?>
+                                           
                                         </tbody>
                                     </table>
                                     <p><em>Optional: Royal Hue Music on dragon boat &#8211; extra $5/person</em>

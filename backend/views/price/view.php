@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Price */
 
-$this->title = $model->id;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Prices', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -30,8 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'tourId',
-            'hotelId',
-            'info',
+            'name',
+            'twoPax',
+            'threeFivePax',
+            'sixEightPax',
+            'ninePax',
             'created_at',
             'updated_at',
             'deleted_at',
