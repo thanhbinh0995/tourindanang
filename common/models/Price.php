@@ -1,10 +1,9 @@
 <?php
 
 namespace common\models;
-use yii\behaviors\TimestampBehavior;
-
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "price".
  *
@@ -85,5 +84,9 @@ class Price extends \yii\db\ActiveRecord
     public function getTour()
     {
         return $this->hasOne(Tour::className(), ['id' => 'tourId']);
+    }
+
+    public static function listPrice($id=NULL){
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

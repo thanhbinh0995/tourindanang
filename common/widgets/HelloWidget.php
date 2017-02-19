@@ -93,10 +93,6 @@ EOD;
         $this->getView()->registerJsFile('/myjs/JuiThemeSelect.js', ['depends' => [JqueryAsset::className()]]);
         return "$this->label $this->list \n $this->script";
     }
-    // public function run()
-    // {
-    //     return Html::encode($this->message);
-    // }
 }
 
 
