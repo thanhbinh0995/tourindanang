@@ -87,7 +87,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
+        $pages = 2;
+        $tours = Tour::find()->all();
         $tourAddress = [];
         $tourPrice =[];
         foreach($tours as $tour){
@@ -120,7 +121,7 @@ class SiteController extends Controller
               'typesName' => $typesName,
               'addressesName' => $addressesName,
               'days' => $days,
-       
+              'pages' => $pages,
         ]);
     }
 
