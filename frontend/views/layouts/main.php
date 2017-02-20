@@ -11,6 +11,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use common\models\Type;
 use yii\widgets\Menu;
+use common\widgets\HelloWidget;
 
 AppAsset::register($this);
 ?>
@@ -39,6 +40,7 @@ AppAsset::register($this);
             ->select('dayTour')
             ->from('tour')
             ->all();  
+     echo HelloWidget::widget();
 
 ?>
 <div id="wrapper">

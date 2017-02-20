@@ -4,13 +4,19 @@ use yii\data\ActiveDataProvider;
 use yii\widgets\Menu;
 use yii\data\ArrayDataProvider;
 use yii\widgets\LinkPager;
+use common\widgets\HelloWidget;
 
 function checkTourAvailable($tourTemp){
 	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
 		 return true;
 	else return false;
 }
-?><body class="home blog single-author multi">
+?>
+<?php 
+	// var_dump(HelloWidget::widget());
+	// exit();
+?>
+<body class="home blog single-author multi">
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
