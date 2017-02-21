@@ -15,6 +15,7 @@ use frontend\models\ContactForm;
 use yii\helpers\Url;
 use common\models\Tour;
 use common\models\Price;
+use yii\data\ArrayDataProvider;
 /**
  * Site controller
  */
@@ -89,40 +90,29 @@ class SiteController extends Controller
     {
         $pages = 2;
         $tours = Tour::find()->all();
+      
         $tourAddress = [];
         $tourPrice =[];
         foreach($tours as $tour){
             $addresses =Tour::getAddressesName($tour);
             $addresses = explode(', ',$addresses);
-            if($addresses) $tourAddress[$tour->name] = $addresses;
+            if($addresses) $tour->address = $addresses;
+           // $tourAddress[$tour->name] = $addresses;
             $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
-               $tourPrice[$tour->name] = $price->ninePax;
+               //$tourPrice[$tour->name] = $price->ninePax;
+               $tour->price = $price->ninePax;
             }
         }
-       
-        $typesName = (new \yii\db\Query())
-                ->select('name')
-                ->from('type')
-                ->all();
-        $addressesName = (new \yii\db\Query())
-                ->select('name')
-                ->from('address')
-                ->all();     
-        $days = (new \yii\db\Query())
-                ->select('dayTour')
-                ->from('tour')
-                ->all();  
-        return $this->render('index', [
-              'tours' => $tours,
-              'tourAddress' => $tourAddress,
-              'tourPrice' => $tourPrice,
-              'addresses' => $addresses,
-              'typesName' => $typesName,
-              'addressesName' => $addressesName,
-              'days' => $days,
-              'pages' => $pages,
+
+        $provider = new ArrayDataProvider([
+            'allModels' => $tours,
+            'pagination' => [
+                'pageSize' => 2
+            ],
         ]);
+
+        return $this->render('index', ['listDataProvider' => $provider]);
     }
 
     /**

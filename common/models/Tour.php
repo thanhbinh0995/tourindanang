@@ -39,6 +39,8 @@ class Tour extends \yii\db\ActiveRecord
     public $file_image;
     public $types = array();
     public $addresses = array();
+    public $price;
+    public $address;
     public function behaviors()
     {
         return [

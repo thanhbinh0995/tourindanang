@@ -58,7 +58,6 @@ class TourController extends Controller
             'typesName' => $typesName,
             'addressesName' => $addressesName,
             'days' => $days,       
-            'days' => $days,
         ]);
     }
     public function actionView($id)

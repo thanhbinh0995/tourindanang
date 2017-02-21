@@ -5,6 +5,8 @@ use yii\widgets\Menu;
 use yii\data\ArrayDataProvider;
 use yii\widgets\LinkPager;
 use common\widgets\HelloWidget;
+use common\components\Util;
+use yii\widgets\ListView;
 
 function checkTourAvailable($tourTemp){
 	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
@@ -40,7 +42,11 @@ function checkTourAvailable($tourTemp){
                     <div id="content" class="grid_12" role="main">
                         <?php 
 							$count=0 ; 
-							foreach($tours as $tour){ 
+							// 	var_dump($listDataProvider);
+							// exit();
+							foreach($listDataProvider->allModels as $tour){ 
+							// 	var_dump($tour);
+							// exit();
 								if(checkTourAvailable($tour)){ 
 									$idFeature = $tour->id; ?>
 									<article id="<?php echo $tour->id ?>" class="landing">
@@ -52,7 +58,7 @@ function checkTourAvailable($tourTemp){
 											</p>
 										</div>
 										<div id="landing-media" class="one_half omega">
-											<p><img src="/api/uploads/<?php echo $tour->avatar ?>" alt="<?php echo $tour->name ?>" />
+											<p><img src="<?=  Util::getUrlImage($tour->avatar)  ?>" alt="<?php echo $tour->name ?>" />
 											</p>
 										</div>
 									</article>
@@ -60,7 +66,7 @@ function checkTourAvailable($tourTemp){
 								break; } 
 								$count++; 
 							} 
-							if($count == count($tours)) { 
+							if($count == count($listDataProvider->allModels)) { 
 						?>
 							<article class="landing">
 								<div id="landing-text" class="one_half alpha"></div>
@@ -79,47 +85,28 @@ function checkTourAvailable($tourTemp){
                 <div id="home-widget-area" class="clearfix">
                 </div>
                 <div id="content" class="grid_8 " role="main">
-                    <?php 
-						$provider = new ArrayDataProvider([
-							'allModels' => $tours,
-							'sort' => [
-								'attributes' => ['id', 'name'],
+                   <?= ListView::widget([
+							
+							'dataProvider' => $listDataProvider,
+							'itemView' => '_article',
+
+							
+							'itemOptions' => [
+								'tag' => false,
 							],
-							'pagination' => [
-								'pageSize' => $pages,
+							'summary' => '',
+							
+
+							'layout' => '{items}{pager}',
+
+							'pager' => [
+								'firstPageLabel' => 'First',
+								'lastPageLabel' => 'Last',
+								'maxButtonCount' => 2,
+							
 							],
+
 						]);
-						$tours = $provider->getModels();
-                            echo LinkPager::widget([
-                                'pagination' => $provider->getPagination(),
-                            ]);
-						foreach($tours as $tour){ 
-							if( checkTourAvailable($tour) ){ 
-								if($tour->id == $idFeature) continue; ?>
-								<article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
-									<figure class="thumbt"><a href="tour/view/<?= $tour->id ?>" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a>
-									</figure>
-									<header class="entry-header">
-										<h2 class="entry-title"><a href="tour/view/<?= $tour->id ?>" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2> </header>
-
-									<div class="entry-content clearfix">
-
-										<span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i>
-										<a href='duration/day-tour/index'>
-											<?php echo ($tour->dayTour == 1) ? "Day tour" : $tour->dayTour." days" ?></a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i>
-
-										<?php for($countAddress=0 ; $countAddress < count($tourAddress[$tour->name]) ; $countAddress++) { ?>
-										<a href='destination/hue/index'>
-											<?php echo $tourAddress[$tour->name][$countAddress];?></a>,
-										<?php }?>
-
-										<p>
-											<?php echo $tour->info ?></p>
-									</div>
-								</article>
-                    <?php 
-								} 
-							} 
-					?>
+						?>
                 </div>
 </body>
