@@ -13,10 +13,11 @@ class HelloWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->typesTest = (new \yii\db\Query())
-                ->select('id,name')
-                ->from('type')
-                ->all();
+        // $this->typesTest = (new \yii\db\Query())
+        //         ->select('id,name')
+        //         ->from('type')
+        //         ->all();
+                
         // var_dump($this->typesTest);
         // exit();
         // $addressesName = (new \yii\db\Query())
@@ -34,7 +35,10 @@ class HelloWidget extends Widget
         parent::run();
         // HelloWidget::register($this->getView());
         // return $this->render('main', ['message' => $this->message]);
-        return Html::encode($this->render('main', ['typesTest' => $this->typesTest]));
+        return ($this->render('main', [
+            // 'typesTest' => $this->typesTest,
+            'message' => $this->message,
+        ]));
         // return $this->render('@frontend/views/site/index', ['typesTest' => $this->typesTest]);
     }
 }

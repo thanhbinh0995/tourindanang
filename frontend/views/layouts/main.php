@@ -39,10 +39,20 @@ AppAsset::register($this);
     $days = (new \yii\db\Query())
             ->select('dayTour')
             ->from('tour')
-            ->all();  
-     echo HelloWidget::widget();
+            ->all();
+
+    // $test = H/elloWidget();
+    // var_dump(HelloWidget);
+
+    // exit();
+    // Html::encode(HelloWidget::widget());  
+    //  echo HelloWidget::widget();
 
 ?>
+<?php HelloWidget::begin(); ?>
+    <?php echo $message ?>
+
+<?php HelloWidget::end(); exit();?>
 <div id="wrapper">
     <header id="masthead" class="site-header clearfix">
             <div class="screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a>

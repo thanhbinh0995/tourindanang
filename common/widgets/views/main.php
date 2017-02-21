@@ -1,6 +1,10 @@
 <?php 
 
 use yii\helpers\Html;
+
+var_dump($message);
 // var_dump($typesTest);
-$typesTest="hkjhjkhkj";
+// exit();
+// $typesTest="hkjhjkhkj";
 // Html::encode($typesTest);
+?>
