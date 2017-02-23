@@ -1,23 +1,7 @@
  <?php
     use yii\widgets\ListView;
+	use common\widgets\ListWidget;
 
  ?>
  <h1 class="page-title"><?= $model->name ?></h1>
- <?= ListView::widget([
-							
-							'dataProvider' => $model->provider,
-							'itemView' => '_article',
-
-							
-							'itemOptions' => [
-								'tag' => false,
-							],
-							'summary' => '',
-							
-
-							'layout' => '{items}{pager}',
-
-	
-
-						]);
-?>
+                 <?=   ListWidget::widget(['provider' => $model->provider]); ?>

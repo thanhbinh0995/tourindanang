@@ -7,6 +7,8 @@ use yii\widgets\LinkPager;
 use common\widgets\HelloWidget;
 use common\components\Util;
 use yii\widgets\ListView;
+use common\widgets\ListWidget;
+
 
 function checkTourAvailable($tourTemp){
 	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
@@ -79,28 +81,7 @@ function checkTourAvailable($tourTemp){
                 <div id="home-widget-area" class="clearfix">
                 </div>
                 <div id="content" class="grid_8 " role="main">
-                   <?= ListView::widget([
-							
-							'dataProvider' => $listDataProvider,
-							'itemView' => '_article',
+                                   <?=   ListWidget::widget(['provider' => $listDataProvider]); ?>
 
-							
-							'itemOptions' => [
-								'tag' => false,
-							],
-							'summary' => '',
-							
-
-							'layout' => '{items}{pager}',
-
-							'pager' => [
-								'firstPageLabel' => 'First',
-								'lastPageLabel' => 'Last',
-								'maxButtonCount' => 2,
-							
-							],
-
-						]);
-						?>
                 </div>
 </body>

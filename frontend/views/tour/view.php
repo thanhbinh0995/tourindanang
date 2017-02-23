@@ -7,7 +7,8 @@ use common\models\Type;
 use common\models\Address;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
-
+// var_dump($model);
+// exit();
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
 
@@ -68,7 +69,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
     </script>
     <div id="main">
         <div id="breadcrumbs" class="container_12 clearfix">
-            <span xmlns:v="http://rdf.data-vocabulary.org/#">
+            <span >
                 <span typeof="v:Breadcrumb">
                     <a href="../../index.html" rel="v:url" property="v:title">Home</a> » 
                     <span rel="v:child" typeof="v:Breadcrumb">
@@ -115,201 +116,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                                 <li><a href="#inquiry">Enquiry</a>
                                 </li>
                             </ul>
-
-                            <div class="tab-content">
-                                <div id="itinerary" class="tab active">
-                                    <?= $model->itinerary ?>
-                                </div>
-
-                                <div id="price" class="tab">
-                                    <h4>Tour price</h4>
-                                   
-                                    <p><strong><?= $model->name; ?><br />
-                                    </strong>
-                                    </p>
-                                    <table>
-                                        <tbody>
-                                             <tr>
-                                                    <td>Number of travellers</td>
-                                                    <td>2 pax</td>
-                                                    <td>3 - 5 pax</td>
-                                                    <td>6 -8 pax</td>
-                                                    <td>9 pax</td>
-                                                 </tr>
-                                            <?php
-                                                foreach($tourPrices as $tourPrice){ ?>
-                                                  <tr>
-                                                    <td><?= $tourPrice->name ?></td>
-                                                    <td><?= $tourPrice->twoPax ?></td>
-                                                    <td><?= $tourPrice->threeFivePax ?></td>
-                                                    <td><?= $tourPrice->sixEightPax ?></td>
-                                                    <td><?= $tourPrice->ninePax ?></td>
-                                                 </tr>
-                                            <?php 
-                                               }    
-                                               
-                                             ?>
-                                           
-                                        </tbody>
-                                    </table>
-                                    <h4>Hotel price</h4>
-                                    </p>
-                                    <table>
-                                        <tbody>
-                                             <tr>
-                                                    <td>Tour Class </td>
-                                                    <td>2 pax</td>
-                                                    <td>3 - 5 pax</td>
-                                                    <td>6 -8 pax</td>
-                                                    <td>9 pax</td>
-                                                 </tr>
-                                            <?php
-                                                foreach($tourHotels as $tourHotel){ ?>
-                                                  <tr>
-                                                    <td><?= $tourHotel->level ?></td>
-                                                    <td><?= $tourHotel->twoPax ?></td>
-                                                    <td><?= $tourHotel->threeFivePax ?></td>
-                                                    <td><?= $tourHotel->sixEightPax ?></td>
-                                                    <td><?= $tourHotel->ninePax ?></td>
-                                                 </tr>
-                                            <?php 
-                                               }    
-                                               
-                                             ?>
-                                           
-                                        </tbody>
-                                    </table>
-                                    <h4>Hotel proposal</h4>
-                                    </p>
-                                    <table>
-                                        <tbody>
-                                             <tr>
-                                                    <td>Destination</td>
-                                                    <td>Superior 3 star hotel</td>
-                                                    <td>Deluxe
-4 star hotel</td>
-                                                    <td>Luxury
-5 star hotel</td>
-                                                 
-                                                 </tr>
-                                            <?php
-                                          
-                                                foreach($addresses as $address){ ?>
-                                                  <tr>
-                                                    <td><?= $address; ?></td>
-                                                    <td><?= $addressHotel[$address]['Superior'] ;?></td>
-                                                    <td><?= $addressHotel[$address]['Deluxe'] ;?></td>
-                                                    <td><?= $addressHotel[$address]['Luxury'] ;?></td>
-                                                 </tr>
-                                            <?php 
-                                               }    
-                                               
-                                             ?>
-                                           
-                                        </tbody>
-                                    </table>
-                                    <p><em>Optional: Royal Hue Music on dragon boat &#8211; extra $5/person</em>
-                                    </p>
-                                    <p>Not fit your requirement? Feel free to contact us to plan this trip and get the best possible price based upon your travel period and specific touring needs.</p>
-                                    <h4>Tour inclusive</h4>
-                                    <ul>
-                                        <li>Transportation by private car, pick up/drop off at your hotel</li>
-                                        <li>Entrance fees for visits mentioned in itinerary</li>
-                                        <li>English speaking tour guide</li>
-                                        <li>Lunch at restaurant</li>
-                                        <li>Boat trip on Perfume River</li>
-                                        <li>Drink water</li>
-                                    </ul>
-                                    <h4>Tour exclusive</h4>
-                                    <ul>
-                                        <li>Travel insurance</li>
-                                        <li>Drinks &amp; other meals not mentioned</li>
-                                        <li>Personal expenses &amp; tips</li>
-                                    </ul>
-                                </div>
-                                <div id="inquiry" class="tab">
-                                    <h4>Request a quote</h4>
-                                    <form class="enquiry-form" method="post" action="#">
-                                        <div id="ef_content">
-                                            <div>
-                                                <label for="tour_name">Tour Name: <strong>Imperial Hue City Tour</strong>
-                                                </label>
-                                                <input type="hidden" name="c_tour" id="tour_name" size="50" maxlength="50" value="Imperial Hue City Tour" />
-                                            </div>
-                                            <div>
-                                                <label for="datepicker">Tour Date:</label>
-                                                <input type="text" id="datepicker" name="tour_date" size="20" value="" />
-                                            </div>
-                                            <div>
-                                                <label for="ef_num_adult">Adults(>12): </label>
-                                                <select id="ef_num_adult" name="num_adult">
-                                                    <option value='0' selected='selected'>0</option>
-                                                    <option value='1'>1</option>
-                                                    <option value='2'>2</option>
-                                                    <option value='3'>3</option>
-                                                    <option value='4'>4</option>
-                                                    <option value='5'>5</option>
-                                                    <option value='6'>6</option>
-                                                    <option value='7'>7</option>
-                                                    <option value='8'>8</option>
-                                                    <option value='9'>9</option>
-                                                    <option value='10'>10</option>
-                                                    <option value='11'>11</option>
-                                                    <option value='12'>12</option>
-                                                    <option value='13'>13</option>
-                                                    <option value='14'>14</option>
-                                                    <option value='15'>15</option>
-                                                    <option value=">15">>15</option>
-                                                </select>
-                                                <label for="ef_num_child">Children(2-11): </label>
-                                                <select id="ef_num_child" name="num_child">
-                                                    <option value='0' selected='selected'>0</option>
-                                                    <option value='1'>1</option>
-                                                    <option value='2'>2</option>
-                                                    <option value='3'>3</option>
-                                                    <option value='4'>4</option>
-                                                    <option value='5'>5</option>
-                                                </select>
-                                            </div>
-                                            <p></p>
-                                            <h4>Your contact information</h4>
-                                            <div>
-                                                <label for="ef_name">Your Name:</label>
-                                                <select id="name_title" name="name_title">
-                                                    <option value="Mr.">Mr.</option>
-                                                    <option value="Mrs.">Mrs.</option>
-                                                    <option value="Ms.">Ms.</option>
-                                                </select>
-                                                <input type="text" name="c_name" id="ef_name" size="30" maxlength="50" value="" required />
-                                            </div>
-                                            <div>
-                                                <label for="ef_email">Your E-mail:</label>
-                                                <input type="text" name="email" id="ef_email" size="30" maxlength="50" value="" required/>
-                                            </div>
-                                            <div>
-                                                <label for="ef_phone">Phone Number:</label>
-                                                <input type="text" id="ef_phone" name="phone" size="20" value="" />
-                                            </div>
-                                            <div>
-                                                <label for="ef_message">Additional requirements:</label>
-                                                <textarea name="message" id="ef_message" cols="50" rows="5" required></textarea>
-                                            </div>
-                                            <div>
-                                                <input type="submit" value="Submit" name="send" id="ef_send" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <script type="text/javascript">
-                                        jQuery(document).ready(function($) {
-                                            $("#datepicker").datepicker({
-                                                dateFormat: "yy-mm-dd",
-                                                minDate: 0
-                                            });
-                                        });
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
+                                <?= $this->render('_details',['model'=>$model]);?>
+                                <?= $this->render('_itinerary',['model'=>$model]); ?>
+                                <?= $this->render('_enquiry');?>
+                                
                     </div>
                     <div class='yarpp-related'>
                         <h3>See also:</h3>

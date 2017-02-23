@@ -41,6 +41,9 @@ class Tour extends \yii\db\ActiveRecord
     public $addresses = array();
     public $price;
     public $address;
+    public $addressHotel;
+    public $tourPrice;
+    public $tourHotel;
     public function behaviors()
     {
         return [

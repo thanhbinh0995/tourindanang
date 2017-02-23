@@ -6,6 +6,8 @@ use common\models\Tour;
 use common\models\Type;
 use yii\data\ActiveDataProvider;
 use yii\widgets\Menu;
+use common\widgets\ListWidget;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -46,32 +48,8 @@ $this->title = 'Tours';
                 </header>
 
 
-                <?php 
-                    foreach ($dataProvider as $tour) {
-                ?>
+                              <?=   ListWidget::widget(['provider' => $provider]); ?>
 
-                <article id="post-792" class="post-792 tour type-tour has-post-thumbnail duration-day-tour travel-style-active-tours travel-style-sightseeing destination-da-nang">
-                    <figure class="thumbt">
-                        <a href="../tour/<?php echo $tour->slug; ?>" title="<?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="img" title="<?php $tour->name ?>" />
-                        </a>
-                    </figure>
-                    <header class="entry-header">
-                        <h2 class="entry-title"><a href="../tour/<?= $tour->slug ?>" title="<?= $tour->name ?>" rel="bookmark"><?= $tour->name ?></a></h2> </header>
-                    <div class="entry-content clearfix">
-                        <span class='price'>from <span>$33</span></span>
-                        <i class='fa fa-clock-o'></i> 
-                        <a href='../duration/day-tour/index'>
-                            <?php echo $tour->dayTour; 
-                                if ($tour->dayTour > 1) echo " days";
-                                else echo " day";
-                            ?>
-                        </a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> <a href='/address'>
-                            <?= Tour::getAddressesName($tour); ?>
-                        </a>
-                        <p><?php $tour?></p>
-                    </div>
-                </article>
-                 <?php } ?>
 
             </div>
 	</body>

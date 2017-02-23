@@ -47,30 +47,50 @@ class TourController extends Controller
     }
     public function actionView($id)
     {
-        $model = $this->findModel($id);   
-        $addresses = $model->getAddressesName($model);
-        $addresses = explode(', ',$addresses);
+        $test = ['a'=>'b'];
+        $test =(object)$test;
+        
+        $model = $this->findModel($id);  
+        $addresses =Tour::getAddressesName($model);
+            $addresses = explode(', ',$addresses);
+            if($addresses) $model->addresses = $addresses;
+            $price = Price::find()->where(['tourId'=>$model->id])->orderby('ninePax ASC')->one();
+            if($price){
+               $model->price = $price->ninePax;
+        }
         $addressIds = $model->tourAddresses;
-        $addressHotel = [];
+        $addressHotels = [];
+        
         $tourHotels = $model->tourHotels;
         $tourPrices = $model->prices;
         foreach($addressIds as  $addressId){
-            
-            //$addressHotel[$addressId->address->name] = $addressId->address->hotel;
+            $hotels = [];
             foreach( $addressId->address->hotel as $hotel){
-                $addressHotel[$addressId->address->name][$hotel->level] = $hotel->name;
+                $hotels['name'] = $addressId->address->name;
+                $hotels[$hotel->level] = $hotel->name;
             }
+            $hotels = (object)$hotels;
+            $addressHotels [] =  $hotels;
         }
-        return $this->render('view', [
-            'model' => $model,
-            'addresses' => $addresses,
-            'price' => $model->prices,
-            'tourHotel' => $model->tourHotels,
-            'addressHotel' => $addressHotel,
-            'tourHotels' => $tourHotels,
-            'tourPrices' => $tourPrices,
-            
+    
+        $addressHotels= new ArrayDataProvider([
+                'allModels' => $addressHotels,
         ]);
+        $model->addressHotel = $addressHotels;
+       
+        $tourPrices= new ArrayDataProvider([
+                'allModels' => $tourPrices,
+        ]);
+        $model->tourPrice = $tourPrices;
+
+        $tourHotels= new ArrayDataProvider([
+                'allModels' => $tourHotels,
+        ]);
+        $model->tourHotel = $tourHotels;
+      
+ 
+        return $this->render('view', ['model' => $model ]);
+
     }
 
     protected function findModel($id)
@@ -105,7 +125,9 @@ class TourController extends Controller
     public function getTourInfo($tours){
         $tourAddress = [];
         $tourPrice =[];
+        
         foreach($tours as $tour){
+        
             $addresses =Tour::getAddressesName($tour);
             $addresses = explode(', ',$addresses);
             if($addresses) $tour->address = $addresses;
