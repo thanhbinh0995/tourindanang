@@ -35,7 +35,6 @@ use yii\widgets\Menu;
                                             <ul class="dropdown-menu menu-depth-1">
                                                
                                                 <?php 
-                                                    // $typesName = Type::listType();
                                                     foreach ($typesName as $typeName) {
                                                 ?>
                                                     <li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent"><a href="../../travel-style/view?typeId=<?= $typeName['id']; ?>" class="menu-link"><?= $typeName['name']; ?></a>
