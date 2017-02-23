@@ -42,11 +42,9 @@ function checkTourAvailable($tourTemp){
                     <div id="content" class="grid_12" role="main">
                         <?php 
 							$count=0 ; 
-							// 	var_dump($listDataProvider);
-							// exit();
+						
 							foreach($listDataProvider->allModels as $tour){ 
-							// 	var_dump($tour);
-							// exit();
+					
 								if(checkTourAvailable($tour)){ 
 									$idFeature = $tour->id; ?>
 									<article id="<?php echo $tour->id ?>" class="landing">

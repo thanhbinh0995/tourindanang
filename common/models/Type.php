@@ -21,6 +21,7 @@ class Type extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+     public $provider;
      public function behaviors()
     {
         return [

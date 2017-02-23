@@ -72,8 +72,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                 <span typeof="v:Breadcrumb">
                     <a href="../../index.html" rel="v:url" property="v:title">Home</a> » 
                     <span rel="v:child" typeof="v:Breadcrumb">
-                        <a href="../../travel-style/sightseeing/index.html" rel="v:url" property="v:title"><?php echo Tour::getTypesName($model); ?></a> » 
-                            <span class="breadcrumb_last"><?php echo $model->name ?></span>
+                        <a href="../../travel-style/sightseeing/index.html" rel="v:url" property="v:title"><?= Tour::getTypesName($model); ?></a> » 
+                            <span class="breadcrumb_last"><?= $model->name ?></span>
                     </span>
                 </span>
             </span>
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
 
                 <article id="post-382" class="post-382 tour type-tour has-post-thumbnail duration-day-tour travel-style-sightseeing destination-hue">
                     <header class="entry-header">
-                        <h1 class="entry-title"><?php echo $model->name; ?></h1>
+                        <h1 class="entry-title"><?= $model->name; ?></h1>
                         <div class="entry-meta">
                             <span class='price'>from 
                                 <span>$40</span>
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                             <i class='fa fa-clock-o'></i>
                             <a href='../../duration/day-tour/index.html'>Day tour</a> &nbsp;&nbsp;
                             <i class='fa fa-map-marker'></i>
-                            <a href='../../destination/hue/index.html'><?php echo Tour::getAddressesName($model); ?></a>
+                            <a href='../../destination/hue/index.html'><?= Tour::getAddressesName($model); ?></a>
                         </div>
                     </header>
                     <div class="entry-content clearfix">
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                             <?php  
                                 foreach ($model->images as $image) {    
                             ?>
-                                <img src="/api/uploads/<?= $image->name; ?>" class="thumb" alt="khai dinh tomb" />
+                                <img src="/api/uploads/<?= $image->name; ?>" class="thumb"  />
                             <?php } ?>
                         </div>
                         <p class='desc'><?= $model->info ?></p>
@@ -196,10 +196,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                                           
                                                 foreach($addresses as $address){ ?>
                                                   <tr>
-                                                    <td><?php echo $address; ?></td>
-                                                    <td><?php echo $addressHotel[$address]['Superior'] ;?></td>
-                                                    <td><?php echo $addressHotel[$address]['Deluxe'] ;?></td>
-                                                    <td><?php echo $addressHotel[$address]['Luxury'] ;?></td>
+                                                    <td><?= $address; ?></td>
+                                                    <td><?= $addressHotel[$address]['Superior'] ;?></td>
+                                                    <td><?= $addressHotel[$address]['Deluxe'] ;?></td>
+                                                    <td><?= $addressHotel[$address]['Luxury'] ;?></td>
                                                  </tr>
                                             <?php 
                                                }    

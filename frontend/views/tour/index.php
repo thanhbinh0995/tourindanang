@@ -2,6 +2,8 @@
 use common\models\Tour;
 use yii\data\ActiveDataProvider;
 use yii\widgets\Menu;
+use common\components\Util;
+use yii\widgets\ListView;
 
 function checkTourAvailable($tourTemp){
 	if( $tourTemp != NULL && $tourTemp->prices != NULL && Tour::getAddressesName($tourTemp) != null && Tour::getTypesName($tourTemp) != null)
@@ -27,51 +29,25 @@ function checkTourAvailable($tourTemp){
     </div>
     <div class="container_12 clearfix">
         <div id="content" class="grid_8 " role="main">
+             <?= ListView::widget([
+							
+							'dataProvider' => $listDataProvider,
+							'itemView' => '_item',
 
-        <?php 
-            foreach ($typesName as $typeName ){
-                $typeNameFeature = $typeName['name'];
-                break; 
-            }
+							
+							'itemOptions' => [
+								'tag' => false,
+							],
+							'summary' => '',
+							
+
+							'layout' => '{items}{pager}',
+
+	
+
+						]);
+			?>
         
-            foreach($typesName as $typeName){
-                if($typeName['name'] == $typeNameFeature) {?>
-                <div class="page-header"><h1 class="page-title"><?php echo $typeName['name'] ?></h1></div>
-                <?php } else { ?>
-                
-                <h1 class="page-title"><?php echo $typeName['name'] ?></h1>
-                <?php }?>
-                <?php
-            $tours = $tourType[$typeName['name']]   ;
-            
-            ?>
-
-                <?php
-                        foreach($tours as $tour){
-                            if( checkTourAvailable($tour) ){
-                            
-                        ?>
-                            <article id="<?php echo $tour->id ?>" class="<?php echo $tour->id ?> tour type-tour has-post-thumbnail ">
-                        <figure class="thumbt"><a href="tour/view/<?= $tour->id ?>" title=" echo <?php $tour->name ?>"><img width="150" height="150" src="/api/uploads/<?php echo $tour->avatar ?>" class="img-polaroid featured-image wp-post-image" alt="minh mang tomb" title="<?php echo $tour->name ?>" /></a></figure>	<header class="entry-header">
-                        <h2 class="entry-title"><a href="tour/view/<?= $tour->id ?>" title="<?php echo $tour->name ?>" rel="bookmark"><?php echo $tour->name ?></a></h2>	</header>
-                        
-                        <div class="entry-content clearfix">
-
-                        <span class='price'>from <span><?php echo $tourPrice[$tour->name] ?></span> </span><i class='fa fa-clock-o'></i> <a href='duration/day-tour/index'><?php echo ($tour->dayTour == 1) ?  "Day tour" :  $tour->dayTour." days" ?></a> &nbsp;&nbsp;<i class='fa fa-map-marker'></i> 
-
-                        <?php 
-                        for($countAddress = 0; $countAddress < count($tourAddress[$tour->name]) ; $countAddress++) {
-                        ?>
-                            <a href='destination/hue/index'><?php echo $tourAddress[$tour->name][$countAddress];?></a>, 
-                        <?php }?>
-                            
-                        <p><?php echo $tour->info ?></p>	</div>
-                    </article>
-                    <?php	
-                            }
-                        }
-                    }
-                ?>
     </div>
 </body>
 

@@ -12,6 +12,8 @@ use yii\filters\VerbFilter;
 use common\models\TourType;
 use common\models\Type;
 use common\models\Price;
+use yii\data\ArrayDataProvider;
+
 /**
  * TourController implements the CRUD actions for Tour model.
  */
@@ -20,45 +22,28 @@ class TourController extends Controller
     public function actionIndex()
     {
         $types = Type::find()->all();
-        $tourType = [];
         foreach($types as $type){
             $tours = $type->getToursName($type);
-            if($tours) $tourType[$type->name] = $tours;
-        }
-        $tours = Tour::find()->limit(4)->orderBy('id DESC')->all(); 
-        $tourAddress = [];
-        $tourPrice =[];
-        foreach($tours as $tour){
-            $addresses =Tour::getAddressesName($tour);
-            $addresses = explode(', ',$addresses);
-            if($addresses) $tourAddress[$tour->name] = $addresses;
-            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
-            if($price){
-               $tourPrice[$tour->name] = $price->ninePax;
+         
+           if($tours){ 
+               $tours = $this->getTourInfo($tours);
+        //           var_dump($tours);
+        // exit();
+               $provider= new ArrayDataProvider([
+                'allModels' => $tours,
+                    'pagination' => [
+                        'pageSize' => 2
+                    ],
+               ]);
+               $type->provider = $provider;
             }
         }
-        $typesName = (new \yii\db\Query())
-                ->select('name')
-                ->from('type')
-                ->all();
-        $addressesName = (new \yii\db\Query())
-                ->select('name')
-                ->from('address')
-                ->all();     
-        $days = (new \yii\db\Query())
-                ->select('dayTour')
-                ->from('tour')
-                ->all();  
-        return $this->render('index', [
-            'tourAddress' => $tourAddress,
-            'tourPrice' => $tourPrice,
-            'addresses' => $addresses,
-            'types' => $types,
-            'tourType' => $tourType,
-            'typesName' => $typesName,
-            'addressesName' => $addressesName,
-            'days' => $days,       
+        $provider = new ArrayDataProvider([
+            'allModels' => $types,
+          
         ]);
+       
+        return $this->render('index', ['listDataProvider' => $provider ]);
     }
     public function actionView($id)
     {
@@ -117,13 +102,19 @@ class TourController extends Controller
         }
     }
     
-    // protected function findModelBySlug($slug)
-    // {
-    //     if (($model = Post::findOne(['slug' => $slug])) !== null) {
-    //         return $model;
-    //     } else {
-    //         throw new NotFoundHttpException();
-    //     }
-    // }
-
+    public function getTourInfo($tours){
+        $tourAddress = [];
+        $tourPrice =[];
+        foreach($tours as $tour){
+            $addresses =Tour::getAddressesName($tour);
+            $addresses = explode(', ',$addresses);
+            if($addresses) $tour->address = $addresses;
+            $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
+            if($price){
+               $tour->price = $price->ninePax;
+            }
+        }
+        return $tours;
+    }
+   
 }
