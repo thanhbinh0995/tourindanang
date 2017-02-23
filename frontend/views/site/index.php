@@ -12,10 +12,6 @@ function checkTourAvailable($tourTemp){
 	else return false;
 }
 ?>
-<?php 
-	// var_dump(HelloWidget::widget());
-	// exit();
-?>
 <body class="home blog single-author multi">
     <script>
         (function(i, s, o, g, r, a, m) {

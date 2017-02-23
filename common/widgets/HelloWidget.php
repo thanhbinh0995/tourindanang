@@ -8,38 +8,35 @@ use yii\web\View;
 use yii\web\JqueryAsset;
 class HelloWidget extends Widget 
 {   
-    public $typesTest;
-    public $message;
+    public $typesName;
+    public $addressesName;
+    public $days;
+    public $content;
     public function init()
     {
         parent::init();
-        // $this->typesTest = (new \yii\db\Query())
-        //         ->select('id,name')
-        //         ->from('type')
-        //         ->all();
-                
-        // var_dump($this->typesTest);
-        // exit();
-        // $addressesName = (new \yii\db\Query())
-        //         ->select('id,name')
-        //         ->from('address')
-        //         ->all();     
-        // $days = (new \yii\db\Query())
-        //         ->select('dayTour')
-        //         ->from('tour')
-        //         ->all(); 
-        $this->message = "Hello Yiifdfa2";
+        $this->typesName = (new \yii\db\Query())
+                ->select('id,name')
+                ->from('type')
+                ->all();
+        $this->addressesName = (new \yii\db\Query())
+                ->select('id,name')
+                ->from('address')
+                ->all();     
+        $this->days = (new \yii\db\Query())
+                ->select('dayTour')
+                ->from('tour')
+                ->all(); 
     }
 
     public function run() {
         parent::run();
-        // HelloWidget::register($this->getView());
-        // return $this->render('main', ['message' => $this->message]);
-        return ($this->render('main', [
-            // 'typesTest' => $this->typesTest,
-            'message' => $this->message,
-        ]));
-        // return $this->render('@frontend/views/site/index', ['typesTest' => $this->typesTest]);
+        return $this->render('main', [
+            'typesName' => $this->typesName,
+            'addressesName' => $this->addressesName,
+            'days' => $this->days,
+            'content' => $this->content,
+            ]);
     }
 }
 
