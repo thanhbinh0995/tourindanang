@@ -26,9 +26,9 @@ class TourController extends Controller
             $tours = $type->getToursName($type);
          
            if($tours){ 
-               $tours = $this->getTourInfo($tours);
-        //           var_dump($tours);
-        // exit();
+               foreach($tours as $tour){
+                     $tour = $this->getTourInfo($tour);
+               }
                $provider= new ArrayDataProvider([
                 'allModels' => $tours,
                     'pagination' => [
@@ -39,30 +39,18 @@ class TourController extends Controller
             }
         }
         $provider = new ArrayDataProvider([
-            'allModels' => $types,
-          
+            'allModels' => $types,  
         ]);
        
         return $this->render('index', ['listDataProvider' => $provider ]);
     }
     public function actionView($id)
     {
-        $test = ['a'=>'b'];
-        $test =(object)$test;
-        
         $model = $this->findModel($id);  
-        $addresses =Tour::getAddressesName($model);
-            $addresses = explode(', ',$addresses);
-            if($addresses) $model->addresses = $addresses;
-            $price = Price::find()->where(['tourId'=>$model->id])->orderby('ninePax ASC')->one();
-            if($price){
-               $model->price = $price->ninePax;
-        }
+        $model = $this->getTourInfo($model);
         $addressIds = $model->tourAddresses;
-        $addressHotels = [];
-        
-        $tourHotels = $model->tourHotels;
-        $tourPrices = $model->prices;
+        $providerTourHotels = $model->tourHotels;
+        $providerTourPrices = $model->prices;
         foreach($addressIds as  $addressId){
             $hotels = [];
             foreach( $addressId->address->hotel as $hotel){
@@ -70,26 +58,22 @@ class TourController extends Controller
                 $hotels[$hotel->level] = $hotel->name;
             }
             $hotels = (object)$hotels;
-            $addressHotels [] =  $hotels;
+            $providerAddressHotels [] =  $hotels;
         }
-    
-        $addressHotels= new ArrayDataProvider([
-                'allModels' => $addressHotels,
+        $providerAddressHotels= new ArrayDataProvider([
+                'allModels' => $providerAddressHotels,
         ]);
-        $model->addressHotel = $addressHotels;
-       
-        $tourPrices= new ArrayDataProvider([
-                'allModels' => $tourPrices,
+        $providerTourPrices= new ArrayDataProvider([
+                'allModels' => $providerTourPrices,
         ]);
-        $model->tourPrice = $tourPrices;
-
-        $tourHotels= new ArrayDataProvider([
-                'allModels' => $tourHotels,
+        $providerTourHotels= new ArrayDataProvider([
+                'allModels' => $providerTourHotels,
         ]);
-        $model->tourHotel = $tourHotels;
-      
- 
-        return $this->render('view', ['model' => $model ]);
+        return $this->render('view', ['model' => $model,
+                'providerAddressHotels' => $providerAddressHotels, 
+                'providerTourPrices' => $providerTourPrices,
+                'providerTourHotels' => $providerTourHotels,
+        ]);
 
     }
 
@@ -101,42 +85,18 @@ class TourController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionSlug($slug)
-    { 
-        $model = Tour::find()->where(['slug'=>$slug])->one();
-        $types = $model->getTypes();
-        $addresses = $model->getAddresses();
-            foreach ($types as $type ) {
-            array_push($model->types,$type['typeId']);
-        }
-        foreach ($addresses as $address ) {
-            array_push($model->addresses,$address['addressId']);
-        }
-        if (!is_null($model)) {
-            return $this->render('view', [
-                'model' => $model,
-            ]);      
-        } else {
-            return $this->redirect('/tour/index');
-        }
-    }
     
-    public function getTourInfo($tours){
+    public function getTourInfo($tour){
         $tourAddress = [];
         $tourPrice =[];
-        
-        foreach($tours as $tour){
-        
             $addresses =Tour::getAddressesName($tour);
             $addresses = explode(', ',$addresses);
             if($addresses) $tour->address = $addresses;
             $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
                $tour->price = $price->ninePax;
-            }
         }
-        return $tours;
+        return $tour;
     }
    
 }

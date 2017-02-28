@@ -28,13 +28,12 @@ $this->title = 'Tours';
     </script>
     <div id="main">
         <div id="breadcrumbs" class="container_12 clearfix">
-            <span
-                xmlns:v="http://rdf.data-vocabulary.org/#">
+            <span>
                 <span typeof="v:Breadcrumb">
-                    <a href="../../index.html" rel="v:url" property="v:title">Home</a> » 
+                    <a href="../../" rel="v:url" property="v:title">Home</a> » 
                     <span rel="v:child" typeof="v:Breadcrumb">
-                        <a href="../../tour/index.html" rel="v:url" property="v:title">Tours</a> » 
-                        <span class="breadcrumb_last">Da Nang</span>
+                        <a href="../../tour/" rel="v:url" property="v:title">Tours</a> » 
+                        <span class="breadcrumb_last"><?=$name?></span>
                     </span>
                 </span>
             </span>
@@ -43,7 +42,7 @@ $this->title = 'Tours';
             <div id="content" class="grid_8 " role="main">
                 <header class="page-header">
                     <h1 class="page-title">Vietnam: 
-                        <span>Da Nang</span>
+                        <span><?=$name?></span>
                     </h1>
                 </header>
 

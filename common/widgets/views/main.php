@@ -25,7 +25,7 @@ use yii\widgets\Menu;
                                 <img src="/api/uploads/hvg-travel.png" width="98" height="38" alt="tour in Danang" /> </a>
                             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
                             <div class="nav-collapse">
-                                <form method="get" id="searchform" action="http://tourindanang.com/" class="navbar-search pull-right ">
+                                <form method="get" id="searchform" action="" class="navbar-search pull-right ">
                                     <input type="text" class="search-query" name="s" id="s1" placeholder="Search">
                                     <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
                                 </form>
@@ -37,7 +37,7 @@ use yii\widgets\Menu;
                                                 <?php 
                                                     foreach ($typesName as $typeName) {
                                                 ?>
-                                                    <li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent"><a href="../../travel-style/view?typeId=<?= $typeName['id']; ?>" class="menu-link"><?= $typeName['name']; ?></a>
+                                                    <li id="nav-menu-item-345" class="sub-menu-item  menu-item-depth-1 menu-item menu-item-type-taxonomy menu-item-object-travel-style current-tour-ancestor current-menu-parent current-tour-parent"><a href="../../type/view?typeId=<?= $typeName['id']; ?>" class="menu-link"><?= $typeName['name']; ?></a>
                                                     </li>
                                                 <?php } ?>
                                             </ul>

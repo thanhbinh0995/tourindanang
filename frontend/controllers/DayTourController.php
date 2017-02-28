@@ -18,22 +18,22 @@ class DayTourController extends Controller
             ->where(['tour.dayTour' => $dayTour])
             ->all();
         $model = $this->getTourInfo($model);
+        $name = ($dayTour == 1) ? "Day tour" : $dayTour." days";
         $provider= new ArrayDataProvider([
                 'allModels' => $model,
                     'pagination' => [
                         'pageSize' => 2
                     ],
                ]);
-        return $this->render('view', ['provider' => $provider ]);
+        return $this->render('view', [
+            'name' => $name,
+            'provider' => $provider ]);
     }
 
      public function getTourInfo($tours){
         $tourAddress = [];
         $tourPrice =[];
         foreach($tours as $tour){
-            $addresses =Tour::getAddressesName($tour);
-            $addresses = explode(', ',$addresses);
-            if($addresses) $tour->address = $addresses;
             $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
                $tour->price = $price->ninePax;

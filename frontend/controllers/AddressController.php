@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 use Yii;
 use common\models\Tour;
+use common\models\Address;
 use common\models\TourSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,6 +22,7 @@ class AddressController extends \yii\web\Controller
             ->join('JOIN', 'address a', 'ta.addressId = a.id')
             ->where(['a.id' => $id])
             ->all();
+        $name = $this->findModel($id)->name;
         $model = $this->getTourInfo($model);
         $provider= new ArrayDataProvider([
                 'allModels' => $model,
@@ -28,7 +30,10 @@ class AddressController extends \yii\web\Controller
                         'pageSize' => 2
                     ],
                ]);
-        return $this->render('view', ['provider' => $provider ]);
+        return $this->render('view', [
+            'provider' => $provider,
+            'name' => $name
+             ]);
     }
     public function getTourInfo($tours){
         $tourAddress = [];
@@ -43,6 +48,15 @@ class AddressController extends \yii\web\Controller
             }
         }
         return $tours;
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Address::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
 }

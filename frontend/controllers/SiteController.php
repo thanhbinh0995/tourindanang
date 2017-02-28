@@ -94,13 +94,8 @@ class SiteController extends Controller
         $tourAddress = [];
         $tourPrice =[];
         foreach($tours as $tour){
-            $addresses =Tour::getAddressesName($tour);
-            $addresses = explode(', ',$addresses);
-            if($addresses) $tour->address = $addresses;
-           // $tourAddress[$tour->name] = $addresses;
             $price = Price::find()->where(['tourId'=>$tour->id])->orderby('ninePax ASC')->one();
             if($price){
-               //$tourPrice[$tour->name] = $price->ninePax;
                $tour->price = $price->ninePax;
             }
         }

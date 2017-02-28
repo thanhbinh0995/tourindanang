@@ -7,7 +7,7 @@ use common\models\Type;
 use common\models\Address;
 /* @var $this yii\web\View */
 /* @var $model common\models\Tour */
-// var_dump($model);
+// var_dump($providerAddressHotels);
 // exit();
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                         <h1 class="entry-title"><?= $model->name; ?></h1>
                         <div class="entry-meta">
                             <span class='price'>from 
-                                <span>$40</span>
+                                <span><?= $model->price ?>$</span>
                             </span>
                             <i class='fa fa-clock-o'></i>
                             <a href='../../duration/day-tour/index.html'>Day tour</a> &nbsp;&nbsp;
@@ -117,7 +117,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Tours', 'url' => ['index']];
                                 </li>
                             </ul>
                                 <?= $this->render('_details',['model'=>$model]);?>
-                                <?= $this->render('_itinerary',['model'=>$model]); ?>
+                                <?= $this->render('_itinerary',[
+                                        'model'=>$model,
+                                        'providerAddressHotels' => $providerAddressHotels, 
+                                        'providerTourPrices' => $providerTourPrices,
+                                        'providerTourHotels' => $providerTourHotels,
+                                 ]); ?>
+                                
                                 <?= $this->render('_enquiry');?>
                                 
                     </div>

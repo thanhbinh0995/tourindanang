@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Price;
+use common\models\Type;
 use yii\data\ArrayDataProvider;
 
 class TypeController extends Controller
@@ -27,7 +28,11 @@ class TypeController extends Controller
                         'pageSize' => 2
                     ],
                ]);
-        return $this->render('view', ['provider' => $provider ]);
+        $name = $this->findModel($typeId)->name;
+        return $this->render('view', [
+            'provider' => $provider,
+            'name' => $name,
+             ]);
 
     }
 
@@ -44,5 +49,14 @@ class TypeController extends Controller
             }
         }
         return $tours;
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Type::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

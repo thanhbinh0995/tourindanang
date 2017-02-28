@@ -1,11 +1,8 @@
 <?php 
    use yii\widgets\ListView;
-
 ?>
 <div class="tab-content">
-                                <div id="itinerary" class="tab active">
-                                    <?= $model->itinerary ?>
-                                </div>
+                                
                                 <div id="price" class="tab">
                                     <h4>Tour price</h4>
                                     <p><strong><?= $model->name; ?><br />
@@ -21,13 +18,12 @@
                                                     <td>9 pax</td>
                                                  </tr>
                                            <?= ListView::widget([			
-                                                    'dataProvider' => $model->tourPrice,
+                                                    'dataProvider' => $providerTourPrices,
                                                     'itemView' => '_price',                                      
                                                     'itemOptions' => [
                                                         'tag' => false,
                                                     ],
                                                     'summary' => '',
-                                                    'layout' => '{items}{pager}',
                                                 ]);
                                             ?>
                                         </tbody>
@@ -44,13 +40,12 @@
                                                     <td>9 pax</td>
                                                  </tr>
                                            <?= ListView::widget([							
-                                                    'dataProvider' => $model->tourHotel,
+                                                    'dataProvider' => $providerTourHotels,
                                                     'itemView' => '_hotel',                                                   
                                                     'itemOptions' => [
                                                         'tag' => false,
                                                     ],
                                                     'summary' => '',                                        
-                                                    'layout' => '{items}{pager}',
                                                 ]);
                                             ?>
                                            
@@ -71,7 +66,7 @@
                                                  </tr>                 
                                             <?= 
                                             ListView::widget([
-                                                    'dataProvider' => $model->addressHotel,
+                                                    'dataProvider' => $providerAddressHotels,
                                                     'itemView' => '_address',                    
                                                     'itemOptions' => [
                                                         'tag' => false,
