@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use kartik\export\ExportMenu;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,17 +18,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Address', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?php  
+    $gridColumns = [
+        ['class' => 'yii\grid\SerialColumn'],
+        'name',
+        ['class' => 'yii\grid\ActionColumn'],
+    ];
+    
+    // Renders a export dropdown menu
+    echo ExportMenu::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumns,
+    ]);
+    
+    // You can choose to render your own GridView separately
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-         
-            'name',
-           
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+        'columns' => $gridColumns,
+    ]);
+    
+    // GridView::widget([
+    //     'dataProvider' => $dataProvider,
+    //     'filterModel' => $searchModel,
+    //     'columns' => [
+    //         ['class' => 'yii\grid\SerialColumn'],
+    //         'name',
+    //         ['class' => 'yii\grid\ActionColumn'],
+    //     ],
+    // ]); 
+    ?>
 </div>

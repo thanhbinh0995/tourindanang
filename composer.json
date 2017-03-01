@@ -35,7 +35,9 @@
         "kartik-v/yii2-widget-select2": "@dev",
         "arogachev/yii2-many-to-many": "^0.2.1",
         "alexinator1/yii2-jta": "^0.2.4",
-        "zelenin/yii2-slug-behavior": "~1.5.1"
+        "zelenin/yii2-slug-behavior": "~1.5.1",
+        "kartik-v/yii2-export": "*",
+        "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

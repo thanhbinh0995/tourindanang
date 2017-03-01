@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use kartik\export\ExportMenu;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TourSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -33,10 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
         // exit();
     
     ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+    <?php 
+       
+        
+        // Renders a export dropdown menu
+       
+        
+        // // You can choose to render your own GridView separately
+        // echo \kartik\grid\GridView::widget([
+        //     'dataProvider' => $dataProvider,
+        //     'filterModel' => $searchModel,
+        //     'columns' => $gridColumns
+        // ]);
+    
+    ?>
+    <?php 
+        $gridColumns = [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
@@ -55,8 +67,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', 'tour/'.$model->slug, ['title' => Yii::t('yii', 'View'),]);  
                              }
                         ],
-            ],        
+            ],   
+        ];
+        echo ExportMenu::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => $gridColumns
+        ]);
+         echo GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => $gridColumns,
+        ]); 
 
-        ],
-    ]); ?>
+    ?>
 </div>
